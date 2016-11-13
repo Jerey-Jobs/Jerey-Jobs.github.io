@@ -10,6 +10,46 @@ grammar_cjkRuby: true
 （2）通过new产生的一个对象需要非常繁琐的数据准备或者权限，这时可以使用原型模式。 
 （3）一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用，即保护性拷贝。
 
+### 如何实现
+
+首先我们得实现Cloneable接口，复写clone方法
+``` stylus
+    implements  Cloneable
+    
+    @Override
+    protected User clone() {
+        User user = null;
+        try{
+            user = (User)super.clone();
+        } catch (CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+```
+
+我们需要注意，clone这个方法不是Cloneable接口中的，我们来看Cloneable的定义，是一个空的接口。
+
+``` stylus
+ * @author  unascribed
+ * @see     java.lang.CloneNotSupportedException
+ * @see     java.lang.Object#clone()
+ * @since   JDK1.0
+ */
+public interface Cloneable {
+}
+
+```
+那么clone是哪来的呢，其实clone是Object中的方法，Cloneable是一个标识接口，它表明这个类的对象是可以拷贝的。如果没有实现Cloneable接口却调用了clone()函数将抛出异常。
+
+### 浅拷贝和深拷贝
+
+那么在实现clone方法的时候，需要注意个问题，像上面那样，直接调用
+
+> user = (User)super.clone();
+
+这样只是简单的拷贝了对象，实际上并不是将原始文档的所有字段都重新构造了一份，而是副本文档的字段引用原始文档的字段。我们需要自己赋值其成员变量，尤其当成员变量为引用型对象时，边涉及到了浅拷贝和深拷贝的问题。
+
  ----------
  ###谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
