@@ -1,7 +1,5 @@
 ---
 title: Android N新特性-多窗口模式适配
-tags: 新建,模板,小书匠
-grammar_cjkRuby: true
 ---
 
  - **1. 多窗口模式的开关**
