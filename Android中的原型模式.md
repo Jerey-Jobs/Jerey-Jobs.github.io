@@ -1,5 +1,5 @@
 ---
-title: Android中
+title: Android中的原型模式
 grammar_cjkRuby: true
 ---
 ### 定义
