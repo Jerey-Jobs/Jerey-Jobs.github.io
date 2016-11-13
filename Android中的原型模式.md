@@ -50,6 +50,32 @@ public interface Cloneable {
 
 这样只是简单的拷贝了对象，实际上并不是将原始文档的所有字段都重新构造了一份，而是副本文档的字段引用原始文档的字段。我们需要自己赋值其成员变量，尤其当成员变量为引用型对象时，边涉及到了浅拷贝和深拷贝的问题。
 
+那我们来看一下深拷贝的demo代码：
+
+``` stylus
+    @Override
+    public WordDocument clone() {
+        try {
+            WordDocument doc = (WordDocument) super.clone();
+            doc.mText = this.mText;
+            doc.mImages = (ArrayList<String>) this.mImages.clone();
+            return doc;
+        } catch (CloneNotSupportedException e) {
+
+        }
+        return null;
+    }
+```
+
+
+
+### 总结
+原型模式本质上就是对象拷贝，与 C++ 中的拷贝构造函数有些类似，它们之间容易出现的问题也都是深拷贝、浅拷贝。使用原型模式可以解决构建复杂对象的资源消耗问题，能够在某些场景下提升创建对象的效率。还有一个重要的途径就是保护性拷贝，也就是某个对象对外可能是只读的，为了防止外部对这个只读对象修改，通常可以通过返回一个对象拷贝的形式实现只读的限制。
+
+优点：原型模式是在内存中二进制流的拷贝，要比直接 new 一个对象性能好很多，特别是要在一个循环体内产生大量的对象时，原型模式可以更好滴体现其优点。
+
+
+
  ----------
  ###谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
