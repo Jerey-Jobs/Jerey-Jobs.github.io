@@ -1,0 +1,618 @@
+转载请标明出处：http://blog.csdn.net/lmj623565791/article/details/24740977
+
+[Android][0]现在实现Tab类型的界面方式越来越多，今天就把常见的实现方式给大家来个总结。目前写了：
+
+1、传统的ViewPager实现
+
+2、FragmentManager+Fragment实现
+
+3、ViewPager+FragmentPagerAdapter实现
+
+4、TabPageIndicator+ViewPager+FragmentPagerAdapter
+
+ 1、传统的ViewPager实现
+
+主要就是ViewPager+ViewAdapter这个还是比较常见的，就不多说了
+
+效果图：
+
+![1472266518049.jpg][1]
+
+代码：
+
+**[java]**view plain copy 
+
+[![](./1472266518051.jpg "1472266518051.jpg")](https://code.csdn.net/snippets/319715) 
+
+[![](https://code.csdn.net/assets/ico_fork.svg)](https://code.csdn.net/snippets/319715/fork)
+
+1. package com.example.mainframework02;
+1. import java.util.ArrayList;
+1. import java.util.List;
+1. import android.app.Activity;
+1. import android.os.Bundle;
+1. import android.support.v4.view.PagerAdapter;
+1. import android.support.v4.view.ViewPager;
+1. import android.support.v4.view.ViewPager.OnPageChangeListener;
+1. import android.view.LayoutInflater;
+1. import android.view.View;
+1. import android.view.ViewGroup;
+1. import android.widget.ImageButton;
+1. import android.widget.ImageView;
+1. import android.widget.LinearLayout;
+1. public class TraditionalViewPagerAcvitity extends Activity
+1. {
+1. /**
+1. * ViewPager
+1. */
+1. private ViewPager mViewPager;
+1. /**
+1. * ViewPager的适配器
+1. */
+1. private PagerAdapter mAdapter;
+1. private ListmViews;
+1. private LayoutInflater mInflater;
+1. private int currentIndex;
+1. /**
+1. * 底部四个按钮
+1. */
+1. private LinearLayout mTabBtnWeixin;
+1. private LinearLayout mTabBtnFrd;
+1. private LinearLayout mTabBtnAddress;
+1. private LinearLayout mTabBtnSettings;
+1. @Override
+1. protected void onCreate(Bundle savedInstanceState)
+1. {
+1. super .onCreate(savedInstanceState);
+1. setContentView(R.layout.activity_main);
+1. mInflater = LayoutInflater.from( this );
+1. mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
+1. /**
+1. * 初始化View
+1. */
+1. initView();
+1. mViewPager.setAdapter(mAdapter);
+1. mViewPager.setOnPageChangeListener( new OnPageChangeListener()
+1. {
+1. @Override
+1. public void onPageSelected( int position)
+1. {
+1. resetTabBtn();
+1. switch (position)
+1. {
+1. case 0 :
+1. ((ImageButton) mTabBtnWeixin.findViewById(R.id.btn_tab_bottom_weixin))
+1. .setImageResource(R.drawable.tab_weixin_pressed);
+1. break ;
+1. case 1 :
+1. ((ImageButton) mTabBtnFrd.findViewById(R.id.btn_tab_bottom_friend))
+1. .setImageResource(R.drawable.tab_find_frd_pressed);
+1. break ;
+1. case 2 :
+1. ((ImageButton) mTabBtnAddress.findViewById(R.id.btn_tab_bottom_contact))
+1. .setImageResource(R.drawable.tab_address_pressed);
+1. break ;
+1. case 3 :
+1. ((ImageButton) mTabBtnSettings.findViewById(R.id.btn_tab_bottom_setting))
+1. .setImageResource(R.drawable.tab_settings_pressed);
+1. break ;
+1. }
+1. currentIndex = position;
+1. }
+1. @Override
+1. public void onPageScrolled( int arg0, float arg1, int arg2)
+1. {
+1. }
+1. @Override
+1. public void onPageScrollStateChanged( int arg0)
+1. {
+1. }
+1. });
+1. }
+1. protected void resetTabBtn()
+1. {
+1. ((ImageButton) mTabBtnWeixin.findViewById(R.id.btn_tab_bottom_weixin))
+1. .setImageResource(R.drawable.tab_weixin_normal);
+1. ((ImageButton) mTabBtnFrd.findViewById(R.id.btn_tab_bottom_friend))
+1. .setImageResource(R.drawable.tab_find_frd_normal);
+1. ((ImageButton) mTabBtnAddress.findViewById(R.id.btn_tab_bottom_contact))
+1. .setImageResource(R.drawable.tab_address_normal);
+1. ((ImageButton) mTabBtnSettings.findViewById(R.id.btn_tab_bottom_setting))
+1. .setImageResource(R.drawable.tab_settings_normal);
+1. }
+1. private void initView()
+1. {
+1. mTabBtnWeixin = (LinearLayout) findViewById(R.id.id_tab_bottom_weixin);
+1. mTabBtnFrd = (LinearLayout) findViewById(R.id.id_tab_bottom_friend);
+1. mTabBtnAddress = (LinearLayout) findViewById(R.id.id_tab_bottom_contact);
+1. mTabBtnSettings = (LinearLayout) findViewById(R.id.id_tab_bottom_setting);
+1. mViews = new ArrayList();
+1. View first = mInflater.inflate(R.layout.main_tab_01, null );
+1. View second = mInflater.inflate(R.layout.main_tab_02, null );
+1. View third = mInflater.inflate(R.layout.main_tab_03, null );
+1. View fourth = mInflater.inflate(R.layout.main_tab_04, null );
+1. mViews.add(first);
+1. mViews.add(second);
+1. mViews.add(third);
+1. mViews.add(fourth);
+1. mAdapter = new PagerAdapter()
+1. {
+1. @Override
+1. public void destroyItem(ViewGroup container, int position, Object object)
+1. {
+1. container.removeView(mViews.get(position));
+1. }
+1. @Override
+1. public Object instantiateItem(ViewGroup container, int position)
+1. {
+1. View view = mViews.get(position);
+1. container.addView(view);
+1. return view;
+1. }
+1. @Override
+1. public boolean isViewFromObject(View arg0, Object arg1)
+1. {
+1. return arg0 == arg1;
+1. }
+1. @Override
+1. public int getCount()
+1. {
+1. return mViews.size();
+1. }
+1. };
+1. }
+1. }
+
+评价：所有的代码都集中在一个Activity中，显得代码比较乱。
+
+2、FragmentManager+Fragment实现
+
+主要利用了Fragment在主内容界面对Fragment的add,hide等事务操作。
+
+效果图：
+
+![1472266518053.jpg][2]
+
+代码：
+
+主Activity
+
+**[java]**view plain copy 
+
+[![](./1472266518054.jpg "1472266518054.jpg")](https://code.csdn.net/snippets/319715) 
+
+[![](https://code.csdn.net/assets/ico_fork.svg)](https://code.csdn.net/snippets/319715/fork)
+
+1. package com.example.mainframework02.fragment;
+1. import android.annotation.SuppressLint;
+1. import android.app.Activity;
+1. import android.app.FragmentManager;
+1. import android.app.FragmentTransaction;
+1. import android.os.Bundle;
+1. import android.view.View;
+1. import android.view.View.OnClickListener;
+1. import android.widget.ImageButton;
+1. import android.widget.LinearLayout;
+1. import com.example.mainframework02.R;
+1. public class FragmentMainActivity extends Activity implements OnClickListener
+1. {
+1. private MainTab02 mTab02;
+1. private MainTab01 mTab01;
+1. private MainTab03 mTab03;
+1. private MainTab04 mTab04;
+1. /**
+1. * 底部四个按钮
+1. */
+1. private LinearLayout mTabBtnWeixin;
+1. private LinearLayout mTabBtnFrd;
+1. private LinearLayout mTabBtnAddress;
+1. private LinearLayout mTabBtnSettings;
+1. /**
+1. * 用于对Fragment进行管理
+1. */
+1. private FragmentManager fragmentManager;
+1. @SuppressLint ( "NewApi" )
+1. @Override
+1. protected void onCreate(Bundle savedInstanceState)
+1. {
+1. super .onCreate(savedInstanceState);
+1. setContentView(R.layout.fragment_main);
+1. initViews();
+1. fragmentManager = getFragmentManager();
+1. setTabSelection( 0 );
+1. }
+1. private void initViews()
+1. {
+1. mTabBtnWeixin = (LinearLayout) findViewById(R.id.id_tab_bottom_weixin);
+1. mTabBtnFrd = (LinearLayout) findViewById(R.id.id_tab_bottom_friend);
+1. mTabBtnAddress = (LinearLayout) findViewById(R.id.id_tab_bottom_contact);
+1. mTabBtnSettings = (LinearLayout) findViewById(R.id.id_tab_bottom_setting);
+1. mTabBtnWeixin.setOnClickListener( this );
+1. mTabBtnFrd.setOnClickListener( this );
+1. mTabBtnAddress.setOnClickListener( this );
+1. mTabBtnSettings.setOnClickListener( this );
+1. }
+1. @Override
+1. public void onClick(View v)
+1. {
+1. switch (v.getId())
+1. {
+1. case R.id.id_tab_bottom_weixin:
+1. setTabSelection( 0 );
+1. break ;
+1. case R.id.id_tab_bottom_friend:
+1. setTabSelection( 1 );
+1. break ;
+1. case R.id.id_tab_bottom_contact:
+1. setTabSelection( 2 );
+1. break ;
+1. case R.id.id_tab_bottom_setting:
+1. setTabSelection( 3 );
+1. break ;
+1. default :
+1. break ;
+1. }
+1. }
+1. /**
+1. * 根据传入的index参数来设置选中的tab页。
+1. *
+1. */
+1. @SuppressLint ( "NewApi" )
+1. private void setTabSelection( int index)
+1. {
+1. // 重置按钮
+1. resetBtn();
+1. // 开启一个Fragment事务
+1. FragmentTransaction transaction = fragmentManager.beginTransaction();
+1. // 先隐藏掉所有的Fragment，以防止有多个Fragment显示在界面上的情况
+1. hideFragments(transaction);
+1. switch (index)
+1. {
+1. case 0 :
+1. // 当点击了消息tab时，改变控件的图片和文字颜色
+1. ((ImageButton) mTabBtnWeixin.findViewById(R.id.btn_tab_bottom_weixin))
+1. .setImageResource(R.drawable.tab_weixin_pressed);
+1. if (mTab01 == null )
+1. {
+1. // 如果MessageFragment为空，则创建一个并添加到界面上
+1. mTab01 = new MainTab01();
+1. transaction.add(R.id.id_content, mTab01);
+1. } else
+1. {
+1. // 如果MessageFragment不为空，则直接将它显示出来
+1. transaction.show(mTab01);
+1. }
+1. break ;
+1. case 1 :
+1. // 当点击了消息tab时，改变控件的图片和文字颜色
+1. ((ImageButton) mTabBtnFrd.findViewById(R.id.btn_tab_bottom_friend))
+1. .setImageResource(R.drawable.tab_find_frd_pressed);
+1. if (mTab02 == null )
+1. {
+1. // 如果MessageFragment为空，则创建一个并添加到界面上
+1. mTab02 = new MainTab02();
+1. transaction.add(R.id.id_content, mTab02);
+1. } else
+1. {
+1. // 如果MessageFragment不为空，则直接将它显示出来
+1. transaction.show(mTab02);
+1. }
+1. break ;
+1. case 2 :
+1. // 当点击了动态tab时，改变控件的图片和文字颜色
+1. ((ImageButton) mTabBtnAddress.findViewById(R.id.btn_tab_bottom_contact))
+1. .setImageResource(R.drawable.tab_address_pressed);
+1. if (mTab03 == null )
+1. {
+1. // 如果NewsFragment为空，则创建一个并添加到界面上
+1. mTab03 = new MainTab03();
+1. transaction.add(R.id.id_content, mTab03);
+1. } else
+1. {
+1. // 如果NewsFragment不为空，则直接将它显示出来
+1. transaction.show(mTab03);
+1. }
+1. break ;
+1. case 3 :
+1. // 当点击了设置tab时，改变控件的图片和文字颜色
+1. ((ImageButton) mTabBtnSettings.findViewById(R.id.btn_tab_bottom_setting))
+1. .setImageResource(R.drawable.tab_settings_pressed);
+1. if (mTab04 == null )
+1. {
+1. // 如果SettingFragment为空，则创建一个并添加到界面上
+1. mTab04 = new MainTab04();
+1. transaction.add(R.id.id_content, mTab04);
+1. } else
+1. {
+1. // 如果SettingFragment不为空，则直接将它显示出来
+1. transaction.show(mTab04);
+1. }
+1. break ;
+1. }
+1. transaction.commit();
+1. }
+1. /**
+1. * 清除掉所有的选中状态。
+1. */
+1. private void resetBtn()
+1. {
+1. ((ImageButton) mTabBtnWeixin.findViewById(R.id.btn_tab_bottom_weixin))
+1. .setImageResource(R.drawable.tab_weixin_normal);
+1. ((ImageButton) mTabBtnFrd.findViewById(R.id.btn_tab_bottom_friend))
+1. .setImageResource(R.drawable.tab_find_frd_normal);
+1. ((ImageButton) mTabBtnAddress.findViewById(R.id.btn_tab_bottom_contact))
+1. .setImageResource(R.drawable.tab_address_normal);
+1. ((ImageButton) mTabBtnSettings.findViewById(R.id.btn_tab_bottom_setting))
+1. .setImageResource(R.drawable.tab_settings_normal);
+1. }
+1. /**
+1. * 将所有的Fragment都置为隐藏状态。
+1. *
+1. * @param transaction
+1. * 用于对Fragment执行操作的事务
+1. */
+1. @SuppressLint ( "NewApi" )
+1. private void hideFragments(FragmentTransaction transaction)
+1. {
+1. if (mTab01 != null )
+1. {
+1. transaction.hide(mTab01);
+1. }
+1. if (mTab02 != null )
+1. {
+1. transaction.hide(mTab02);
+1. }
+1. if (mTab03 != null )
+1. {
+1. transaction.hide(mTab03);
+1. }
+1. if (mTab04 != null )
+1. {
+1. transaction.hide(mTab04);
+1. }
+1. }
+1. }
+
+  
+各个TabFragment，一共四个TabFragment，下面贴出两个，基本都一样。
+
+**[java]**view plain copy 
+
+[![](./1472266518055.jpg "1472266518055.jpg")](https://code.csdn.net/snippets/319715) 
+
+[![](https://code.csdn.net/assets/ico_fork.svg)](https://code.csdn.net/snippets/319715/fork)
+
+1. package com.example.mainframework02.fragment;
+1. import android.annotation.SuppressLint;
+1. import android.app.Fragment;
+1. import android.os.Bundle;
+1. import android.view.LayoutInflater;
+1. import android.view.View;
+1. import android.view.ViewGroup;
+1. @SuppressLint ( "NewApi" )
+1. public class MainTab01 extends Fragment
+1. {
+1. @Override
+1. public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+1. {
+1. return inflater.inflate(com.example.mainframework02.R.layout.main_tab_01, container, false );
+1. }
+1. }
+
+
+
+
+
+**[java]**view plain copy 
+
+[![](./1472266518058.jpg "1472266518058.jpg")](https://code.csdn.net/snippets/319715) 
+
+[![](https://code.csdn.net/assets/ico_fork.svg)](https://code.csdn.net/snippets/319715/fork)
+
+1. package com.example.mainframework02.fragment;
+1. import android.annotation.SuppressLint;
+1. import android.app.Fragment;
+1. import android.os.Bundle;
+1. import android.view.LayoutInflater;
+1. import android.view.View;
+1. import android.view.ViewGroup;
+1. import com.example.mainframework02.R;
+1. @SuppressLint ( "NewApi" )
+1. public class MainTab02 extends Fragment
+1. {
+1. public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+1. {
+1. return inflater.inflate(R.layout.main_tab_02, container, false );
+1. }
+1. }
+
+评价：每个Fragment中的控件的处理，都是独立到各自的类中，相对来说主Activity简化了不少，可惜没有左右滑动的效果了。
+
+ 3、ViewPager+Fragment实现
+
+主要通过ViewPager和FragmentPagerAdapter一起来实现。
+
+效果图：
+
+![1472266518058.jpg][3]
+
+代码：
+
+主Activity
+
+**[java]**view plain copy 
+
+[![](./1472266518059.jpg "1472266518059.jpg")](https://code.csdn.net/snippets/319715) 
+
+[![](https://code.csdn.net/assets/ico_fork.svg)](https://code.csdn.net/snippets/319715/fork)
+
+1. package com.example.mainframework03;
+1. import java.util.ArrayList;
+1. import java.util.List;
+1. import android.os.Bundle;
+1. import android.support.v4.app.Fragment;
+1. import android.support.v4.app.FragmentActivity;
+1. import android.support.v4.app.FragmentPagerAdapter;
+1. import android.support.v4.view.ViewPager;
+1. import android.support.v4.view.ViewPager.OnPageChangeListener;
+1. import android.widget.ImageButton;
+1. import android.widget.LinearLayout;
+1. public class MainActivity extends FragmentActivity
+1. {
+1. private ViewPager mViewPager;
+1. private FragmentPagerAdapter mAdapter;
+1. private ListmFragments = new ArrayList();
+1. /**
+1. * 底部四个按钮
+1. */
+1. private LinearLayout mTabBtnWeixin;
+1. private LinearLayout mTabBtnFrd;
+1. private LinearLayout mTabBtnAddress;
+1. private LinearLayout mTabBtnSettings;
+1. @Override
+1. protected void onCreate(Bundle savedInstanceState)
+1. {
+1. super .onCreate(savedInstanceState);
+1. setContentView(R.layout.activity_main);
+1. mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
+1. initView();
+1. mAdapter = new FragmentPagerAdapter(getSupportFragmentManager())
+1. {
+1. @Override
+1. public int getCount()
+1. {
+1. return mFragments.size();
+1. }
+1. @Override
+1. public Fragment getItem( int arg0)
+1. {
+1. return mFragments.get(arg0);
+1. }
+1. };
+1. mViewPager.setAdapter(mAdapter);
+1. mViewPager.setOnPageChangeListener( new OnPageChangeListener()
+1. {
+1. private int currentIndex;
+1. @Override
+1. public void onPageSelected( int position)
+1. {
+1. resetTabBtn();
+1. switch (position)
+1. {
+1. case 0 :
+1. ((ImageButton) mTabBtnWeixin.findViewById(R.id.btn_tab_bottom_weixin))
+1. .setImageResource(R.drawable.tab_weixin_pressed);
+1. break ;
+1. case 1 :
+1. ((ImageButton) mTabBtnFrd.findViewById(R.id.btn_tab_bottom_friend))
+1. .setImageResource(R.drawable.tab_find_frd_pressed);
+1. break ;
+1. case 2 :
+1. ((ImageButton) mTabBtnAddress.findViewById(R.id.btn_tab_bottom_contact))
+1. .setImageResource(R.drawable.tab_address_pressed);
+1. break ;
+1. case 3 :
+1. ((ImageButton) mTabBtnSettings.findViewById(R.id.btn_tab_bottom_setting))
+1. .setImageResource(R.drawable.tab_settings_pressed);
+1. break ;
+1. }
+1. currentIndex = position;
+1. }
+1. @Override
+1. public void onPageScrolled( int arg0, float arg1, int arg2)
+1. {
+1. }
+1. @Override
+1. public void onPageScrollStateChanged( int arg0)
+1. {
+1. }
+1. });
+1. }
+1. protected void resetTabBtn()
+1. {
+1. ((ImageButton) mTabBtnWeixin.findViewById(R.id.btn_tab_bottom_weixin))
+1. .setImageResource(R.drawable.tab_weixin_normal);
+1. ((ImageButton) mTabBtnFrd.findViewById(R.id.btn_tab_bottom_friend))
+1. .setImageResource(R.drawable.tab_find_frd_normal);
+1. ((ImageButton) mTabBtnAddress.findViewById(R.id.btn_tab_bottom_contact))
+1. .setImageResource(R.drawable.tab_address_normal);
+1. ((ImageButton) mTabBtnSettings.findViewById(R.id.btn_tab_bottom_setting))
+1. .setImageResource(R.drawable.tab_settings_normal);
+1. }
+1. private void initView()
+1. {
+1. mTabBtnWeixin = (LinearLayout) findViewById(R.id.id_tab_bottom_weixin);
+1. mTabBtnFrd = (LinearLayout) findViewById(R.id.id_tab_bottom_friend);
+1. mTabBtnAddress = (LinearLayout) findViewById(R.id.id_tab_bottom_contact);
+1. mTabBtnSettings = (LinearLayout) findViewById(R.id.id_tab_bottom_setting);
+1. MainTab01 tab01 = new MainTab01();
+1. MainTab02 tab02 = new MainTab02();
+1. MainTab03 tab03 = new MainTab03();
+1. MainTab04 tab04 = new MainTab04();
+1. mFragments.add(tab01);
+1. mFragments.add(tab02);
+1. mFragments.add(tab03);
+1. mFragments.add(tab04);
+1. }
+1. }
+
+  
+还有4个TabFragment，下面贴一个，四个基本一样
+
+**[java]**view plain copy 
+
+[![](./1472266518060.jpg "1472266518060.jpg")](https://code.csdn.net/snippets/319715) 
+
+[![](https://code.csdn.net/assets/ico_fork.svg)](https://code.csdn.net/snippets/319715/fork)
+
+1. package com.example.mainframework03;
+1. import android.os.Bundle;
+1. import android.support.v4.app.Fragment;
+1. import android.view.LayoutInflater;
+1. import android.view.View;
+1. import android.view.ViewGroup;
+1. public class MainTab01 extends Fragment
+1. {
+1. @Override
+1. public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+1. {
+1. return inflater.inflate(R.layout.main_tab_01, container, false );
+1. }
+1. }
+
+评价：实现效果和第一种效果一模一样，每个Fragment独自处理自己内部的逻辑，代码整洁很多，并且支持左右滑动。感觉是第一种和第二种的结合版本。
+
+ 4、TabPageIndicator+ViewPager+FragmentPagerAdapter
+
+实现方式和3是一致的，但是使用了TabPageIndicator作为tab的指示器，效果还是不错的，这个之前写过，就不再贴代码了。
+
+效果图：
+
+![1472266518061.jpg][4]
+
+参考 ：[Android 使用Fragment，ViewPagerIndicator 制作csdn app主要框架][5]
+
+好了，就总结了这么多，肯定还有很多别的实现方式，大家可以留言，有时间会继续完善这篇总结的。
+
+[第一种和第二种的源码][6] [第三种方式的源码][7] 
+
+本来想一起，无奈，一会v4.Fragment一会Fragment就分开了，嘿嘿，各位留个言，赞一个，算是对我的支持。
+
+ 该博客视频教程已经更新：[多种多样的App主界面Tab实现方法][8]，期待您的关注。
+
+ ----------------------------------------------------------------------------------------------------------
+
+博主部分视频已经上线，如果你不喜欢枯燥的文本，请猛戳（初录，期待您的支持）：
+
+ [视频目录地址：本人录制的视频教程][9]
+
+[0]: http://lib.csdn.net/base/15
+[1]: ./1472266518049.jpg
+[2]: ./1472266518053.jpg
+[3]: ./1472266518058.jpg
+[4]: ./1472266518061.jpg
+[5]: http://blog.csdn.net/lmj623565791/article/details/23513993
+[6]: http://download.csdn.net/detail/lmj623565791/7273193
+[7]: http://download.csdn.net/detail/lmj623565791/7273175
+[8]: http://www.imooc.com/view/264
+[9]: http://www.imooc.com/space/teacher/id/320852
