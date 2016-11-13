@@ -114,6 +114,7 @@ public class Intent implements Parcelable, Cloneable {
 }
 ```
 
+可以见到，我们的Intent是深度拷贝，而且是直接new一个的深度拷贝。可见其设计初衷不是因为其不是为了解决构建复杂对象的资源消耗问题。
 
 
 
