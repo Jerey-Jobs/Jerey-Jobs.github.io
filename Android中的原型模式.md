@@ -69,6 +69,52 @@ public interface Cloneable {
     }
 ```
 
+### 应用
+那么原型模式，在我们的Android中有什么经典应用呢。此时我打开了AndroidStudio，直接跳到了我们的Intenet源码。
+
+``` stylus
+ *
+ * <p>These are the possible flags that can be used in the Intent via
+ * {@link #setFlags} and {@link #addFlags}.  See {@link #setFlags} for a list
+ * of all possible flags.
+ */
+public class Intent implements Parcelable, Cloneable {
+    
+    ...
+    @Override
+    public Object clone() {
+        return new Intent(this);
+    }
+
+    public Intent(Intent o) {
+        this.mAction = o.mAction;
+        this.mData = o.mData;
+        this.mType = o.mType;
+        this.mPackage = o.mPackage;
+        this.mComponent = o.mComponent;
+        this.mFlags = o.mFlags;
+        this.mContentUserHint = o.mContentUserHint;
+        if (o.mCategories != null) {
+            this.mCategories = new ArraySet<String>(o.mCategories);
+        }
+        if (o.mExtras != null) {
+            this.mExtras = new Bundle(o.mExtras);
+        }
+        if (o.mSourceBounds != null) {
+            this.mSourceBounds = new Rect(o.mSourceBounds);
+        }
+        if (o.mSelector != null) {
+            this.mSelector = new Intent(o.mSelector);
+        }
+        if (o.mClipData != null) {
+            this.mClipData = new ClipData(o.mClipData);
+        }
+    }
+    ...
+}
+```
+
+
 
 
 ### 总结
