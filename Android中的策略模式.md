@@ -27,7 +27,7 @@ grammar_cjkRuby: true
 ### 如何实现
 1.定义接口A，想好封装
 2.implement A接口 实现B
-3.多态使用
+3.多态使用（这么一说，我仿佛在说 java基础之多态）
 
 ``` stylus
     class B implement A{
@@ -42,6 +42,9 @@ grammar_cjkRuby: true
         }
     }
 ```
+### 源码应用
+其实这个是个很简单的设计模式，应用很多，我们来看看Android源码中有什么经典应用吧。
+1.TimeInterpolator 时间插值器
 
 
  ----------
