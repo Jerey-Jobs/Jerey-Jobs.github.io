@@ -27,6 +27,7 @@ grammar_cjkRuby: true
 ### 如何实现
 1.定义接口A，想好封装
 2.implement A接口 实现B
+3.多态使用
 
 ``` stylus
     class B implement A{
