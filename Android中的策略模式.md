@@ -104,7 +104,7 @@ public class ValueAnimator extends Animator{
 }
 ```
 
-当我们调用时，直接替换了TimeInterpolator。
+当我们调用时，直接替换了TimeInterpolator。无需干其他事情，我们自己写多种复用的自定义view啊，window啊，都可以借鉴这样的写法。
 
 
 
