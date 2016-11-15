@@ -46,6 +46,38 @@ grammar_cjkRuby: true
 其实这个是个很简单的设计模式，应用很多，我们来看看Android源码中有什么经典应用吧。
 1.TimeInterpolator 时间插值器
 
+我们来看一个插值器源码
+
+``` stylus
+/** 
+ * An interpolator where the rate of change is constant 
+ * 
+ */  
+@HasNativeInterpolator  
+public class LinearInterpolator implements Interpolator, NativeInterpolatorFactory {  
+  
+    public LinearInterpolator() {  
+    }  
+      
+    public LinearInterpolator(Context context, AttributeSet attrs) {  
+    }  
+      
+    public float getInterpolation(float input) {  
+        return input;  
+    }  
+  
+    /** @hide */  
+    @Override  
+    public long createNativeInterpolator() {  
+        return NativeInterpolatorFactoryHelper.createLinearInterpolator();  
+    }  
+} 
+```
+
+每个动画都有自己的插值器,
+> animtorAlpha.setInterpolator(new LinearInterpolator());
+
+
 
  ----------
  ###谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
