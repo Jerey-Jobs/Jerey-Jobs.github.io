@@ -44,7 +44,8 @@ grammar_cjkRuby: true
 ```
 ### 源码应用
 其实这个是个很简单的设计模式，应用很多，我们来看看Android源码中有什么经典应用吧。
-1.TimeInterpolator 时间插值器
+
+TimeInterpolator 时间插值器
 
 我们来看一个插值器源码
 
@@ -74,8 +75,37 @@ public class LinearInterpolator implements Interpolator, NativeInterpolatorFacto
 } 
 ```
 
-每个动画都有自己的插值器,
+
+
+每个动画都有自己的默认插值器, 而通过抽象出插值器接口（最新版本的源码又改了），然后我们可以通过setInterpolator去改变它
+这样大大增加了类的功能上的扩展性
 > animtorAlpha.setInterpolator(new LinearInterpolator());
+
+当我们调用ssetInterpolator时，发生了哪些事情呢？
+
+``` stylus
+public class ValueAnimator extends Animator{
+    //插值器也有自己的默认初始值
+    private TimeInterpolator mInterpolator = sDefaultInterpolator;
+    
+        // The time interpolator to be used if none is set on the animation
+    private static final TimeInterpolator sDefaultInterpolator =
+            new AccelerateDecelerateInterpolator();
+
+    //设置插值器
+    @Override
+    public void setInterpolator(TimeInterpolator value) {
+        if (value != null) {
+            mInterpolator = value;
+        } else {
+            mInterpolator = new LinearInterpolator();
+        }
+    }
+}
+```
+
+当我们调用时，直接替换了TimeInterpolator。
+
 
 
 
