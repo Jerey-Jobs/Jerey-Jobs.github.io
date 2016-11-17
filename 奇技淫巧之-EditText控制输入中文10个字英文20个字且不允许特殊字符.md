@@ -68,7 +68,9 @@ grammar_cjkRuby: true
         }
     };
 ```
+使用时，只需要
 
+mEditText.addTextChangedListener(textWatcher);
 
 
  ----------
