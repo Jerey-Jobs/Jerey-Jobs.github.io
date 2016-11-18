@@ -45,12 +45,15 @@ grammar_cjkRuby: true
             }
             mEditText.setText(s);
             mEditText.setSelection(editStart);
-            mEditText.addTextChangedListener(textWatcher);
             Matcher m = NAME_PATTERN.matcher(s);
             if( m.find()){
-                ToastUtils.showToast(mContext, R.string.illegal_character);
-                mEditText.setText("");
+                ToastUtils.showToast(mContext, R.string.robot_name_error);
+                editStart = mEditText.getSelectionStart();
+                s.delete( mEditText.getSelectionEnd() - 1, mEditText.getSelectionEnd());
+                mEditText.setText(s);
+                mEditText.setSelection(editStart - 1);
             }
+            mEditText.addTextChangedListener(textWatcher);
         }
 
         private int calculateLength(String etstring) {
