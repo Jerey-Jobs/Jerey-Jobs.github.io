@@ -2,9 +2,9 @@
 title: Handler.post解惑
 grammar_cjkRuby: true
 ---
-程序员都知道不能在UI线程执行耗时的操作，Android引入handler就是为了解决这个问题，当然实现异步更新UI不仅仅只有这一种方法，还有AsyncTask也可以实现。
+Android程序员都知道不能在UI线程执行耗时的操作，Android引入handler就是为了解决这个问题，当然实现异步更新UI不仅仅只有这一种方法，还有AsyncTask也可以实现。
 
-
+Android有一个 Handler类，使用该类可以对运行在不同线程中的多个任务进行排队，并使用Message和Runnable对象安排这些任务。在javadoc中，对Handler是这样解释的：Handler可以发送和处理消息对象或Runnable对象，这些消息对象和Runnable对象与一个线程相关联。每个Handler的实例都关联了一个线程和线程的消息队列。当创建了一个Handler对象时，一个线程或消息队列同时也被创建，该Handler对象将发送和处理这些消息或Runnable对象。
 
 
  ----------
