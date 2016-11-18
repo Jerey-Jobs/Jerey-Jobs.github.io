@@ -6,6 +6,12 @@ Android程序员都知道不能在UI线程执行耗时的操作，Android引入h
 
 Android有一个 Handler类，使用该类可以对运行在不同线程中的多个任务进行排队，并使用Message和Runnable对象安排这些任务。在javadoc中，对Handler是这样解释的：Handler可以发送和处理消息对象或Runnable对象，这些消息对象和Runnable对象与一个线程相关联。每个Handler的实例都关联了一个线程和线程的消息队列。当创建了一个Handler对象时，一个线程或消息队列同时也被创建，该Handler对象将发送和处理这些消息或Runnable对象。
 
+a、如果new一个无参构造函数的Handler对象，那么这个Handler将自动与当前运行线程相关联，也就是说这个Handler将与当前运行的线程使用同一个消息队列，并且可以处理该队列中的消息。
+    我做过这样一个实验，在主用户界面中创建一个带有无参构造函数的Handler对象，该Handler对象向消息队列推送一个Runnable对象，在Runnable对象的run函数中打印当前线程Id，主用户界面线程ID和Runnable线程ID均为1。
+    
+b. b、如果new一个带参构造函数的Handler对象，那么这个Handler对象将与参数所表示的Looper相关联。注意：此时线程类应该是一个特殊类HandlerThread类，一个Looper类的Thread类，它继承自Thread类。
+
+c、如果需要Handler对象去处理消息，那么就要重载Handler类的handleMessage函数。
 
  ----------
  ###谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
