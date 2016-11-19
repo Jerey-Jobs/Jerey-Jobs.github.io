@@ -108,9 +108,19 @@ public class SecondActivity extends AppCompatActivity {
  打印为
  
 
-> Blockquote
+> 11-19 17:05:15.930 6280-6280/? I/iii:  跳转去activity2
+11-19 17:05:15.960 6280-6280/? I/iii: 进入activity2
+11-19 17:05:15.960 6280-6321/? I/iii:  count = 0
+11-19 17:05:16.960 6280-6321/? I/iii:  count = 1
+11-19 17:05:17.960 6280-6321/? I/iii:  count = 2
+11-19 17:05:18.960 6280-6321/? I/iii:  count = 3
+11-19 17:05:19.250 6280-6280/? I/iii: activity2 onDestroy() 
+11-19 17:05:19.960 6280-6321/? I/iii:  count = 4
+11-19 17:05:20.960 6280-6321/? I/iii:  count = 5
+11-19 17:05:21.960 6280-6321/? I/iii:  count = 6
+11-19 17:05:22.960 6280-6321/? I/iii:  count = 7
 
-
+可见，使用handlerThread只充当了一个线程的单行执行器的作用，并没有能够起到所谓的控制runnable执行的作用。
 
 - ### handler回顾
 
