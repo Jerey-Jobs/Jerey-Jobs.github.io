@@ -14,7 +14,100 @@ grammar_cjkRuby: true
 
 移除这些runnable，解决掉在view，或者说activity中开启线程，而当view或者activity结束时 线程仍然存活的问题。
 
-但是目前存在一个问题，removeCallback并不是立即停止该线程，而是移除掉还未执行的callback，正在执行的是无法立即结束的。
+但是目前存在一个问题，removeCallback并不是立即停止该线程，而是移除掉还未执行的callback，正在执行的是无法立即结束的。此问题我写了demo，证实的确是正在运行的程序无论通过
+mNetHandler.getLooper().quit();
+handlerThread.quitSafely();
+都无法停止该线程，我们来看一下我的demo
+功能很简单，activity1点击button进activity2，activity2一进去就开启线程干事情，然后点击finsh按钮，结束当前activity，回到activity1，无论哪种模式，activity开的那个线程都能存活。
+
+- Activity 1的代码 没什么东西  就是跳转
+``` stylus
+public class MainActivity extends AppCompatActivity {
+
+    private Button button;
+    private TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textView = (TextView) findViewById(R.id.my_text);
+        button = (Button) findViewById(R.id.button);
+        textView.setText("第一个界面");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
+```
+
+- Activity2的代码
+
+``` stylus
+/**
+ * Created by xiamin on 11/19/16.
+ */
+public class SecondActivity extends AppCompatActivity {
+    private Button button;
+    private TextView textView;
+    private Handler mNetHandler;
+    HandlerThread handlerThread;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textView = (TextView) findViewById(R.id.my_text);
+        button = (Button) findViewById(R.id.button);
+        textView.setText("第2个界面");
+        button.setText("finish()");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        handlerThread = new HandlerThread("NET");
+        handlerThread.start();
+        mNetHandler = new Handler(handlerThread.getLooper());
+        mNetHandler.post(mRunnable);
+    }
+
+    private static int count = 0;
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                Log.i("iii"," count = " + count++);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        Log.i("iii","mNetHandler.removeCallbacks(mRunnable);");
+        mNetHandler.removeCallbacksAndMessages(null);
+        mNetHandler.getLooper().quit();
+        handlerThread.quitSafely();
+        super.onDestroy();
+    }
+}
+
+```
+
+
+
+
 
 
 Android程序员都知道不能在UI线程执行耗时的操作，Android引入handler就是为了解决这个问题，当然实现异步更新UI不仅仅只有这一种方法，还有AsyncTask也可以实现。
