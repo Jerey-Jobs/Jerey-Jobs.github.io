@@ -2,7 +2,7 @@
 title: Handler.post解惑
 grammar_cjkRuby: true
 ---
-本人今日拿到一份代码，其中网络请求方面由于功能很简单，就没有使用网络请求框架，ok，那按照我的想法，开启一个线程拿个数据，拿完发送handler更新UI即可了，但是代码中并不是这么写的，而是通过mNetHandler.post一个包含网络请求的runnable。mNetHandler的来源是这样的。
+今日修改bug拿到一份代码，其中网络请求方面由于功能很简单，就没有使用网络请求框架，ok，那按照我的想法，开启一个线程拿个数据，拿完发送handler更新UI即可了，但是代码中并不是这么写的，而是通过mNetHandler.post一个包含网络请求的runnable。mNetHandler的来源是这样的。
 
 ``` stylus
         HandlerThread handlerThread = new HandlerThread("NET");
