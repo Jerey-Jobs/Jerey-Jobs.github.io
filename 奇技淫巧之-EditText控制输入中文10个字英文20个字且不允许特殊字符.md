@@ -9,7 +9,7 @@ grammar_cjkRuby: true
 此方法是设置文本监听器，省事，好用，且ROM，平台无关。
 ### code
 
-``` stylus
+``` java
     private static final String SPECIAL_CHARACTERS =  "[\"\"''`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！
     @#￥%……&*（）—-—+|{}【】‘；：”“’。，、？]";
     private static final Pattern NAME_PATTERN;
