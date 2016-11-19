@@ -21,7 +21,7 @@ handlerThread.quitSafely();
 功能很简单，activity1点击button进activity2，activity2一进去就开启线程干事情，然后点击finsh按钮，结束当前activity，回到activity1，无论哪种模式，activity开的那个线程都能存活。
 
 - Activity 1的代码 没什么东西  就是跳转
-``` stylus
+``` java
 public class MainActivity extends AppCompatActivity {
 
     private Button button;
