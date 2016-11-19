@@ -4,5 +4,15 @@ tags: 新建,模板,小书匠
 grammar_cjkRuby: true
 ---
 
+ ----------
+ ###谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
-欢迎使用 **{小书匠}(xiaoshujiang)编辑器**，您可以通过==设置==里的修改模板来改变新建文章的内容。
+ ----------
+ 本文作者：Anderson/Jerey_Jobs
+
+ 简书地址：[Anderson大码渣][1]
+
+ github地址：[Jerey_Jobs][2]
+  [1]: http://www.jianshu.com/users/016a5ba708a0/
+  [2]: https://github.com/Jerey-Jobs
+
