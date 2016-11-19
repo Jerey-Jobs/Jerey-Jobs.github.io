@@ -17,7 +17,12 @@ Android Support v13  :这个包的设计是为了android 3.2及更高版本的�
 MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd81f0 that was originally bound here
 服务没有解绑，造成内存泄露，onDestroy的回调方法中加入了对服务的解绑操作即 unbindService成功解决
 
-
+ -  ### 
+ -  ###  
+ -  ###  
+ -  ###  
+ -  ### 
+ -  ###   
 
 
  ----------
