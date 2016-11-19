@@ -43,7 +43,7 @@ private BroadcastReceiver mbatteryReceiver=new BroadcastReceiver()
     };
 ```
 
-```
+``` java
 mContext.registerReceiver(mbatteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 unregisterReceiver(mbatteryReceiver);
 ```
