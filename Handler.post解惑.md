@@ -9,7 +9,7 @@ grammar_cjkRuby: true
         handlerThread.start();
         mNetHandler = new Handler(handlerThread.getLooper());
 ```
-而当我询问原因时，解释是用mNetHandler来管理这些Runnable，在view结束时，
+而当我询问原作者原因时，解释是用mNetHandler来管理这些Runnable，在view结束时，
 > mNetHandler.removeCallback
 
 移除这些runnable，解决掉在view，或者说activity中开启线程，而当view或者activity结束时 线程仍然存活的问题。
