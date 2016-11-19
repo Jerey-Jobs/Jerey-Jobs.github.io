@@ -27,7 +27,8 @@ MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd
 随后搜索该pid 快速找到log
 
 
- -  ###  
+ -  ###  Fragment对于onActivityResult捕获不到的情况
+			被父avtivity的onActivityResult捕获了
  -  ###  
  -  ### 
  -  ###   
