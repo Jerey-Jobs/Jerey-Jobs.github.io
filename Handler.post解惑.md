@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
 - Activity2的代码
 
-``` stylus
+``` java
 /**
  * Created by xiamin on 11/19/16.
  */
