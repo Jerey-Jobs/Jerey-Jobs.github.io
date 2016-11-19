@@ -140,7 +140,7 @@ b、如果new一个带参构造函数的Handler对象，那么这个Handler对�
 c、如果需要Handler对象去处理消息，那么就要重载Handler类的handleMessage函数。
 
  ----------
- ###谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
+ ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
  ----------
  本文作者：Anderson/Jerey_Jobs
