@@ -108,7 +108,7 @@ public class SecondActivity extends AppCompatActivity {
 
 
 
-
+### handler回顾
 
 Android程序员都知道不能在UI线程执行耗时的操作，Android引入handler就是为了解决这个问题，当然实现异步更新UI不仅仅只有这一种方法，还有AsyncTask也可以实现。
 
