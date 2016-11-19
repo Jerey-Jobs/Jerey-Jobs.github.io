@@ -13,6 +13,7 @@ Android Support v4:  这个包是为了照顾1.6及更高版本而设计的，�
 Android Support v7:  这个包是为了考虑照顾2.1及以上版本而设计的，但不包含更低，故如果不考虑1.6,我们可以采用再加上这个包，另外注意，v7是要依赖v4这个包的，即，两个得同时被包含。
 Android Support v13  :这个包的设计是为了android 3.2及更高版本的，一般我们都不常用，平板开发中能用到。
 
+- 未解绑服务使得服务持有一个销毁的activity的context造成内存泄露
 MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd81f0 that was originally bound here
 服务没有解绑，造成内存泄露，onDestroy的回调方法中加入了对服务的解绑操作即 unbindService成功解决
 
