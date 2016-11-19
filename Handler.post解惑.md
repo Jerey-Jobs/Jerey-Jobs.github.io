@@ -121,6 +121,10 @@ public class SecondActivity extends AppCompatActivity {
 11-19 17:05:22.960 6280-6321/? I/iii:  count = 7
 
 可见，使用handlerThread只充当了一个线程的单行执行器的作用，并没有能够起到所谓的控制runnable执行的作用。事实上，什么都不能控制runnable执行的。
+- ### 这个事情提醒我们几点：
+#### **1.activity结束后线程还能存活，所以我们要记得结束它或者知道要管理好他们**
+#### **2.使用handlerThread.post runnable 只是让handlerThread充当了线程的顺序执行器**
+
 
 - ### handler回顾
 
