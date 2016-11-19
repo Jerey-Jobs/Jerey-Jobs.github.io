@@ -18,7 +18,7 @@ MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd
 服务没有解绑，造成内存泄露，onDestroy的回调方法中加入了对服务的解绑操作即 unbindService成功解决
 
  -  ### handler中的handleMessage返回值
- return true 代表事件被处理了，其他handleMessage
+ return true 代表事件被处理了，其他handleMessage不会执行
  
  -  ###  
  -  ###  
