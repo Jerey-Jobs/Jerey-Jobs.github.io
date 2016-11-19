@@ -105,7 +105,7 @@ public class SecondActivity extends AppCompatActivity {
     }
 }
 ```
- 打印为
+ 打印为，我们可以见到runnable里在继续打印
  
 
 > 11-19 17:05:15.930 6280-6280/? I/iii:  跳转去activity2
