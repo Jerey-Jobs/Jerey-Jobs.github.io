@@ -21,7 +21,12 @@ MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd
  return true 代表事件被处理了，其他handleMessage不会收到该msg
  return false 事件继续传递，外层的handleMessage() 会继续执行 
  
- -  ###  
+ -  ###  FC问题从log中快速搜索has died
+
+ 11-18 10:10:59.380 V/CommandService(  495): Death received CommandThread:android.os.BinderProxy@41a1b1b8 in pid:1218
+随后搜索该pid 快速找到log
+
+
  -  ###  
  -  ###  
  -  ### 
