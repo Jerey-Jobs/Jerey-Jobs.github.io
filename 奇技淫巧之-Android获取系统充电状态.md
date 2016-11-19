@@ -22,7 +22,7 @@ Android系统在发送完broadcast后才被注册的broadcastreceiver无法接�
 ### 如何获取充电状态？
 
 
-```
+``` java
 private BroadcastReceiver mbatteryReceiver=new BroadcastReceiver()
     {
         public void onReceive(Context context, Intent intent) 
