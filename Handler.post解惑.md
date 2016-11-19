@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("iii"," 跳转去activity2");
                 Intent intent = new Intent(MainActivity.this,SecondActivity.class);
                 startActivity(intent);
             }
@@ -61,6 +62,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i("iii","进入activity2");
         textView = (TextView) findViewById(R.id.my_text);
         button = (Button) findViewById(R.id.button);
         textView.setText("第2个界面");
@@ -85,7 +87,7 @@ public class SecondActivity extends AppCompatActivity {
             while (true) {
                 Log.i("iii"," count = " + count++);
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -95,16 +97,18 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        Log.i("iii","mNetHandler.removeCallbacks(mRunnable);");
+        Log.i("iii","activity2 onDestroy() ");
         mNetHandler.removeCallbacksAndMessages(null);
         mNetHandler.getLooper().quit();
         handlerThread.quitSafely();
         super.onDestroy();
     }
 }
-
 ```
+ 打印为
+ 
 
+> Blockquote
 
 
 
