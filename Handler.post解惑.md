@@ -9,7 +9,12 @@ grammar_cjkRuby: true
         handlerThread.start();
         mNetHandler = new Handler(handlerThread.getLooper());
 ```
-而当我询问原因时，解释是用mNetHandler来管理这些Runnable，在view结束时，移除这些runnable，解决掉在view，或者说activity中开启线程，而当view或者activity结束时 线程仍然存活的问题。
+而当我询问原因时，解释是用mNetHandler来管理这些Runnable，在view结束时，
+> mNetHandler.removeCallback
+
+移除这些runnable，解决掉在view，或者说activity中开启线程，而当view或者activity结束时 线程仍然存活的问题。
+
+但是目前存在一个问题，removeCallback并不是立即停止该线程，而是移除掉还未执行的callback，正在执行的是无法立即结束的。
 
 
 Android程序员都知道不能在UI线程执行耗时的操作，Android引入handler就是为了解决这个问题，当然实现异步更新UI不仅仅只有这一种方法，还有AsyncTask也可以实现。
