@@ -2,7 +2,15 @@
 title: Handler.post解惑
 grammar_cjkRuby: true
 ---
-本人今日拿到一份代码，其中网络请求方面由于很简单，就没有使用网络请求框架，ok，那按照我的想法，开启一个线程拿个数据，拿完发送handler更新UI即可了，但是代码中并不是这么写的，而是使用handler.post一个包含网络请求的runnable。
+本人今日拿到一份代码，其中网络请求方面由于很简单，就没有使用网络请求框架，ok，那按照我的想法，开启一个线程拿个数据，拿完发送handler更新UI即可了，但是代码中并不是这么写的，而是通过mNetHandler.post一个包含网络请求的runnable。mNetHandler的来源是这样的。
+
+``` stylus
+        HandlerThread handlerThread = new HandlerThread("NET");
+        handlerThread.start();
+        mNetHandler = new Handler(handlerThread.getLooper());
+```
+而当我询问原因时，解释是用mNetHandler来管理这些Runnable，在view结束时，移除这些runnable，解决掉在view，或者说activity中开启线程，而当view或者activity结束时 线程仍然存活的问题。
+
 
 Android程序员都知道不能在UI线程执行耗时的操作，Android引入handler就是为了解决这个问题，当然实现异步更新UI不仅仅只有这一种方法，还有AsyncTask也可以实现。
 
