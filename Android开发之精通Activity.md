@@ -4,7 +4,7 @@ title: Android开发之深入Activity
 
 很多人提到Activity就知道其7大生命周期，以及各个方法的使用，但是Activity到底是怎么工作的呢？
 本篇文章带你学习Activity到底是什么。
-
+----------
 ### Activity相关Framework类
 - ActivityThread是什么？
 ActivityThread不是一个线程，在Activity中有个
@@ -38,12 +38,15 @@ final ApplicationThread mAppThread = new ApplicationThread();
 
 - ActivityRecord
 ActivityManagerService端负责记录每个注册过来的Activity的信息
-    
-
+---------- 
 ### Activity与其他类的区别
+----------
 ### Activity的生命方法是什么时候回调的
+----------
 ### Activity是如何被打开的
+----------
 ### Service是如何被打开的
+----------
 ### Activity栈交互
 
 
