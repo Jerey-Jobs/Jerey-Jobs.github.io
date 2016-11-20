@@ -9,7 +9,7 @@ title: Android开发之从源码深入Activity
 - Context是什么？
   Context在我们的[Android开发之深入Context][1]文章中已经介绍过
 - ActivityThread是什么？
-ActivityThread不是一个线程，是一个应用的主线程，在Activity中有个
+ActivityThread不是一个线程，是应用的主线程，在Activity中有个
 >  ActivityThread mMainThread;
 ActivityThread有个main方法
 ``` java
@@ -40,10 +40,14 @@ final ApplicationThread mAppThread = new ApplicationThread();
 
 - ActivityRecord
 ActivityManagerService端负责记录每个注册过来的Activity的信息
+
 ---------- 
 ### Activity与其他类的区别
 Activity作为整体框架，控制界面，有其生命周期，但是其生命周期的回调等都是由Framework控制
 如果从本质上看，与普通的类没什么区别
+
+----------
+### Activity的生命方法是什么时候回调的
 关键点：
 1.Instrumentation （生命周期的管理，还可以启动Activity，创建Application）
 2.ActivityManagerNative AMS的远程代理
@@ -118,27 +122,9 @@ public final class ActivityThread {
     }
     
 ```
+从上面我们看出Instrumentation是负责回掉activity生命周期的工具类，而ActivityThread是控制着这些执行的类。
+#### 其实代码继续跟下去，最终会发现，我们的应用无非是在由前台的ActivityThread，ContextImpl，后台的ActivityManagerService，想要显示到界面上最后都是拿到WindowManager设置参数后addView来干的。
 
-
-----------
-### Activity的生命方法是什么时候回调的
-----------
-### Activity是如何被打开的
-----------
-### Service是如何被打开的
-----------
-### Activity栈交互
-
-
-
-``` stylus
-Activity类：
-    public void setContentView(@LayoutRes int layoutResID) {
-        /*拿到的其实是PhoneWindow*/
-        getWindow().setContentView(layoutResID);
-        initWindowDecorActionBar();
-    }
-```
 
 
 
