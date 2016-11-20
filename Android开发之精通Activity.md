@@ -9,11 +9,19 @@ title: Android开发之深入Activity
 - ActivityThread是什么？
 ActivityThread不是一个线程，在Activity中有个
 >  ActivityThread mMainThread;
-
 ActivityThread有个main方法
-
 ``` java
-    
+     public static void main(String[] args) {
+        Process.setArgV0("<pre-initialized>");
+
+        Looper.prepareMainLooper();
+
+        ActivityThread thread = new ActivityThread();
+        thread.attach(false);
+        ...
+        // End of event ActivityThreadMain.
+        Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
+        Looper.loop();
 ```
 
 
