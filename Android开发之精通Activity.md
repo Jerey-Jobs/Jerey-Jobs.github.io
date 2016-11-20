@@ -6,8 +6,10 @@ title: Android开发之深入Activity
 本篇文章带你学习Activity到底是什么。
 ----------
 ### Activity相关Framework类
+- Context是什么？
+  Context在我们的[Android开发之深入Context][1]文章中已经介绍过
 - ActivityThread是什么？
-ActivityThread不是一个线程，在Activity中有个
+ActivityThread不是一个线程，是一个应用的主线程，在Activity中有个
 >  ActivityThread mMainThread;
 ActivityThread有个main方法
 ``` java
@@ -40,6 +42,31 @@ final ApplicationThread mAppThread = new ApplicationThread();
 ActivityManagerService端负责记录每个注册过来的Activity的信息
 ---------- 
 ### Activity与其他类的区别
+Activity作为整体框架，控制界面，有其生命周期，但是其生命周期的回调等都是由Framework控制
+关键点：
+1.Instrumentation （生命周期的管理，还可以启动Activity，创建Application）
+2.ActivityManagerNative AMS的远程代理
+3.ActivityThread中的final H mH = new H();
+
+``` java
+    private class H extends Handler {
+        ...
+        public void handleMessage(Message msg) {
+            if (DEBUG_MESSAGES) Slog.v(TAG, ">>> handling: " + codeToString(msg.what));
+            switch (msg.what) {
+                /**/
+                case LAUNCH_ACTIVITY: {
+                    Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, "activityStart");
+                    final ActivityClientRecord r = (ActivityClientRecord) msg.obj;
+
+                    r.packageInfo = getPackageInfoNoCheck(
+                            r.activityInfo.applicationInfo, r.compatInfo);
+                    handleLaunchActivity(r, null, "LAUNCH_ACTIVITY");
+                    Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
+                } break;
+```
+
+
 ----------
 ### Activity的生命方法是什么时候回调的
 ----------
@@ -56,8 +83,11 @@ ActivityManagerService端负责记录每个注册过来的Activity的信息
  ----------
  本文作者：Anderson/Jerey_Jobs
 
- 简书地址：[Anderson大码渣][1]
+ 简书地址：[Anderson大码渣][2]
 
- github地址：[Jerey_Jobs][2]
-  [1]: http://www.jianshu.com/users/016a5ba708a0/latest_articles
-  [2]: https://github.com/Jerey-Jobs
+ github地址：[Jerey_Jobs][3]
+
+
+  [1]: http://www.jianshu.com/p/25613ae8a88e
+  [2]: http://www.jianshu.com/users/016a5ba708a0/latest_articles
+  [3]: https://github.com/Jerey-Jobs
