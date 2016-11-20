@@ -49,12 +49,13 @@ Activity作为整体框架，控制界面，有其生命周期，但是其生命
 3.ActivityThread中的final H mH = new H();
 
 ``` java
+public final class ActivityThread {    
     private class H extends Handler {
         ...
         public void handleMessage(Message msg) {
             if (DEBUG_MESSAGES) Slog.v(TAG, ">>> handling: " + codeToString(msg.what));
             switch (msg.what) {
-                /**/
+                /*拿到启动avtivity的请求*/
                 case LAUNCH_ACTIVITY: {
                     Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, "activityStart");
                     final ActivityClientRecord r = (ActivityClientRecord) msg.obj;
@@ -64,6 +65,38 @@ Activity作为整体框架，控制界面，有其生命周期，但是其生命
                     handleLaunchActivity(r, null, "LAUNCH_ACTIVITY");
                     Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
                 } break;
+                ...
+        }
+    }
+        
+        
+    private void handleLaunchActivity(ActivityClientRecord r, Intent customIntent, String reason) {
+    ...
+        Activity a = performLaunchActivity(r, customIntent);
+    ...
+    }
+    
+    
+    private Activity performLaunchActivity(ActivityClientRecord r, Intent customIntent) {
+        // System.out.println("##### [" + System.currentTimeMillis() + "] ActivityThread.performLaunchActivity(" + r + ")");
+        /*创建application，整个应用程序就这个地方创建app 
+        * 里面会调用 instrumentation.callApplicationOnCreate(app);
+        回调application的oncreate方法*/
+        Application app = r.packageInfo.makeApplication(false, mInstrumentation);
+        
+        /*使用classloader创建class*/
+        java.lang.ClassLoader cl = r.packageInfo.getClassLoader();
+        activity = mInstrumentation.newActivity(
+                cl, component.getClassName(), r.intent);
+        
+        /*使得activity与windows对象进行关联，关联后就*/
+        activity.attach(appContext, this, getInstrumentation(), r.token,
+                    r.ident, app, r.intent, r.activityInfo, title, r.parent,
+                    r.embeddedID, r.lastNonConfigurationInstances, config,
+                    r.referrer, r.voiceInteractor, window);
+  
+    }
+    
 ```
 
 
