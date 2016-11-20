@@ -43,10 +43,11 @@ ActivityManagerService端负责记录每个注册过来的Activity的信息
 ---------- 
 ### Activity与其他类的区别
 Activity作为整体框架，控制界面，有其生命周期，但是其生命周期的回调等都是由Framework控制
+如果从本质上看，与普通的类没什么区别
 关键点：
 1.Instrumentation （生命周期的管理，还可以启动Activity，创建Application）
 2.ActivityManagerNative AMS的远程代理
-3.ActivityThread中的final H mH = new H();
+3.ActivityThread中的final H mH = new H();这个handler类
 
 ``` java
 public final class ActivityThread {    
@@ -93,7 +94,8 @@ public final class ActivityThread {
         activity = mInstrumentation.newActivity(
                 cl, component.getClassName(), r.intent);
         
-        /*使得activity与windows对象进行关联，关联后就*/
+        /*使得activity与windows对象进行关联 同时对Activity初始化相关的内容
+          比如：ContextImpl，Theme，Configuration，title*/
         activity.attach(appContext, this, getInstrumentation(), r.token,
                     r.ident, app, r.intent, r.activityInfo, title, r.parent,
                     r.embeddedID, r.lastNonConfigurationInstances, config,
