@@ -17,11 +17,11 @@ ActivityThread有个main方法
         Looper.prepareMainLooper();
 
         ActivityThread thread = new ActivityThread();
-        thread.attach(false);
+        thread.attach(false);    //与AMS进行通信，交互
         ...
         // End of event ActivityThreadMain.
         Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
-        Looper.loop();
+        Looper.loop();   //轮询消息队列
     }
 ```
 
