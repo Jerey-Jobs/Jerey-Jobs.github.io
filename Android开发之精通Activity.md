@@ -22,6 +22,7 @@ ActivityThread有个main方法
         // End of event ActivityThreadMain.
         Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
         Looper.loop();
+    }
 ```
 
 
