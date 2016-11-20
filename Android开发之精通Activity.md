@@ -2,6 +2,9 @@
 title: Android开发之深入Activity
 ---
 
+很多人提到Activity就知道其7大生命周期，以及各个方法的使用，但是Activity到底是怎么工作的呢？
+本篇文章带你学习Activity到底是什么。
+
 - ### Activity相关Framework
 - ### Activity与其他类的区别
 - ### Activity的生命方法是什么时候回调的
