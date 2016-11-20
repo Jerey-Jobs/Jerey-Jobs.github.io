@@ -33,7 +33,11 @@ ActivityThread有个main方法
 final ApplicationThread mAppThread = new ApplicationThread();
 ```
 
+- ActivityClientRecord
+一个记录类，客户端负责记录Activity的各种信息
 
+- ActivityRecord
+ActivityManagerService端负责记录每个注册过来的Activity的信息
     
 
 ### Activity与其他类的区别
