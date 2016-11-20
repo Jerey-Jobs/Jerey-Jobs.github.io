@@ -25,8 +25,16 @@ ActivityThread有个main方法
     }
 ```
 
+- ApplicationThread？
+负责与AMS进行通信的一个帮助类
+在ActivityThread中作为一个成员变量进行初始化
 
-  ActivityThread先创建，创建looper，通知ActivityManagerService进行attach
+``` java
+final ApplicationThread mAppThread = new ApplicationThread();
+```
+
+
+    
 
 ### Activity与其他类的区别
 ### Activity的生命方法是什么时候回调的
