@@ -1,5 +1,5 @@
 ---
-title: Android开发之深入Activity
+title: Android开发之从源码深入Activity
 ---
 
 很多人提到Activity就知道其7大生命周期，以及各个方法的使用，但是Activity到底是怎么工作的呢？
@@ -119,6 +119,18 @@ public final class ActivityThread {
 ### Service是如何被打开的
 ----------
 ### Activity栈交互
+
+
+
+``` stylus
+Activity类：
+    public void setContentView(@LayoutRes int layoutResID) {
+        /*拿到的其实是PhoneWindow*/
+        getWindow().setContentView(layoutResID);
+        initWindowDecorActionBar();
+    }
+```
+
 
 
  ----------
