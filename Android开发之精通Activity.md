@@ -66,6 +66,13 @@ public final class ActivityThread {
                     handleLaunchActivity(r, null, "LAUNCH_ACTIVITY");
                     Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
                 } break;
+                case RESUME_ACTIVITY:
+                    Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, "activityResume");
+                    SomeArgs args = (SomeArgs) msg.obj;
+                    handleResumeActivity((IBinder) args.arg1, true, args.argi1 != 0, true,
+                            args.argi3, "RESUME_ACTIVITY");
+                    Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
+                    break;
                 ...
         }
     }
