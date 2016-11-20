@@ -79,11 +79,13 @@ public final class ActivityThread {
     
     private Activity performLaunchActivity(ActivityClientRecord r, Intent customIntent) {
         // System.out.println("##### [" + System.currentTimeMillis() + "] ActivityThread.performLaunchActivity(" + r + ")");
+        
         /*创建application，整个应用程序就这个地方创建app 
         * 里面会调用LoadedApk的  public Application makeApplication(boolean forceDefaultAppClass,Instrumentation instrumentation)
         ---->instrumentation.callApplicationOnCreate(app);
         ---->mActivityThread.mAllApplications.add(app);
         回调application的oncreate方法*/
+    
         Application app = r.packageInfo.makeApplication(false, mInstrumentation);
         
         /*使用classloader创建class*/
