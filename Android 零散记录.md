@@ -37,7 +37,7 @@ MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd
 	 TextUtils.isEmpty(mStr.trim()
 	 String类自带的trim()方法，能够去掉字符串前后空格
 	 
- -  ###   
+ -  ###  
  -  ###
  -  ### 
  -  ###   
