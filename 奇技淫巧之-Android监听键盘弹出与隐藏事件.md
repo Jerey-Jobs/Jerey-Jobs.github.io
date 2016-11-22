@@ -88,6 +88,46 @@ java:
             }
         });
 ```
+虽然不是根据布局大小变化来判断的，但是根据ViewTreeObserver.OnGlobalLayoutListener，
+
+``` java
+    @Override
+    public void onGlobalLayout() {
+        int currHeight = mContentView.getHeight();
+        if (currHeight == 0) {
+            Log.i(TAG, "currHeight is 0");
+            return;
+        }
+        boolean hasChange = false;
+        if (mPreHeight == 0) {
+            mPreHeight = currHeight;
+            mOriginHeight = currHeight;
+        } else {
+            if (mPreHeight != currHeight) {
+                hasChange = true;
+                mPreHeight = currHeight;
+            } else {
+                hasChange = false;
+            }
+        }
+        if (hasChange) {
+            boolean isShow;
+            int keyboardHeight = 0;
+            if (mOriginHeight == currHeight) {
+                //hidden
+                isShow = false;
+            } else {
+                //show
+                keyboardHeight = mOriginHeight - currHeight;
+                isShow = true;
+            }
+
+            if (mKeyBoardListen != null) {
+                mKeyBoardListen.onKeyboardChange(isShow, keyboardHeight);
+            }
+        }
+    }
+```
 
 
  ----------
