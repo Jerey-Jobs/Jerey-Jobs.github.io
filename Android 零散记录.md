@@ -32,10 +32,20 @@ MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd
 
  -  ###  软件盘的本质是什么？软键盘其实是一个Dialog！
  InputMethodService为我们的输入法创建了一个Dialog，并且将该Dialog的Window的某些参数（如Gravity）进行了设置，使之能够在底部或者全屏显示。当我们点击输入框时，系统对活动主窗口进行调整，从而为输入法腾出相应的空间，然后将该Dialog显示在底部，或者全屏显示。
+ 
+ -  ### 如何去掉字符串前后空格，或者说判断字符串是否为空，或者全部为空格
+	 TextUtils.isEmpty(mStr.trim()
+ -  ###   
+ -  ###
  -  ### 
  -  ###   
-
-
+ -  ###
+ -  ### 
+ -  ###   
+ -  ###
+ -  ### 
+ -  ###   
+ -  ###
  ----------
  ###谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
