@@ -37,7 +37,24 @@ MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd
 	 TextUtils.isEmpty(mStr.trim()
 	 String类自带的trim()方法，能够去掉字符串前后空格
 	 
- -  ###  
+ -  ### 如何使强制控制键盘弹起落下
+
+``` java
+   public void showSoftKeyboard() {
+        mEditText.setFocusable(true);
+        mEditText.setFocusableInTouchMode(true);
+        mEditText.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+    }
+
+    public void hideSoftKeyboard() {
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+    }
+```
+
+
  -  ###
  -  ### 
  -  ###   
