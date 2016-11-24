@@ -75,7 +75,7 @@ grammar_cjkRuby: true
 
 mEditText.addTextChangedListener(textWatcher);
 
-或者使用自定义的EditText类
+或者使用自定义的EditText类，我写的，目前而言，扩展性实用性还不错，还是可以一用的
 
 ``` java
 
