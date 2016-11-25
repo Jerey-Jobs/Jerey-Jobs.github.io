@@ -67,6 +67,7 @@ SystemUI 通知栏和最近应用
 
  -  ### Android分辨率适配终极方案
  android-support-percent-lib  Android基于百分比的布局，谷歌官方推荐
+ [android-support-percent-lib鸿洋博客][1]
  
  -  ### 
  -  ###   
@@ -81,9 +82,11 @@ SystemUI 通知栏和最近应用
  ----------
  本文作者：Anderson/Jerey_Jobs
 
- 简书地址：[Anderson大码渣][1]
+ 简书地址：[Anderson大码渣][2]
 
- github地址：[Jerey_Jobs][2]
-  [1]: http://www.jianshu.com/users/016a5ba708a0/
-  [2]: https://github.com/Jerey-Jobs
+ github地址：[Jerey_Jobs][3]
 
+
+  [1]: http://blog.csdn.net/lmj623565791/article/details/46695347
+  [2]: http://www.jianshu.com/users/016a5ba708a0/
+  [3]: https://github.com/Jerey-Jobs
