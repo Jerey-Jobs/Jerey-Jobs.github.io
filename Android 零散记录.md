@@ -61,7 +61,9 @@ I/###xiamin( 8571): Setting onStart
 I/###xiamin( 8571): Setting onResume
 
 
- -  ###   
+ -  ###   Android模块
+keyguard(锁屏)模块
+SystemUI 通知栏和最近应用
  -  ###
  -  ### 
  -  ###   
