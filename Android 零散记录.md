@@ -61,10 +61,12 @@ I/###xiamin( 8571): Setting onStart
 I/###xiamin( 8571): Setting onResume
 
 
- -  ###   Android模块
+ -  ###  Android模块
 keyguard(锁屏)模块
 SystemUI 通知栏和最近应用
- -  ###
+
+ -  ### Android分辨率适配终极方案
+ android-support-percent-lib  Android基于百分比的布局，谷歌官方推荐
  -  ### 
  -  ###   
  -  ###
