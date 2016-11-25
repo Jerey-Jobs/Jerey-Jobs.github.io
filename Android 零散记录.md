@@ -53,11 +53,22 @@ MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd
 ```
 
 
- -  ###
+ -  ### 
  -  ### 
  -  ###   
  -  ###
- -  ### 
+ -  ### 系统语言改变那点事
+ 当系统语言改变，当前Activity会进行重新创建，在生命方法中
+ 
+
+> I/###xiamin( 8571): Setting onPause
+I/###xiamin( 8571): Setting onStop
+I/###xiamin( 8571): Setting onDestory
+I/###xiamin( 8571): Setting onCreate
+I/###xiamin( 8571): Setting onStart
+I/###xiamin( 8571): Setting onResume
+
+
  -  ###   
  -  ###
  -  ### 
