@@ -84,7 +84,9 @@ android-support-percent-lib Android基于百分比的布局，谷歌官方推荐
 ```
 
 
- -  ### 
+ -  ### adjustResize那点事
+ 如果你在 manifest 中把一个 activity 设置成 android:windowSoftInputMode="adjustResize"，那么 ScrollView（或者其它可伸缩的 ViewGroups）会缩小，从而为软键盘腾出空间。但是，如果你在 activity 的主题中设置了 android:windowFullscreen="true"，那么 ScrollView 不会缩小。这是因为该属性强制 ScrollView 全屏显示。然而在主题中设置 android:fitsSystemWindows="false" 也会导致 adjustResize 不起作用；
+
  -  ###   
  -  ###
  -  ### 
