@@ -85,7 +85,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
 ```
 
-然后我们添加一个线程，在线程中,拿到SurfaceHolder 进行绘制
+然后我们添加一个线程，在线程中,拿到SurfaceHolder 进行绘制，同时我们打印UI线程号和draw时候的线程号。
 总体代码如下，
 
 ``` java
@@ -193,9 +193,16 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
 ```
 
+#### 执行效果如图
 
-
-
+Log日志为：
+11-27 05:06:10.979 2752-2752/com.example.surfaceviewdemo I/iii: surfaceCreated
+11-27 05:06:10.979 2752-2752/com.example.surfaceviewdemo I/iii: UI thread id: 1
+11-27 05:06:11.027 2752-2767/com.example.surfaceviewdemo I/iii: draw thread id: 107
+11-27 05:06:11.231 2752-2767/com.example.surfaceviewdemo I/iii: draw thread id: 107
+11-27 05:06:11.343 2752-2767/com.example.surfaceviewdemo I/iii: draw thread id: 107
+11-27 05:06:11.439 2752-2767/com.example.surfaceviewdemo I/iii: draw thread id: 107
+可以看出，我们的绘图线程与UI线程不是同一个线程。这带来的好处是巨大的。
 
 
  ----------
