@@ -79,9 +79,9 @@ SystemUI 通知栏和最近应用
  
 
 ```  java
-           SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-            Date date = new Date(System.currentTimeMillis());
-            str = format.format(date)；
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+    Date date = new Date(System.currentTimeMillis());
+    String str = format.format(date)；
 ```
 
 
