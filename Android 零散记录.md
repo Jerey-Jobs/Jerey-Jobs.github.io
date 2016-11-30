@@ -1,7 +1,5 @@
 ---
 title: Android 零散记录
-tags: 新建,模板,小书匠
-grammar_cjkRuby: true
 ---
  - ### PopupWindow与AlertDialog的区别
 最关键的区别是AlertDialog不能指定显示位置，只能默认显示在屏幕最中间（当然也可以通过设置WindowManager参数来改变位置）。而PopupWindow是可以指定显示位置的，随便哪个位置都可以，更加灵活。
@@ -53,45 +51,30 @@ MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd
         inputManager.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
     }
 ```
-
-
  -  ### 系统语言改变那点事
-当系统语言改变，当前Activity会进行重新创建，在生命方法中，我们可以在manifest中： android:configChanges="locale" 语言（国家码）改变
+ 当系统语言改变，当前Activity会进行重新创建，在生命方法中，我们可以在manifest中： android:configChanges="locale" 语言（国家码）改变
+> I/###xiamin( 8571): Setting onPause
+I/###xiamin( 8571): Setting onStop
+I/###xiamin( 8571): Setting onDestory
+I/###xiamin( 8571): Setting onCreate
+I/###xiamin( 8571): Setting onStart
+I/###xiamin( 8571): Setting onResume
 
-> I/###xiamin( 8571): Setting onPause  
-> I/###xiamin( 8571): Setting onStop  
-> I/###xiamin( 8571): Setting onDestory  
-> I/###xiamin( 8571):  Setting onCreate  
-> I/###xiamin( 8571): Setting onStart  
-> I/###xiamin( 8571): Setting onResume
 
-### Android模块 
-keyguard(锁屏)模块 
+ -  ###  Android模块
+keyguard(锁屏)模块
 SystemUI 通知栏和最近应用
 
-### Android分辨率适配终极方案 
-android-support-percent-lib Android基于百分比的布局，谷歌官方推荐 [android-support-percent-lib鸿洋博客][1]
-
-### SurfaceView 
-普通的Android控件，例如TextView、Button和CheckBox等，它们都是将自己的UI绘制在宿主窗口的绘图表面之上，这意味着它们的UI是在应用程序的主线程中进行绘制的。由于应用程序的主线程除了要绘制UI之外，还需要及时地响应用户输入，否则的话，系统就会认为应用程序没有响应了，因此就会弹出一个ANR对话框出来。对于一些游戏画面，或者摄像头预览、视频播放来说，它们的UI都比较复杂，而且要求能够进行高效的绘制，因此，它们的UI就不适合在应用程序的主线程中进行绘制。这时候就必须要给那些需要复杂而高效UI的视图生成一个独立的绘图表面，以及使用一个独立的线程来绘制这些视图的UI。 
-
-
- -  ###常用debug代码
-
-``` stylus
-    Thread.currentThread().getId(); //获得线程号
-    System.currentTimeMillis(); //获取当前系统时间
-```
-
-
- -  ### adjustResize那点事
- 如果你在 manifest 中把一个 activity 设置成 android:windowSoftInputMode="adjustResize"，那么 ScrollView（或者其它可伸缩的 ViewGroups）会缩小，从而为软键盘腾出空间。但是，如果你在 activity 的主题中设置了 android:windowFullscreen="true"，那么 ScrollView 不会缩小。这是因为该属性强制 ScrollView 全屏显示。然而在主题中设置 android:fitsSystemWindows="false" 也会导致 adjustResize 不起作用；
-
- -  ###   
+ -  ### Android分辨率适配终极方案
+ android-support-percent-lib  Android基于百分比的布局，谷歌官方推荐
+ [android-support-percent-lib鸿洋博客][1]
+ 
+ -  ### SurfaceView
+ 普通的Android控件，例如TextView、Button和CheckBox等，它们都是将自己的UI绘制在宿主窗口的绘图表面之上，这意味着它们的UI是在应用程序的主线程中进行绘制的。由于应用程序的主线程除了要绘制UI之外，还需要及时地响应用户输入，否则的话，系统就会认为应用程序没有响应了，因此就会弹出一个ANR对话框出来。对于一些游戏画面，或者摄像头预览、视频播放来说，它们的UI都比较复杂，而且要求能够进行高效的绘制，因此，它们的UI就不适合在应用程序的主线程中进行绘制。这时候就必须要给那些需要复杂而高效UI的视图生成一个独立的绘图表面，以及使用一个独立的线程来绘制这些视图的UI。
+ 
+ -  ###   android:splitMotionEvents：定义布局是否传递触摸事件（touch）到子布局，true表示传递给子布局，false表示不传递。
  -  ###
  -  ### 
- -  ###   
- -  ###
  -  ### 
  -  ###   
  -  ###
