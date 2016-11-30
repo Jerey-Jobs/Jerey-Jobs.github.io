@@ -74,7 +74,17 @@ SystemUI 通知栏和最近应用
  
  -  ###   android:splitMotionEvents
    定义布局是否传递触摸事件（touch）到子布局，true表示传递给子布局，false表示不传递。
- -  ###
+   
+ -  ### 获取当前格式化时间
+ 
+
+```  java
+           SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+            Date date = new Date(System.currentTimeMillis());
+            str = format.format(date)；
+```
+
+
  -  ### 
  -  ### 
  -  ###   
