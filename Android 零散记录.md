@@ -102,7 +102,9 @@ SystemUI 通知栏和最近应用
 >storage/sdcard/Android/data/包名/cache
 
 
- - ### 
+ - ### SharedPreferences也可以设置监听器
+ mSharedPreferences.registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+ 
  - ###
  - ###  
  - ###
