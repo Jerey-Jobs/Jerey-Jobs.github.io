@@ -24,11 +24,19 @@ StringBuilder 线程不安全，效率高
 - ### switch是否能作用在byte上，是否能作用在long上，是否能作用在String上？
 switch支持使用byte类型，不支持long类型，String支持在java1.7引入
 
-- ###
-- ###
-- ###
-- ###
-- ###
+- ### 接口的意义
+规范、扩展、回调
+
+- ### 覆盖equals时总要覆盖hashCode方法
+因为如果对象根据equals方法是比较相等的，那么调这两个对象中的任意一个对象的hashCode方法都必须产生相同的效果
+
+- ### 多态的好处
+可替换性、可扩充、接口性、灵活、简化
+
+- ### 线程阻塞
+
+- ### String转int
+>int i = Integer.parseInt([String])
 - ###
 - ###
 - ###
