@@ -52,7 +52,6 @@ MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd
     }
 ```
  -  ### 系统语言改变那点事
- 其实当系统语言改变，也就是configChanges改变
  当系统语言改变，当前Activity会进行重新创建，在生命方法中，我们可以在manifest中： android:configChanges="locale" 语言（国家码）改变
 > I/###xiamin( 8571): Setting onPause
 I/###xiamin( 8571): Setting onStop
@@ -103,9 +102,25 @@ SystemUI 通知栏和最近应用
 >storage/sdcard/Android/data/包名/cache
 
 
- - ### 
- - ###
- - ###  
+ - ### SharedPreferences也可以设置监听器
+ mSharedPreferences.registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+ 
+ - ### Android获取唯一机器码的代码
+>String mDeviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+ 
+ - ### 将内容复制到粘贴板
+ 
+
+``` java
+    ClipboardManager copy = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    ClipData myClip;
+    String text = "" + mIdcode;
+    myClip = ClipData.newPlainText("text", text);
+    copy.setPrimaryClip(myClip);
+    Toast.makeText(WelcomeActivity.this, "复制成功", Toast.LENGTH_SHORT).show();
+```
+
+
  - ###
  - ###  
  - ###  
