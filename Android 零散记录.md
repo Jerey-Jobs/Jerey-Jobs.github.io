@@ -109,8 +109,6 @@ SystemUI 通知栏和最近应用
 >String mDeviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
  
  - ### 将内容复制到粘贴板
- 
-
 ``` java
     ClipboardManager copy = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
     ClipData myClip;
