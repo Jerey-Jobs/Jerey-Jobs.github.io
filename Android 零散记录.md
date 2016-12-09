@@ -155,6 +155,7 @@ android:persistent="true"
 
  - ###  服务的前台运行（现在没什么用了）
  [服务前台运行](http://blog.csdn.net/mouse12138/article/details/50904459)
+ 
  - ###  
  - ###  
  - ### 
