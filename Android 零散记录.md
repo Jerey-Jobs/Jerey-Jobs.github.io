@@ -119,9 +119,42 @@ SystemUI 通知栏和最近应用
 ```
 
 
- - ###
- - ###  
- - ###  
+ - ### 监听屏幕唤醒和关闭的广播
+ 
+
+``` java
+private void registSreenStatusReceiver() {  
+    mScreenStatusReceiver = new ScreenStatusReceiver();    
+    IntentFilter screenStatusIF = new IntentFilter();    
+    screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);    
+    screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);    
+    registerReceiver(mScreenStatusReceiver, screenStatusIF);    
+}  
+
+unregisterReceiver(mScreenStatusReceiver);  
+
+class ScreenStatusReceiver extends BroadcastReceiver {  
+    String SCREEN_ON = "android.intent.action.SCREEN_ON";  
+    String SCREEN_OFF = "android.intent.action.SCREEN_OFF";  
+  
+    @Override  
+    public void onReceive(Context context, Intent intent) {  
+        if (SCREEN_ON.equals(intent.getAction())) {  
+  
+        }  
+        else if (SCREEN_OFF.equals(intent.getAction())) {  
+        }  
+    }  
+} 
+```
+
+ - ###  Android应用的persistent属性
+android:persistent="true"
+在Android系统中，有一种永久性应用。它们对应的AndroidManifest.xml文件里，会将persistent属性设为true
+在系统启动之时，AMS的systemReady()会加载所有persistent为true的应用。
+
+ - ###  服务的前台运行（现在没什么用了）
+ [服务前台运行](http://blog.csdn.net/mouse12138/article/details/50904459)
  - ###  
  - ###  
  - ### 
@@ -158,11 +191,12 @@ SystemUI 通知栏和最近应用
  ----------
  本文作者：Anderson/Jerey_Jobs
 
- 简书地址：[Anderson大码渣][2]
+ 简书地址：[Anderson大码渣][3]
 
- github地址：[Jerey_Jobs][3]
+ github地址：[Jerey_Jobs][4]
 
 
   [1]: http://blog.csdn.net/lmj623565791/article/details/46695347
-  [2]: http://www.jianshu.com/users/016a5ba708a0/
-  [3]: https://github.com/Jerey-Jobs
+  [2]: http://blog.csdn.net/mouse12138/article/details/50904459
+  [3]: http://www.jianshu.com/users/016a5ba708a0/
+  [4]: https://github.com/Jerey-Jobs
