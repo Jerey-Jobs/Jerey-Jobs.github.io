@@ -156,7 +156,12 @@ android:persistent="true"
  - ###  服务的前台运行（现在没什么用了）
  [服务前台运行](http://blog.csdn.net/mouse12138/article/details/50904459)
  
- - ###  
+ - ###  使用AIDL作为项目之间的接口可能存在一定的风险。
+
+如何规避这个风险，网上有文章说，在IBinder里面的onTransact函数中调用Binder.getCallingUid()和Binder.getCallingPid()来判断外来方的身份。
+但这个方法，只能是被调用方检测调用方的身份。
+最近我的服务作为系统级服务存在的,但是其中的一个标志位出了问题,就是通过该方法找到是哪个进程改了的.
+
  - ###  
  - ### 
  - ### 
