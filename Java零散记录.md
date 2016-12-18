@@ -38,7 +38,7 @@ switch支持使用byte类型，不支持long类型，String支持在java1.7引�
 - ### String转int
 >int i = Integer.parseInt([String])
 
-- ### 
+- ### 格式化
 
 ``` java
         float a = 0.5534
@@ -47,7 +47,6 @@ switch支持使用byte类型，不支持long类型，String支持在java1.7引�
      
     结果为：0.5
 ```
-
 
 - ###
 - ###
