@@ -64,7 +64,13 @@ system    3367  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
 
 ```
 
+- ### 强启应用命令
+adb shell am start -a android.intent.action.MAIN -n com.avatar.settings/.Settings
 
+
+- ### 产生5000次monkey触摸事件
+adb shell monkey -v 5000
+adb shell monkey -p com.avatar.settings -s 500 -v 10000
  ----------
  ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
