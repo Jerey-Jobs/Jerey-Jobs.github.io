@@ -1,6 +1,69 @@
 ---
-title: Git/Repo常用命令
+title: Linux环境下开发常用命令
 ---
+
+- ### 搜索类
+find 目录 -name 名字
+
+grep命令  -r代表递归
+grep -r "内容"
+grep -rE '内容a|内容b'    有内容a或者内容b的
+grep -r  内容a | grep 内容b   既有a也要有b
+
+将文件中XXX替换成YYY
+sed -i 's/XXX/YYY/g' `grep XXX . -rl`
+
+
+- ### 查看进程类
+ps 查看进程
+ps -t 进程号或者grep 命令
+
+- ### Android干掉进程类
+普通进程,activity manager就能干掉
+adb shell am force-stop com.avatar.settings
+
+adb shell ps | grep com.avatar.dialog
+adb shell kill 3349
+
+我们还可以直接用ps -t 加进程号 查看该进程的详细情况及其开的子线程个数
+``` stylus
+root@rk3288:/ # ps -t 3308                                                     
+USER     PID   PPID  VSIZE  RSS     WCHAN    PC         NAME
+system    3308  168   957444 102596 ffffffff 4004e754 S com.avatar.dialog
+system    3312  3308  957444 102596 c007ef6c 4004e920 S GC
+system    3313  3308  957444 102596 c004622c 4004e188 S Signal Catcher
+system    3314  3308  957444 102596 c0115d44 4004d6f0 S JDWP
+system    3315  3308  957444 102596 c007ef6c 4004e920 S Compiler
+system    3316  3308  957444 102596 c007ef6c 4004e920 S ReferenceQueueD
+system    3317  3308  957444 102596 c007ef6c 4004e920 S FinalizerDaemon
+system    3318  3308  957444 102596 c007ef6c 4004e920 S FinalizerWatchd
+system    3319  3308  957444 102596 c05a7d64 4004d5a4 S Binder_1
+system    3320  3308  957444 102596 c05a7d64 4004d5a4 S Binder_2
+system    3321  3308  957444 102596 c0140070 4004e754 S Notify
+system    3322  3308  957444 102596 c0140070 4004e754 S WifiManager
+system    3324  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
+system    3325  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
+system    3326  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
+system    3327  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
+system    3328  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
+system    3329  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
+system    3336  3308  957444 102596 c007ef6c 4004e920 S AsyncTask #1
+system    3337  3308  957444 102596 c007ef6c 4004e920 S AsyncTask #2
+system    3339  3308  957444 102596 c007ef6c 4004e920 S CMEM Purge
+system    3340  3308  957444 102596 bf011f64 4004d2e0 S mali-event-hnd
+system    3341  3308  957444 102596 c007ef6c 4004e920 S mali-utility-wo
+system    3342  3308  957444 102596 c007ef6c 4004e920 S mali-utility-wo
+system    3343  3308  957444 102596 c007ef6c 4004e920 S mali-utility-wo
+system    3344  3308  957444 102596 c007ef6c 4004e920 S mali-utility-wo
+system    3345  3308  957444 102596 c007ef6c 4004e920 S mali-renderer
+system    3346  3308  957444 102596 c007ef6c 4004e920 S AsyncTask #3
+system    3347  3308  957444 102596 c05a7d64 4004d5a4 S Binder_3
+system    3352  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
+system    3355  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
+system    3367  3308  957444 102596 c007ef6c 4004e920 S m.avatar.dialog
+
+```
+
 
  ----------
  ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
