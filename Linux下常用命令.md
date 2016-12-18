@@ -1,5 +1,5 @@
 ---
-title: Linux环境下开发常用命令
+title: Linux环境下Android开发常用命令
 ---
 
 - ### 搜索类
@@ -17,6 +17,11 @@ sed -i 's/XXX/YYY/g' `grep XXX . -rl`
 - ### 查看进程类
 ps 查看进程
 ps -t 进程号或者grep 命令
+
+- ### Android源码编译
+source build/envsetup.sh;
+lunch 
+make -j8
 
 - ### Android干掉进程类
 普通进程,activity manager就能干掉
@@ -71,6 +76,8 @@ adb shell am start -a android.intent.action.MAIN -n com.avatar.settings/.Setting
 - ### 产生5000次monkey触摸事件
 adb shell monkey -v 5000
 adb shell monkey -p com.avatar.settings -s 500 -v 10000
+
+
  ----------
  ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
