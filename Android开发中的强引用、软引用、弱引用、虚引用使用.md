@@ -80,17 +80,71 @@ java.lang.ref包中提供了几个类：SoftReference类、WeakReference类和Ph
 
 
 - ### 弱引用 (WeakReference)
-
+用法
+``` java
+WeakReference<User> sr = new WeakReference<User>(new User());
+```
 如果一个对象只具有弱引用，那么在垃圾回收器线程扫描的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程，因此不一定会很快发现那些只具有弱引用的对象。弱引用也可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。
 弱引用与软引用的根本区别在于：只具有弱引用的对象拥有更短暂的生命周期，可能随时被回收。而只具有软引用的对象只有当内存不够的时候才被回收，在内存足够的时候，通常不被回收。
 
+使用场景,handler的使用防止内存泄露
+``` java
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import java.lang.ref.WeakReference;
+ 
+public class MainActivity extends AppCompatActivity {
+ 
+    private Handler handler  ;
+ 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+ 
+        handler = new MyHandler( this ) ;
+ 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+               handler.sendEmptyMessage( 0 ) ;
+            }
+        }).start() ;
+ 
+    }
+ 
+    private static class MyHandler extends Handler {
+        WeakReference<MainActivity> weakReference ;
+ 
+        public MyHandler(MainActivity activity ){
+            weakReference  = new WeakReference<MainActivity>( activity) ;
+        }
+ 
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( weakReference.get() != null ){
+                // update android ui
+            }
+        }
+    }
+ 
+}
+```
+
+
 在Android应用的开发中，为了防止内存溢出，在处理一些占用内存大而且声明周期较长的对象时候，可以尽量应用软引用和弱引用技术。
+软引用，弱引用都非常适合来保存那些可有可无的缓存数据。如果这样做，当系统内存不足时，这些缓存数据会被回收，不会导致内存溢出。而当内存资源充足时，这些缓存数据又可以存在相当长的时间。
+
 
 
 - ### 到底什么时候使用软引用，什么时候使用弱引用呢？
 个人认为，如果只是想避免OutOfMemory异常的发生，则可以使用软引用。如果对于应用的性能更在意，想尽快回收一些占用内存比较大的对象，则可以使用弱引用。
 还有就是可以根据对象是否经常使用来判断。如果该对象可能会经常使用的，就尽量用软引用。如果该对象不被使用的可能性更大些，就可以用弱引用。
 另外，和弱引用功能类似的是WeakHashMap。WeakHashMap对于一个给定的键，其映射的存在并不阻止垃圾回收器对该键的回收，回收以后，其条目从映射中有效地移除。WeakHashMap使用ReferenceQueue实现的这种机制。
+
 
 
 
