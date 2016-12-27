@@ -34,10 +34,48 @@ so, 是时候系统的学习一下软引用、弱引用这些,并对我们的代
 	MyObject anotherRef=(MyObject)aSoftRef.get();
 ```
 
-
 java.lang.ref包中提供了几个类：SoftReference类、WeakReference类和PhantomReference类，它们分别代表软引用、弱引用和虚引用。ReferenceQueue类表示引用队列，它可以和这三种引用类联合使用，以便跟踪Java虚拟机回收所引用的对象的活动。
 
 如果一个对象只具有软引用，那么如果内存空间足够，垃圾回收器就不会回收它；如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。软引用可用来实现内存敏感的高速缓存。软引用可以和一个引用队列（ReferenceQueue）联合使用，如果软引用所引用的对象被垃圾回收，Java虚拟机就会把这个软引用加入到与之关联的引用队列中。
+
+``` java
+	ReferenceQueue queue = new  ReferenceQueue();
+	SoftReference  ref=new  SoftReference(aMyObject, queue);
+	
+```
+那么当这个SoftReference所软引用的aMyOhject被垃圾收集器回收的同时，ref所强引用的SoftReference对象被列入ReferenceQueue。也就是说，ReferenceQueue中保存的对象是Reference对象，而且是已经失去了它所软引用的对象的Reference对象。另外从ReferenceQueue这个名字也可以看出，它是一个队列，当我们调用它的poll()方法的时候，如果这个队列中不是空队列，那么将返回队列前面的那个Reference对象。
+在任何时候，我们都可以调用ReferenceQueue的poll()方法来检查是否有它所关心的非强可及对象被回收。如果队列为空，将返回一个null,否则该方法返回队列中前面的一个Reference对象。利用这个方法，我们可以检查哪个SoftReference所软引用的对象已经被回收。于是我们可以把这些失去所软引用的对象的SoftReference对象清除掉。常用的方式为:
+
+``` java
+	SoftReference ref = null;
+	while ((ref = (EmployeeRef) q.poll()) != null) {
+		// 清除ref
+	}
+```
+ #### 当然,我们作为Android开发中使用,正常是用来处理图片这种占用内存大的类的.
+ 所以,我们应该这样使用.
+
+``` java
+	View view = findViewById(R.id.button);
+	Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
+	Drawable drawable = new BitmapDrawable(bitmap);
+	SoftReference<Drawable> drawableSoftReference = 
+												new SoftReference<Drawable>(drawable);
+	if(drawableSoftReference != null) {
+		view.setBackground(drawableSoftReference.get());
+	}
+```
+这样的好处是
+通过软引用的get()方法，取得drawable对象实例的强引用，发现对象被未回收。在GC在内存充足的情况下，不会回收软引用对象。此时view的背景显示.
+实际情况中,我们会获取很多图片.然后可能给很多个view展示, 这种情况下很容易内存吃紧导致oom,
+
+内存吃紧，系统开始会GC。这次GC后，drawables.get()不再返回Drawable对象，而是返回null，这时屏幕上背景图不显示，说明在系统内存紧张的情况下，软引用被回收。
+
+使用软引用以后，在OutOfMemory异常发生之前，这些缓存的图片资源的内存空间可以被释放掉的，从而避免内存达到上限，避免Crash发生。
+
+需要注意的是，在垃圾回收器对这个Java对象回收前，SoftReference类所提供的get方法会返回Java对象的强引用，一旦垃圾线程回收该Java对象之后，get方法将返回null。所以在获取软引用对象的代码中，一定要判断是否为null，以免出现NullPointerException异常导致应用崩溃。
+
+
 
 
 
