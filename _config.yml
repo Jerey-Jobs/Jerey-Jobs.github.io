@@ -1,7 +1,7 @@
 # Site settings
 title: 夏敏的博客
 SEOTitle: 夏敏的博客 | Anderson's Blog
-header-img: img/post-bg-os-metro.jpg
+header-img: img/post-bg-universe.jpg
 email: jerey_jobs@qq.com
 description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
 keyword: "夏敏, Android, Anderson, Jerey_Jobs, Anderson大码渣, 博客, 个人网站, 互联网"
@@ -12,8 +12,8 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 # SNS settings
 RSS: false
-weibo_username:     Anderson大码渣
-zhihu_username:     Anderson
+#weibo_username:     Anderson大码渣
+#zhihu_username:     Anderson
 github_username:    Jerey-Jobs
 #twitter_username:  huxpro
 #facebook_username:  huxpro
