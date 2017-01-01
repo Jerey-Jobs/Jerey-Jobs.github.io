@@ -1,0 +1,208 @@
+---
+title: Android 零散记录
+---
+ - ### PopupWindow与AlertDialog的区别
+最关键的区别是AlertDialog不能指定显示位置，只能默认显示在屏幕最中间（当然也可以通过设置WindowManager参数来改变位置）。而PopupWindow是可以指定显示位置的，随便哪个位置都可以，更加灵活。
+mPopWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);  
+
+
+ - ### 为什么叫Support v4，v7
+Android Support v4:  这个包是为了照顾1.6及更高版本而设计的，这个包是使用最广泛的，eclipse新建工程时，都默认带有了。
+Android Support v7:  这个包是为了考虑照顾2.1及以上版本而设计的，但不包含更低，故如果不考虑1.6,我们可以采用再加上这个包，另外注意，v7是要依赖v4这个包的，即，两个得同时被包含。
+Android Support v13  :这个包的设计是为了android 3.2及更高版本的，一般我们都不常用，平板开发中能用到。
+
+ - ### 未解绑服务使得服务持有一个销毁的activity的context造成内存泄露
+MainActivity has leaked ServiceConnection com.skyace.service.MainActivity$1@41cd81f0 that was originally bound here
+服务没有解绑，造成内存泄露，onDestroy的回调方法中加入了对服务的解绑操作即 unbindService成功解决
+
+ -  ### handler中的handleMessage返回值
+ return true 代表事件被处理了，其他handleMessage不会收到该msg
+ return false 事件继续传递，外层的handleMessage() 会继续执行 
+ 
+ -  ###  FC问题从log中快速搜索has died
+
+ 11-18 10:10:59.380 V/CommandService(  495): Death received CommandThread:android.os.BinderProxy@41a1b1b8 in pid:1218
+随后搜索该pid 快速找到log
+
+
+ -  ###  Fragment对于onActivityResult捕获不到的情况
+被父avtivity的onActivityResult捕获了
+
+ -  ###  软件盘的本质是什么？软键盘其实是一个Dialog！
+ InputMethodService为我们的输入法创建了一个Dialog，并且将该Dialog的Window的某些参数（如Gravity）进行了设置，使之能够在底部或者全屏显示。当我们点击输入框时，系统对活动主窗口进行调整，从而为输入法腾出相应的空间，然后将该Dialog显示在底部，或者全屏显示。
+ 
+ -  ### 如何去掉字符串前后空格，或者说判断字符串是否为空，或者全部为空格
+	 TextUtils.isEmpty(mStr.trim()
+	 String类自带的trim()方法，能够去掉字符串前后空格
+	 
+ -  ### 如何使强制控制键盘弹起落下
+
+``` java
+   public void showSoftKeyboard() {
+        mEditText.setFocusable(true);
+        mEditText.setFocusableInTouchMode(true);
+        mEditText.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+    }
+
+    public void hideSoftKeyboard() {
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+    }
+```
+ -  ### 系统语言改变那点事
+ 当系统语言改变，当前Activity会进行重新创建，在生命方法中，我们可以在manifest中： android:configChanges="locale" 语言（国家码）改变
+> I/###xiamin( 8571): Setting onPause
+I/###xiamin( 8571): Setting onStop
+I/###xiamin( 8571): Setting onDestory
+I/###xiamin( 8571): Setting onCreate
+I/###xiamin( 8571): Setting onStart
+I/###xiamin( 8571): Setting onResume
+
+
+ -  ###  Android模块
+keyguard(锁屏)模块
+SystemUI 通知栏和最近应用
+
+ -  ### Android分辨率适配终极方案
+ android-support-percent-lib  Android基于百分比的布局，谷歌官方推荐
+ [android-support-percent-lib鸿洋博客][1]
+ 
+ -  ### SurfaceView
+ 普通的Android控件，例如TextView、Button和CheckBox等，它们都是将自己的UI绘制在宿主窗口的绘图表面之上，这意味着它们的UI是在应用程序的主线程中进行绘制的。由于应用程序的主线程除了要绘制UI之外，还需要及时地响应用户输入，否则的话，系统就会认为应用程序没有响应了，因此就会弹出一个ANR对话框出来。对于一些游戏画面，或者摄像头预览、视频播放来说，它们的UI都比较复杂，而且要求能够进行高效的绘制，因此，它们的UI就不适合在应用程序的主线程中进行绘制。这时候就必须要给那些需要复杂而高效UI的视图生成一个独立的绘图表面，以及使用一个独立的线程来绘制这些视图的UI。
+ 
+ -  ###   android:splitMotionEvents
+   定义布局是否传递触摸事件（touch）到子布局，true表示传递给子布局，false表示不传递。
+   
+ -  ### 获取当前格式化时间 
+```  java
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+    Date date = new Date(System.currentTimeMillis());
+    String str = format.format(date)；
+```
+
+
+ -  ### Android为每个应用程序分配的内存大小
+过去是16M，不过根据机型而言不一样，早期的Android系统G1，就是只有16M
+
+ -  ### Android中内部存储和外部存储的理解和路径获取
+1.data/data/包名/shared_prefs
+2.data/data/包名/databases
+3.data/data/包名/files
+4.data/data/包名/cache
+
+外部存储
+外部存储才是我们平时操作最多的，外部存储一般就是我们上面看到的storage文件夹，当然也有可能是mnt文件夹，这个不同厂家有可能不一样。
+
+一般来说，在storage文件夹中有一个sdcard文件夹，这个文件夹中的文件又分为两类，一类是公有目录，还有一类是私有目录，其中的公有目录有九大类，比如DCIM、DOWNLOAD等这种系统为我们创建的文件夹，私有目录就是Android这个文件夹，这个文件夹打开之后里边有一个data文件夹，打开这个data文件夹，里边有许多包名组成的文件夹。
+
+所以外部存储的路径是：
+>storage/sdcard/Android/data/包名/files
+>storage/sdcard/Android/data/包名/cache
+
+
+ - ### SharedPreferences也可以设置监听器
+ mSharedPreferences.registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+ 
+ - ### Android获取唯一机器码的代码
+>String mDeviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+ 
+ - ### 将内容复制到粘贴板
+``` java
+    ClipboardManager copy = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    ClipData myClip;
+    String text = "" + mIdcode;
+    myClip = ClipData.newPlainText("text", text);
+    copy.setPrimaryClip(myClip);
+    Toast.makeText(WelcomeActivity.this, "复制成功", Toast.LENGTH_SHORT).show();
+```
+
+
+ - ### 监听屏幕唤醒和关闭的广播
+ 
+
+``` java
+private void registSreenStatusReceiver() {  
+    mScreenStatusReceiver = new ScreenStatusReceiver();    
+    IntentFilter screenStatusIF = new IntentFilter();    
+    screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);    
+    screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);    
+    registerReceiver(mScreenStatusReceiver, screenStatusIF);    
+}  
+
+unregisterReceiver(mScreenStatusReceiver);  
+
+class ScreenStatusReceiver extends BroadcastReceiver {  
+    String SCREEN_ON = "android.intent.action.SCREEN_ON";  
+    String SCREEN_OFF = "android.intent.action.SCREEN_OFF";  
+  
+    @Override  
+    public void onReceive(Context context, Intent intent) {  
+        if (SCREEN_ON.equals(intent.getAction())) {  
+  
+        }  
+        else if (SCREEN_OFF.equals(intent.getAction())) {  
+        }  
+    }  
+} 
+```
+
+ - ###  Android应用的persistent属性
+android:persistent="true"
+在Android系统中，有一种永久性应用。它们对应的AndroidManifest.xml文件里，会将persistent属性设为true
+在系统启动之时，AMS的systemReady()会加载所有persistent为true的应用。
+
+ - ###  服务的前台运行（现在没什么用了）
+ [服务前台运行](http://blog.csdn.net/mouse12138/article/details/50904459)
+ 
+ - ###  使用AIDL作为项目之间的接口可能存在一定的风险。
+
+如何规避这个风险，网上有文章说，在IBinder里面的onTransact函数中调用Binder.getCallingUid()和Binder.getCallingPid()来判断外来方的身份。
+但这个方法，只能是被调用方检测调用方的身份。
+最近我的服务作为系统级服务存在的,但是其中的一个标志位出了问题,就是通过该方法找到是哪个进程改了的.
+
+ - ###  
+ - ### 
+ - ### 
+ - ###
+ - ###  
+ - ###
+ - ###  
+ - ###  
+ - ###  
+ - ###  
+ - ### 
+ - ### 
+ - ###
+ - ###  
+ - ###
+ - ###  
+ - ###  
+ - ###  
+ - ###  
+ - ### 
+ - ### 
+ - ###
+ - ###  
+ - ###
+ - ###  
+ - ###  
+ - ###  
+ - ###  
+ - ### 
+ ----------
+ ###谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
+
+ ----------
+ 本文作者：Anderson/Jerey_Jobs
+
+ 简书地址：[Anderson大码渣][3]
+
+ github地址：[Jerey_Jobs][4]
+
+
+  [1]: http://blog.csdn.net/lmj623565791/article/details/46695347
+  [2]: http://blog.csdn.net/mouse12138/article/details/50904459
+  [3]: http://www.jianshu.com/users/016a5ba708a0/
+  [4]: https://github.com/Jerey-Jobs

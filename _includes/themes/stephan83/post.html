@@ -1,0 +1,19 @@
+<div id="post">
+<h2>{{ page.date | date_to_string }}</h2>
+<h1>{{ page.title }}</h1>
+<p class="baseline">{{ page.baseline }}</p>
+
+{{ content }}
+
+
+{% unless page.tags == empty %}
+<h4>Tags</h4>
+<ul class="tag_box">
+{% assign tags_list = page.tags %}
+{% include JB/tags_list %}
+</ul>
+{% endunless %}  
+
+</div>
+
+{% include JB/comments %}

@@ -1,0 +1,180 @@
+---
+title: 几步教你怎么写MVP
+tags: 新建,模板,小书匠
+grammar_cjkRuby: true
+---
+
+# 概述
+首先我们应该是知道的是，软件设计中，降低耦合度是很重要的，大名鼎鼎的MVC（Model-View-Controller）便是因此而生，而在android设计中MVP早就红了半边天，我也在简书博客中看到一些文章 前端也在谈这一套软件设计模式，虽然如今大势已经是MVVM，但是脚步得一扎一个稳， 我们先学习MVP是很有必要的。
+  MVP（Model-View-Presenter，模型-视图-表示器）模式则是由IBM开发出来的一个针对C++和Java的编程模型，大概出现于2000年，是MVC模式的一个变种，主要用来隔离UI、UI逻辑和业务逻辑、数据。也就是说，MVP 是从经典的模式MVC演变而来，它们的基本思想有相通的地方：Controller/Presenter负责逻辑的处理，Model提供数据，View负责显示。
+
+
+![MVP最简单的模型](http://upload-images.jianshu.io/upload_images/2305881-06400859c7fc55d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+View层不再和Model层关联，他们之间通过Presenter层关联，这里就出明显的感觉出P层的任务会比较重，逻辑会相对其他层复杂，同时也是MVP中最关键的层。而联系M-P,P-V的纽带，是接口，即本质是面向接口的编程，来降低各个模块的耦合度，其实与Presenter相关的两个接口ViewInterface、ModelInterface，View其实是ViewInterface的实现类，Model是ModelInterface实现类，然后通过接口Presenter便轻松的连接了Model与View（*这只是最简单的模型情况，事实上，Model与Presenter并不是简单直接定义的类，实现时，有是继承抽象类的，有继承基础的泛型类的，有实现某些接口的，我们在这里只编写简单的模型即可*）
+
+谷歌官方也有MVPdemo [todo_mvp][1]，其将接口以内部类的形式封装在一个总的接口类里，且我觉得其实现方法没有鸿洋大神写的好，同时送上鸿洋的MVP blog [鸿洋 MVP][2]
+
+# 编写
+我们编写一个简单的demo，功能为每次开启应用时显示存储在本地的名字，同时有一个按钮，编辑名字后按该按钮保存名字，下次启动后便为上次的名字：
+
+**首先看目录**
+
+**编写model**
+首先我们要知道model需要进行什么操作，我们需要进行名字的存储和读取操作，因此定义了如下接口
+
+``` stylus
+package com.example.mvpdemo.datamodel;
+
+/**
+ * Created by Xiamin on 2016/9/5.
+ */
+public interface IGetString {
+    public String getName();
+    public void saveName(String name);
+}
+
+```
+
+我们编写该接口的实现类，即我们的model具体实现
+
+``` stylus
+package com.example.mvpdemo.datamodel;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.example.mvpdemo.MainActivity;
+
+/**
+ * Created by Xiamin on 2016/9/5.
+ */
+public class FileOperate implements IGetString {
+    @Override
+    public String getName() {
+        String name;
+        SharedPreferences sharedPreferences;
+        sharedPreferences = MainActivity.getAppContext().getSharedPreferences("data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        name = sharedPreferences.getString("name","");
+        return name;
+    }
+
+    @Override
+    public void saveName(String name) {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = MainActivity.getAppContext().getSharedPreferences("data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name",name);
+        editor.commit();
+    }
+}
+```
+
+
+**编写view**
+我们的view有一个EditText，一个Button，我们需要进行EditText的数据读取和填充操作，因此我们定义了如下接口
+
+``` stylus
+package com.example.mvpdemo.view;
+
+/**
+ * Created by Xiamin on 2016/9/5.
+ */
+public interface IGetStringView {
+
+    public void showName(String name);
+    public String getName();
+}
+
+```
+
+view的实现类为
+
+``` stylus
+public class MainActivity extends AppCompatActivity implements IGetStringView{
+
+    private EditText editText;
+    private Button button;
+    private GetStringPresenter presenter;
+    private static Context mContext ;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        editText = (EditText) findViewById(R.id.editText);
+        button = (Button) findViewById(R.id.button);
+        mContext = getApplicationContext();
+
+        presenter = new GetStringPresenter(this);
+        presenter.showName();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.saveName();
+            }
+        });
+
+    }
+
+    @Override
+    public void showName(String name) {
+        editText.setText(name);
+    }
+
+    @Override
+    public String getName() {
+        return editText.getText().toString();
+    }
+
+    public static Context getAppContext()
+    {
+        return mContext;
+    }
+
+}
+
+```
+
+
+
+**编写presenter**
+Presenter编写就很简单了，多态获取两个接口的实现类，并进行相应操作
+
+``` cs
+/**
+ * Created by Xiamin on 2016/9/5.
+ */
+public class GetStringPresenter {
+    private IGetString getString;
+    private IGetStringView getStringView;
+
+    public GetStringPresenter(IGetStringView view)
+    {
+        this.getStringView = view;
+        getString = new FileOperate();
+    }
+
+    public void saveName()
+    {
+        getString.saveName(getStringView.getName());
+    }
+
+    public void showName()
+    {
+        getStringView.showName(getString.getName());
+    }
+}
+```
+
+这样我们一个简单的mvp的demo便能运行起来了，通过阅读代码我们发现，view中未作任何数据操作，只负责与UI的交互，而Preneter中的操作也变得很简单，因为之前接口的定义恰当，  
+		getString.saveName(getStringView.getName());简单的一句话就获取 了数据并存储到了本地。
+希望大家都编写自己的demo，编写完做一些功能的修改，便会发现解耦带来的莫大好处。
+
+
+
+
+  [1]: https://github.com/googlesamples/android-architecture/tree/todo-mvp/
+  [2]: http://blog.csdn.net/lmj623565791/article/details/46596109

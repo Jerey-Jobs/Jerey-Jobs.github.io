@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>{{ page.title }} | {{ site.title }}</title>
+		<link rel='stylesheet'  href='{{ ASSET_PATH }}/css/style.css' type='text/css' media='all' />
+		<link href='http://fonts.googleapis.com/css?family=Poly:400,400italic' rel='stylesheet' type='text/css'>
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<header>
+			<div>
+				<nav>
+					<ul>
+						<li><a href="/archive.html" title="文章存档">文章存档</a></li>
+						<li><a href="/categories.html" title="分类">分类</a></li>
+						<li><a href="/tags.html" title="标签">标签</a></li>
+						<li><a href="/links.html" title="关于">链接</a></li>
+					</ul>
+				</nav>
+				<p id="logo"><a href="/" title="{{ site.title }}">{{ site.title }}</a></p>
+			</div>
+		</header>
+
+		<div id="content">
+		{{ content }}
+		</div>
+
+		<footer>
+			<p>Jekyll theme by <a href="http://stephan83.github.com">Stephan Florquin</a></p>
+		</footer>
+
+		<div><a href="https://github.com/naokij/naokij.github.com"><img style="position: fixed; top: 0; left: 0; border: 0; z-index: 32001;" src="https://a248.e.akamai.net/assets.github.com/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a></div>
+		{% include JB/analytics %}
+	</body>
+</html>
