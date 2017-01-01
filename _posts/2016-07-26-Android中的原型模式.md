@@ -1,0 +1,139 @@
+---
+title: Android中的原型模式
+grammar_cjkRuby: true
+---
+### 定义
+原型的是一种创建型的设计模式，主用来创建的复杂的对象和构建耗时的实例。通过克隆已有的对象来创建的新的对象，从而节省时间和内存。通过克隆一个已经存在的实例可以使我们的程序运行的更高效。
+
+### 使用场景
+（1）类初始化需要消化非常多的资源，这个资源包括数据、硬件资源等，通过原型拷贝避免这些消耗。 
+（2）通过new产生的一个对象需要非常繁琐的数据准备或者权限，这时可以使用原型模式。 
+（3）一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用，即保护性拷贝。
+
+### 如何实现
+
+首先我们得实现Cloneable接口，复写clone方法
+``` stylus
+    implements  Cloneable
+    
+    @Override
+    protected User clone() {
+        User user = null;
+        try{
+            user = (User)super.clone();
+        } catch (CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+```
+
+我们需要注意，clone这个方法不是Cloneable接口中的，我们来看Cloneable的定义，是一个空的接口。
+
+``` stylus
+ * @author  unascribed
+ * @see     java.lang.CloneNotSupportedException
+ * @see     java.lang.Object#clone()
+ * @since   JDK1.0
+ */
+public interface Cloneable {
+}
+
+```
+那么clone是哪来的呢，其实clone是Object中的方法，Cloneable是一个标识接口，它表明这个类的对象是可以拷贝的。如果没有实现Cloneable接口却调用了clone()函数将抛出异常。
+
+### 浅拷贝和深拷贝
+
+那么在实现clone方法的时候，需要注意个问题，像上面那样，直接调用
+
+> user = (User)super.clone();
+
+这样只是简单的拷贝了对象，实际上并不是将原始文档的所有字段都重新构造了一份，而是副本文档的字段引用原始文档的字段。我们需要自己赋值其成员变量，尤其当成员变量为引用型对象时，边涉及到了浅拷贝和深拷贝的问题。
+
+那么什么是深拷贝呢，如何做？ 其实就是拷贝时，我们的引用对象也得拷贝，更有甚者，比如Android中的Intent的深拷贝直接是new一个。
+
+那我们来看一下深拷贝的demo代码：
+
+``` stylus
+    @Override
+    public WordDocument clone() {
+        try {
+            WordDocument doc = (WordDocument) super.clone();
+            doc.mText = this.mText;
+            doc.mImages = (ArrayList<String>) this.mImages.clone();
+            return doc;
+        } catch (CloneNotSupportedException e) {
+
+        }
+        return null;
+    }
+```
+
+### 应用
+那么原型模式，在我们的Android中有什么经典应用呢。此时我打开了AndroidStudio，直接跳到了我们的Intenet源码。
+
+``` stylus
+ *
+ * <p>These are the possible flags that can be used in the Intent via
+ * {@link #setFlags} and {@link #addFlags}.  See {@link #setFlags} for a list
+ * of all possible flags.
+ */
+public class Intent implements Parcelable, Cloneable {
+    
+    ...
+    @Override
+    public Object clone() {
+        return new Intent(this);
+    }
+
+    public Intent(Intent o) {
+        this.mAction = o.mAction;
+        this.mData = o.mData;
+        this.mType = o.mType;
+        this.mPackage = o.mPackage;
+        this.mComponent = o.mComponent;
+        this.mFlags = o.mFlags;
+        this.mContentUserHint = o.mContentUserHint;
+        if (o.mCategories != null) {
+            this.mCategories = new ArraySet<String>(o.mCategories);
+        }
+        if (o.mExtras != null) {
+            this.mExtras = new Bundle(o.mExtras);
+        }
+        if (o.mSourceBounds != null) {
+            this.mSourceBounds = new Rect(o.mSourceBounds);
+        }
+        if (o.mSelector != null) {
+            this.mSelector = new Intent(o.mSelector);
+        }
+        if (o.mClipData != null) {
+            this.mClipData = new ClipData(o.mClipData);
+        }
+    }
+    ...
+}
+```
+
+可以见到，我们的Intent是深度拷贝，而且是直接new一个的深度拷贝。可见其设计初衷不是因为其不是为了解决构建复杂对象的资源消耗问题。
+
+
+
+### 总结
+原型模式本质上就是对象拷贝，与 C++ 中的拷贝构造函数有些类似，它们之间容易出现的问题也都是深拷贝、浅拷贝。使用原型模式可以解决构建复杂对象的资源消耗问题，能够在某些场景下提升创建对象的效率。还有一个重要的途径就是保护性拷贝，也就是某个对象对外可能是只读的，为了防止外部对这个只读对象修改，通常可以通过返回一个对象拷贝的形式实现只读的限制。
+
+优点：原型模式是在内存中二进制流的拷贝，要比直接 new 一个对象性能好很多，特别是要在一个循环体内产生大量的对象时，原型模式可以更好滴体现其优点。
+
+缺点：这既是它的优点也是缺点，直接在内存中拷贝，构造函数是不会执行的，在实际开发中应该注意这个潜在问题，优点就是减少了约束，缺点也是减少了约束，需要大家在实际应用是考虑。
+
+ ----------
+ ###谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
+
+ ----------
+ 本文作者：Anderson/Jerey_Jobs
+
+ 简书地址：[Anderson大码渣][1]
+
+ github地址：[Jerey_Jobs][2]
+  [1]: http://www.jianshu.com/users/016a5ba708a0/
+  [2]: https://github.com/Jerey-Jobs
+

@@ -1,0 +1,78 @@
+---
+title: android中的观察者模式
+tags: 新建,模板,小书匠
+grammar_cjkRuby: true
+---
+
+**感想**：最近感觉到Interface真是个伟大的东西！
+最近看android message代码的时候，发现有个CursorAdapter这个东西，蛮冷门的，然后看到了这篇文章[Cursor,CursorAdapter中的观察者模式解析][1]，发现自己需要恶补一下设计模式，于是便有了这篇文章的诞生。
+
+**正题**
+观察者模式。首先我们得明确观察者模式的定义，即：*对象间的一种一对多的依赖关系，当一个对象的状态发送改变时，所有依赖于它的对象都能得到通知并被自动更新*
+          
+ 观察者模式中的角色
+
+ 1. 观察者，我们称它为Observer，有时候我们也称它为订阅者，即Subscriber
+ 2. 被观察者，我们称它为Observable，即可以被观察的东西，有时候还会称之为主题，即Subject
+
+具体原理
+
+其实就是一个利用接口实现多态，然后用定义一个list存放实现这些接口的类，通知时遍历链表挨个通知就行了，而具体的Observable中，需要实现register，unregister，notify方法，便完成了最观察者模式的基本。
+贴上实现的Observable类，可以简单的看出，被观察者是怎么实现的，而观察者的实现就很简单了，完成一个Observer接口即可。我们同时贴上Observer接口；
+
+
+
+``` java
+public class Observable<T> {
+    List<Observer<T>> mObservers = new ArrayList<Observer<T>>();
+    public void register(Observer<T> observer) {
+        if (observer == null) {
+            throw new NullPointerException("observer == null");
+        }
+        synchronized (this) {
+            if (!mObservers.contains(observer))
+                mObservers.add(observer);
+        }
+    }
+
+    public synchronized void unregister(Observer<T> observer) {
+        mObservers.remove(observer);
+    }
+
+    public void notifyObservers(T data) {
+        for (Observer<T> observer : mObservers) {
+            observer.onUpdate(this, data);
+        }
+    }
+
+}
+
+public interface Observer<T> {
+    void onUpdate(Observable<T> observable,T data);
+}
+
+
+```
+
+
+观察者模式在android中的应用
+    原来我以为button.setOnClickListener就是观察者，其实并不是，只是一个回调，但更深层次来看，的确是订阅了我们的触摸事件，应该是观察者模式啊，但实际上观察者模式OnClickListener只是给该view设置了该方法而已，其view本身就订阅触了摸事件，并不是因为我们setOnClickListener了，我们才订阅了触摸事件的。当然，这只是我的理解，
+而且view类中，可不是set listener了，而是add-xxx-Listener，想到add，我发现，有点刚刚的观察者模式的影子。
+    我们先看android中的一个标准观察者模式，注册broadcastReceiver，灰常明显，就是订阅一个事件。
+    先看看我们正常是怎么注册Receiver的。
+    
+
+>  registerReceiver()
+
+其实该函数的由来应该是
+
+> LocalBroadcastManager.getInstance(this).registerReceiver(BroadcastReceiver
+> receiver, IntentFilter filter);
+
+    
+我们发现，就是一个观察者模式，注册一个观察者。
+    
+android SDK其他地方也也有很多观察者模式，希望大家多多发现，可以评论在下方。
+
+
+  [1]: http://www.tuicool.com/articles/nAZ3ay	
