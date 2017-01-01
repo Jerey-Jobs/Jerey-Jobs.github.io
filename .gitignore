@@ -1,9 +1,7 @@
-_site/*
-
-Thumbs.db
+_site
+node_modules
+npm-debug.log
 .DS_Store
-
-!.gitkeep
-
-.rbenv-version
-.rvmrc
+*/.DS_Store
+*/*/.DS_Store
+*.sh
