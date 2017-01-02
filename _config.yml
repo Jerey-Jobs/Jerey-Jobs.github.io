@@ -3,7 +3,7 @@ title: 夏敏的博客
 SEOTitle: 夏敏的博客 | Anderson's Blog
 header-img: img/post-bg-universe.jpg
 email: jerey_jobs@qq.com
-description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
+description: "这里是夏敏的个人博客，希望能与你一同进步。"
 keyword: "夏敏, Android, Anderson, Jerey_Jobs, Anderson大码渣, 博客, 个人网站, 互联网"
 url: "https://jerey-jobs.github.io/"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
@@ -59,7 +59,7 @@ duoshuo_share: false                     # set to false if you want to use Comme
 
 
 # Analytics settings
- Baidu Analytics 
+# Baidu Analytics 
  ba_track_id: ecb804bab8e4c19d23ce1dd11d5d36fb
 
 # Google Analytics
