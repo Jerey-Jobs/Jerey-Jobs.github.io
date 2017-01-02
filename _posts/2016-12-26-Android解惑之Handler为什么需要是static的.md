@@ -1,5 +1,7 @@
 ---
-title: Android解惑之Handler为什么需要是static的 
+title: Android解惑之Handler为什么需要是static的
+tags: Android
+grammar_cjkRuby: true
 ---
 
 我们先来看一张Android Studio中的warning截图
