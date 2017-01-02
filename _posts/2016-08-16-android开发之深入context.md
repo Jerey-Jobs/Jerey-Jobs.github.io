@@ -1,5 +1,6 @@
 ---
 title: android开发之深入context
+tags: Android
 grammar_cjkRuby: true
 ---
 
