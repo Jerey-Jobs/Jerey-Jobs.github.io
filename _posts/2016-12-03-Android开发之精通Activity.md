@@ -1,5 +1,7 @@
 ---
 title: Android开发之从源码深入Activity
+tags: Android
+grammar_cjkRuby: true
 ---
 
 很多人提到Activity就知道其7大生命周期，以及各个方法的使用，但是Activity到底是怎么工作的呢？
