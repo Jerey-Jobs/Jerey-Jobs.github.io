@@ -1,5 +1,7 @@
 ---
 title: 浅谈Android ANR分析
+tags: Android
+grammar_cjkRuby: true
 ---
 
  -  ** 什么是ANR？**
