@@ -24,12 +24,12 @@ public abstract class Context
 
 
   从上可知一下三点,即：
-        1、它描述的是一个应用程序环境的信息，即上下文。
-        2、该类是一个抽象(abstract class)类，Android提供了该抽象类的具体实现类(后面我们会讲到是ContextIml类)。
+        1、它描述的是一个应用程序环境的信息，即上下文。<br>
+        2、该类是一个抽象(abstract class)类，Android提供了该抽象类的具体实现类(后面我们会讲到是ContextIml类)。<br>
         3、通过它我们可以获取应用程序的资源和类，也包括一些应用级别操作，例如：启动一个Activity，发送广播，接受Intent 信息 等。。
 
 那么我们明确第一点，context是一个抽象类，而我们平时用的context，均是其实现，而更伟大的是， 我们的application，我们的activity，service，均在context的继承关系树的。
-让我们看一张类图，相信看完这个类图大家就知道context在我们的应用中是什么样子的地位：
+让我们看一张类图，相信看完这个类图大家就知道context在我们的应用中是什么样子的地位：<br>
 ![context继承关系图][1]
 
 
