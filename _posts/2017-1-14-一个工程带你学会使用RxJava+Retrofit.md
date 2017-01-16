@@ -36,7 +36,8 @@ RxJava 的观察者模式如下图：
 ## 使用
 
 通过阅读以下代码链接，会一步一步的知道RxJava是如何使用的。
-
+个人建议把我工程拉下来看，直接运行看log比较有感觉。
+[工程链接：https://github.com/Jerey-Jobs/RxJavaDemos](https://github.com/Jerey-Jobs/RxJavaDemos)
  
  * 第一章：数据的发射与接收<br>
  [第一章代码：数据的发射与接收](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo1.java)
