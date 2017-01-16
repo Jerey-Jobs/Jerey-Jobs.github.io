@@ -37,26 +37,26 @@ RxJava 的观察者模式如下图：
 
 通过阅读以下代码链接，会一步一步的知道RxJava是如何使用的。
 
- * 代码链接：
  
  * 第一章：数据的发射与接收<br>
  [第一章代码：数据的发射与接收](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo1.java)
+ ton
 
  	
- * 第二章：通过filter 控制筛选 通过map转换格式
+ * 第二章：通过filter 控制筛选 通过map转换格式<br>
  [第二章代码：通过filter 控制筛选 通过map转换格式](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo2.java)
  
 
- * 第三章：Scheduler 线程控制
+ * 第三章：Scheduler 线程控制<br>
  [第三章代码：Scheduler 线程控制](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo3.java)
  	
- * 第四章：学会使用lift转变类型
+ * 第四章：学会使用lift转变类型<br>
  [第四章代码：学会使用lift转变类型](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo4.java)
 	
-* 第五章：学会使用Observable.Transformer 改变自身属性
+* 第五章：学会使用Observable.Transformer 改变自身属性<br>
 [第五章代码：学会使用Observable.Transformer 改变自身属性](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo5.java)
 	
-* 第六章：学会简单使用Retrofit
+* 第六章：学会简单使用Retrofit<br>
 [第六章代码：学会使用Retrofit](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/RetrofitDemo.java)
 
 
