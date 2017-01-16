@@ -23,7 +23,7 @@ RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是
 
  
 
-``` stylus
+``` java
  <android.support.v7.widget.RecyclerView
     android:id="@+id/recyclerView"
     android:layout_height="match_parent"
@@ -34,7 +34,7 @@ RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是
  **- Acitvity中使用**
  
 
-``` javascript
+``` java
     RecyclerView mRecyclerView;
     RecyclerViewAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
@@ -53,11 +53,12 @@ RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是
     mAdapter =  new RecyclerViewAdapter(mdatas);
     mRecyclerView.setAdapter(mAdapter);
 ```
-  可以看到，RecyclerView并不像ListView那样只要设个adpter就完成了，它有很多自己可自定义的功能，可以很方便的完成很多效果。
-  比如： mRecyclerView.setLayoutManager(mLayoutManager); 就给了程序员很大的发挥空间，因为有了布局管理，我们可以很方便的设置为
-  LinearLayoutManager        线性布局同时支持横向、纵向
-  GridLayoutManager时       为网格布局管理器
-  StaggeredGridLayoutManager 瀑布式布局管理器
+
+  可以看到，RecyclerView并不像ListView那样只要设个adpter就完成了，它有很多自己可自定义的功能，可以很方便的完成很多效果。<br>
+  比如： mRecyclerView.setLayoutManager(mLayoutManager); 就给了程序员很大的发挥空间，因为有了布局管理，我们可以很方便的设置为<br>
+  LinearLayoutManager        线性布局同时支持横向、纵向<br>
+  GridLayoutManager时       为网格布局管理器<br>
+  StaggeredGridLayoutManager 瀑布式布局管理器<br>
 
  **- 适配器编写**
 
@@ -65,6 +66,7 @@ RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是
  
  
 我们将适配器的编写流程分为：
+
 1.继承 RecyclerView.Adapter
 
 2.完成内部类 ViewHolder 这个 ViewHolder不再是以前的BaseAdapter时我们写的ViewHolder，而是需要继承RecyclerView.ViewHolder抽象类的ViewHolder
@@ -78,7 +80,7 @@ RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是
 以下便是我的RecyclerViewAdapter代码
 
 
-``` stylus
+``` java
 /**
  * Created by Xiamin on 2016/9/2.
  */
@@ -188,11 +190,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
  
  我选择在长按item时删除该item，删除动画在由该行设置
 
-``` ocaml
+``` java
  mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 ```
 
-``` stylus
+``` java
 mAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -209,15 +211,18 @@ mAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnRecyclerViewItemClickL
 
  **- 遇坑**
 
-完成该功能后，测试发现，删除会出现问题，动画是有了，但是下标会乱，导致删除错误item、
-因此便有了该行代码。
+完成该功能后，测试发现，删除会出现问题，动画是有了，但是下标会乱，导致删除错误item、<br>
+因此便有了该行代码。<br>
 因为删除某一项时调用notifyItemRemoved后，显示的item是不会调用onBind方法的，所以position并没有被刷新。这时候得到的position值就是错误的。我们需要手动使adapter给后面的item重新onBind
-``` stylus
+
+``` java
 notifyItemRangeChanged(position, mdata.size());
 ```
+
 至此，RecyclerView的便正常工作了。
 
 **总结**
+
      本文只是RecyclerView的一些基本使用，有很多强大的功能还未能接触，本文也比较初步，仅作入门引导。
 
  
