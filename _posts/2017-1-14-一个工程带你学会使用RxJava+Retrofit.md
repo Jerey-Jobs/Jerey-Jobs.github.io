@@ -39,7 +39,7 @@ RxJava 的观察者模式如下图：
 
  * 代码链接：
  
- * 第一章：数据的发射与接收
+ * 第一章：数据的发射与接收<br>
  [第一章代码：数据的发射与接收](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo1.java)
 
  	
