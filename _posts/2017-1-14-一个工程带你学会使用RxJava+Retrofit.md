@@ -32,6 +32,7 @@ RxJava 有四个基本概念：Observable (可观察者，即被观察者)、 Ob
 
 RxJava 的观察者模式如下图：
 
+![RxJava 的观察者模式](/img/post1/rxjava1.jpg)
 
 ## 使用
 
