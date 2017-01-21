@@ -197,7 +197,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
 #### 执行效果如图
 
-！[warning](/img/post1/surface_demo.png)
+![warning](/img/post1/surface_demo.png)
 
 Log日志为：
 11-27 05:06:10.979 2752-2752/com.example.surfaceviewdemo I/iii: surfaceCreated

@@ -6,7 +6,7 @@ grammar_cjkRuby: true
 
 我们先来看一张Android Studio中的warning截图
 
-！[warning](/img/post1/handler_leak.png)
+![warning](/img/post1/handler_leak.png)
 
 ``` java
 public class HandlerTestActivity extends Activity {
