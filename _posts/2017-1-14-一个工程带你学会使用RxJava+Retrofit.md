@@ -1,5 +1,5 @@
 ---
-title: 2017-1-14-一个工程带你学会使用RxJava+Retrofit
+title: 一个工程带你学会使用RxJava+Retrofit
 tags: Android
 grammar_cjkRuby: true
 ---
