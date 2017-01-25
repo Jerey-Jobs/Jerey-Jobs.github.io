@@ -9,11 +9,13 @@ grammar_cjkRuby: true
 
 ----------
 
+
 ### Activity相关Framework类
 
 - Context是什么？
 
   Context在我们的[Android开发之深入Context][1]文章中已经介绍过
+
 - ActivityThread是什么？
 
 ActivityThread不是一个线程，是应用的主线程，在Activity中有个
@@ -61,6 +63,7 @@ Activity作为整体框架，控制界面，有其生命周期，但是其生命
 如果从本质上看，与普通的类没什么区别
 
 ----------
+
 ### Activity的生命方法是什么时候回调的
 
 关键点：
