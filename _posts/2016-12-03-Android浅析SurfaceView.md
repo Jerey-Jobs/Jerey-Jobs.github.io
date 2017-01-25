@@ -6,9 +6,11 @@ grammar_cjkRuby: true
 
 
  - ### 为什么要用SurfaceView
+
 我们知道使用它可以做一些简单的动画效果。它通过不断循环的执行View.onDraw方法，每次执行都对内部显示的图形做一些调整，我们假设onDraw方法每秒执行20次，这样就会形成一个20帧的补间动画效果。但是现实情况是你无法简单的控制View.onDraw的执行帧数，这边说的帧数是指每秒View.onDraw方法被执行多少次，这是为什么呢？首先我们知道，onDraw方法是由系统帮我们调用的，我们是通过调用View的invalidate方法通知系统需要重新绘制View，然后它就会调用View.onDraw方法。这些都是由系统帮我们实现的，所以我们很难精确去定 义View.onDraw的执行帧数，这个就是为什么我们这边要了解SurfaceView了，它能弥补View的一些不足。
 
  - ### SurfaceView与View有什么不同？
+ 
 对于一个View的onDraw方法，不能从后台线程修改一个GUI元素。
 当需要快速地更新View的UI，或者当渲染代码阻塞GUI线程的时间过长的时候，SurfaceView就是解决上述问题的最佳选择。 SurfaceView封装了一个Surface对象，而不是Canvas。这一点很重要，因为Surface可以使用后台线程绘制。对于那些资源敏感的操作，或者那些要求快速更新或者高速帧率的地方，例如，使用3D图形，创建游戏，或者实时预览摄像头
 
