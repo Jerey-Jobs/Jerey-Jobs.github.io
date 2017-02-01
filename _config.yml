@@ -91,13 +91,13 @@ service-worker: true
 Friends
 friends: [
     {
-        title: "王鑫Vic",
-        href: "https://github.com/JeAmoTu"
+        title: "Vic",
+        href: "https://github.com/JeAmoTu/"
     },{
         title: "PandaQ",
-        href: "http://www.jianshu.com/u/aa53f5d59037"
+        href: "http://www.jianshu.com/u/aa53f5d59037/"
     },{
         title: "Java-Coffee",
-        href: "https://github.com/Java-Coffee"
+        href: "https://github.com/Java-Coffee/"
     }
 ]
