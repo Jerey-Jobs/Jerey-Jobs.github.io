@@ -6,6 +6,10 @@
 <br>重命名了之前写的md记录文件
 <br>集成了百度统计以及多说评论系统
 
+ ![](/img/xiaminblog_view.jpg)
+
+ ![](/img/xiamin_portfolio.jpg)
+
 
  ----------
  博客地址   ： [夏敏的博客/Anderson大码渣/Jerey_Jobs][1] <br>
