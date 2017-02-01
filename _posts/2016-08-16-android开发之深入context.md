@@ -10,7 +10,7 @@ grammar_cjkRuby: true
 
 我们先看google官方的说明
 
-``` stylus
+``` java
 /**
  * Interface to global information about an application environment.  This is
  * an abstract class whose implementation is provided by
@@ -45,7 +45,7 @@ public abstract class Context
        每个应用程序在第一次启动时，都会首先创建Application对象。如果对应用程序启动一个Activity(startActivity)流程比较
 清楚的话，创建Application的时机在创建handleBindApplication()方法中，该函数位于 ActivityThread.java类中 ，如下：
 
-``` stylus
+``` java
 //创建Application时同时创建的ContextIml实例  
 private final void handleBindApplication(AppBindData data){  
     ...  
@@ -130,7 +130,8 @@ private final void handleCreateService(CreateServiceData data){
     ...  
 }  
 ```
-需要强调一点的是，通过对ContextImp的分析可知，其方法的大多数操作都是直接调用其属性mPackageInfo(该属性类型为PackageInfo)的相关方法而来。这说明ContextImp是一种轻量级类，而PackageInfo才是真正重量级的类。而一个App里的所有ContextIml实例，都对应同一个packageInfo对象
+
+需要强调一点的是，通过对ContextImp的分析可知，其方法的大多数操作都是直接调用其属性mPackageInfo(该属性类型为PackageInfo)<br>的相关方法而来。这说明ContextImp是一种轻量级类，而PackageInfo才是真正重量级的类。而一个App里的所有ContextIml实例，都对应同一个packageInfo对象
 
 
   [1]: ./images/context.png "context.png"
