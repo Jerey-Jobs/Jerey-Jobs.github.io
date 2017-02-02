@@ -2,6 +2,8 @@
 title: 浅谈Android ANR分析
 tags: Android
 grammar_cjkRuby: true
+catalog: true
+layout:  post
 ---
 
  -  ** 什么是ANR？**

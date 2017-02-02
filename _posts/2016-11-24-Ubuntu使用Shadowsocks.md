@@ -2,6 +2,8 @@
 title: Ubuntu使用Shadowsocks
 tags: 零散记录
 grammar_cjkRuby: true
+catalog: true
+layout:  post
 ---
 
 sudo apt-get install python-gevent python-pip<br>

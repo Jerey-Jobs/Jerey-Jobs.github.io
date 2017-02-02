@@ -2,6 +2,8 @@
 title: Collections.sort排序详解
 tags: Java
 grammar_cjkRuby: true
+catalog: true
+layout:  post
 ---
 前一阵子项目遇到个Collections.sort问题，补了一下Collections.sort方法。
 
