@@ -2,6 +2,8 @@
 title: Android浅析SurfaceView
 tags: Android
 grammar_cjkRuby: true
+catalog: true
+layout:  post
 ---
 
 

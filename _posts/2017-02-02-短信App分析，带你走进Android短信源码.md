@@ -118,7 +118,7 @@ Google内置包里为我们提供了一系列操作PDU的类（com.google.androi
 - PduParser	用于解析PDU
 - PduComposer	用于生成PDU
 
-![彩信发送流程图](/img/mms/mms_send_google.pngg)
+![彩信发送流程图](/img/mms/mms_send_google.png)
 
 ![彩信接收流程图](/img/mms/mms_receive_l.png)
 

@@ -2,6 +2,8 @@
 title: 2016-08-11-Android之Builder模式
 tags: Android
 grammar_cjkRuby: true
+catalog: true
+layout:  post
 ---
 
 ![设计模式](/img/always/design_patterns.png)

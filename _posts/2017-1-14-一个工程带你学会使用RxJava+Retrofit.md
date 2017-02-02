@@ -2,6 +2,8 @@
 title: 一个工程带你学会使用RxJava+Retrofit
 tags: Android
 grammar_cjkRuby: true
+catalog: true
+layout:  post
 ---
 
 写了一个工程，大概分六个demo.java带你学习如何使用,通熟易懂，很明显，是我这个菜鸟写的。
