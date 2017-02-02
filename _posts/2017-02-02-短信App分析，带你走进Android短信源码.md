@@ -1,6 +1,6 @@
 ---
 title: 闲散整理，带你走进Android短信源码 
-subtitle:   "市场上的大多短信应用均是基于Google原生改的"
+subtitle:   "事实上，市场上的大多短信应用都是基于Google原生改的"
 grammar_cjkRuby: true
 header-img: "img/post-bg-os-metro.jpg"
 catalog: true
