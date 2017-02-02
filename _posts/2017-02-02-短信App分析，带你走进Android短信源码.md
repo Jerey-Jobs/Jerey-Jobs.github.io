@@ -1,5 +1,5 @@
 ---
-title: 2017-02-02-短信App分析，带你走进Android短信源码 
+title: 闲散整理，带你走进Android短信源码 
 subtitle:   "市场上的大多短信应用均是基于Google原生改的"
 grammar_cjkRuby: true
 header-img: "img/post-bg-os-metro.jpg"
@@ -17,7 +17,10 @@ tags:
 ## 简介
 
 这是Google的Mms源码，不过在15年中旬就停止维护了，后期的维护交给了各大开发商。<br>
-[https://github.com/Jerey-Jobs/Mms_google/](https://github.com/Jerey-Jobs/Mms_google/)
+
+[这里是我fork的工程地址 ps:加了注释的](https://github.com/Jerey-Jobs/Mms_google/)
+
+[这里是谷歌工程地址](https://github.com/android/platform_packages_apps_mms)
 
 其实Mms很复杂的，谷歌官方的是简单功能的短信，不过就基础功能版本的短信也够撸了，比如一个彩信附件的显示，其继承关系图就足够复杂，而且彩信还是是smil语言，还有什么pdb，够人好好看一番。
 
