@@ -27,7 +27,9 @@ tags:
 
 ## 初识架构
 
-由于懒，就不画图了，整个短信主要是由2个主要Activity，加2个远程Service，2个本地Service，4个Provider以及4个Receiver组成。其他的一些小功能的就不说了。
+![Mms模块构成图](/img/mms/mmsbasemodel.png)
+
+由于懒，简答说，整个短信主要是由2个主要Activity，加2个远程Service，2个本地Service，4个Provider以及4个Receiver组成。其他的一些小功能的就不说了。
 
 - 所谓2个主要Activity，一为短信联系人界面，即一个listView，外加一些增删功能，另一个为短信编辑界面
 - 所谓2个远程Service，即为AIDL且进程号不同，跑在系统中的负责短信发送接收，彩信发送接收的服务
@@ -66,7 +68,7 @@ Recipient接受人，这里是指信息的接收者，要么是一个陌生的�
 
 ### UI初窥
 
-![短信AppUI](/img/post1/mms_view.jpg)
+![短信AppUI](/img/mms/mms_view.jpg)
 
 ---
 
@@ -77,19 +79,30 @@ Recipient接受人，这里是指信息的接收者，要么是一个陌生的�
  - 彩信
  - 数据库
 
-![Mms模块构成图](https://github.com/Jerey-Jobs/Mms_google/blob/master/HelpPictures/%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90.png)
 
 ###  UI主要组成
-![会话列表数据刷新](https://github.com/Jerey-Jobs/Mms_google/blob/master/HelpPictures/%E4%BC%9A%E8%AF%9D%E5%88%97%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%B7%E6%96%B0.png)
 
-![编辑界面类图](https://github.com/Jerey-Jobs/Mms_google/blob/master/HelpPictures/%E7%BC%96%E8%BE%91%E7%95%8C%E9%9D%A2%E7%B1%BB%E5%9B%BE.png)
+- 我们看会话列表数据刷新图
+
+![会话列表数据刷新](/img/mms/conversation_refersh.png)
+
+- 编辑界面的类图
+
+![编辑界面类图](/img/mms/write_view_leitu.png)
    
 ### 短信发送、接收 
-![短信发送流程图](https://github.com/Jerey-Jobs/Mms_google/blob/master/HelpPictures/%E7%9F%AD%E4%BF%A1%E5%8F%91%E9%80%81%E6%B5%81%E7%A8%8B.png)
 
-![短信发送类图](https://github.com/Jerey-Jobs/Mms_google/blob/master/HelpPictures/%E7%9F%AD%E4%BF%A1%E5%8F%91%E9%80%81%E6%8E%A5%E5%8F%97%E7%B1%BB%E5%9B%BE.png)
+- 短信发送流程图
+- 
+![短信发送流程图](/img/mms/sms_send_liucheng.png)
 
-![短信接收流程图](https://github.com/Jerey-Jobs/Mms_google/blob/master/HelpPictures/%E7%9F%AD%E4%BF%A1%E6%8E%A5%E6%94%B6%E6%B5%81%E7%A8%8B.png)
+- 短信发送类图
+
+![短信发送类图](/img/mms/sms_send_class.png)
+
+- 短信接收流程图
+
+![短信接收流程图](/img/mms/sms_receive_l.png)
 
 ### 彩信 
 
@@ -101,48 +114,51 @@ MMS发送和接收: 手机终端合成多媒体消息后，可以向网内的所
 
 Google内置包里为我们提供了一系列操作PDU的类（com.google.android.mms）
 
-PduPersister  	用于管理PDU存储
-PduParser	 	用于解析PDU
-PduComposer	用于生成PDU
+- PduPersister  用于管理PDU存储
+- PduParser	用于解析PDU
+- PduComposer	用于生成PDU
 
-![彩信发送流程图](https://github.com/Jerey-Jobs/Mms_google/blob/master/HelpPictures/%E5%BD%A9%E4%BF%A1%E5%8F%91%E9%80%81%E6%B5%81%E7%A8%8Bgoogle.png)
-![彩信接收流程图](https://github.com/Jerey-Jobs/Mms_google/blob/master/HelpPictures/%E5%BD%A9%E4%BF%A1%E6%8E%A5%E6%94%B6%E6%B5%81%E7%A8%8B.png)
+![彩信发送流程图](/img/mms/mms_send_google.pngg)
+
+![彩信接收流程图](/img/mms/mms_receive_l.png)
+
+![彩信类图](/img/mms/mms_class.png)
 
 
 **彩信不自动下载的情况**
 
-> 在会话界面的MessageListItem中会显示一个download按钮，当用户点击该按钮
-> -->mContext.startService(intent);
-> -->TransactionService中，处理Action为 RETRIEVE_TRANSACTION的请求
-> --> transaction = new RetrieveTransaction();
-> -->transaction.process();
-> -->byte[] resp = getPdu(mContentLocation);
-> -->PduParser解析数据成pdu
-> -->isDuplicateMessage 判断是否是重复的短信
-> -->PduPersister 再将其存储
-> -->sendAcknowledgeInd(retrieveConf); 再发送Ack给MMSC
-> -->notifyObservers();   通知service ，状态改变
+> 在会话界面的MessageListItem中会显示一个download按钮，当用户点击该按钮<br>
+> -->mContext.startService(intent);<br>
+> -->TransactionService中，处理Action为 RETRIEVE_TRANSACTION的请求<br>
+> --> transaction = new RetrieveTransaction();<br>
+> -->transaction.process();<br>
+> -->byte[] resp = getPdu(mContentLocation);<br>
+> -->PduParser解析数据成pdu<br>
+> -->isDuplicateMessage 判断是否是重复的短信<br>
+> -->PduPersister 再将其存储<br>
+> -->sendAcknowledgeInd(retrieveConf); 再发送Ack给MMSC<br>
+> -->notifyObservers();   通知service ，状态改变<br>
 
 
 
  #### Mms数据库，在短信应用程序中占有很重要的地位
 
-> 1.负责数据的存储 	短信，彩信，对话列表都存储在数据库中
+> 1.负责数据的存储 	短信，彩信，对话列表都存储在数据库中<br>
 > 
-> 2.负责大量的通信 	先待发短信存储到数据库中，发送服务将待短信从数据库取出
+> 2.负责大量的通信 	先待发短信存储到数据库中，发送服务将待短信从数据库取出<br>
 > 
-> 3.通过ContentProvider，间接的肩负起通知界面数据刷新工作  	getContext().getContentResolver().notifyChange() 	通知观察者去刷新数据
+> 3.通过ContentProvider，间接的肩负起通知界面数据刷新工作  	getContext().getContentResolver().notifyChange() 	通知观察者去刷新数据<br>
 
 
 > 
-> threads表：在ConversationList.Java中显示的当前短信 
-> sms表：短信内容 
-> pdu表： 彩信内容
-> part表：（存储彩信内容（文本、音乐、图象）文件名 
-> pending_msgs：存储待发送的短信与彩信 
-> drm：用于彩信权限管理
-> words：用于存储关键字，搜索时用
-> SmsProvider用于短信相关数据的存取 MmsProvider用于彩信相关数据的存取
+> threads表：在ConversationList.Java中显示的当前短信 <br>
+> sms表：短信内容 <br>
+> pdu表： 彩信内容<br>
+> part表：（存储彩信内容（文本、音乐、图象）文件名 <br>
+> pending_msgs：存储待发送的短信与彩信 <br>
+> drm：用于彩信权限管理<br>
+> words：用于存储关键字，搜索时用<br>
+> SmsProvider用于短信相关数据的存取 MmsProvider用于彩信相关数据的存取<br>
 > MmsSmsProvider则用于短彩信通用数据的存取，如会话信息、接收者、草稿（公共属性）等
 
 
