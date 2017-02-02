@@ -4,7 +4,7 @@ subtitle:   "市场上的大多短信应用均是基于Google原生改的"
 grammar_cjkRuby: true
 header-img: "img/post-bg-os-metro.jpg"
 catalog: true
-layout:     keynote
+layout:  post
 tags:
     - Android
     - Google源码
