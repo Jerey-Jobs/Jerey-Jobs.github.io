@@ -1,8 +1,8 @@
 ---
 title: 大学那点事-HashMap与Hashtable
 tags: 
-	- Java
-	- 大学那点事
+    - Java
+    - 大学那点事
 grammar_cjkRuby: true
 catalog: true
 layout:  post
