@@ -90,7 +90,10 @@
                 <p class="copyright text-muted">
                     Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
                     <br>
-                    Support by Jekyll | 百度统计 | 多说评论 | GitHub
+                    Supported by Jekyll  |  百度统计  |  多说评论  |  GitHub  |  
+                    <span id="busuanzi_container_site_pv">
+                        本站访问量 :<span id="busuanzi_value_site_pv"></span>
+                    </span>
                 </p>
 
             </div>
@@ -98,6 +101,7 @@
     </div>
 </footer>
 
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <!-- jQuery -->
 <script src="{{ "/js/jquery.min.js " | prepend: site.baseurl }}"></script>
 
