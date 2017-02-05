@@ -1,18 +1,22 @@
 # [夏敏的博客](http://jerey.cn/)
 ----------
-### 于2017年1月1日将之前的小书匠博客仓库更名为Jerey-Jobs.github.io
 
-#### 后续将之前的有道云笔记部分内容迁移了过来
+#### 于2017年1月1日将之前的小书匠博客仓库更名为Jerey-Jobs.github.io
+
+#### 后续将之前的简书博客和有道云笔记部分内容迁移了过来
+
+<br>2017.01.01 重命名了之前写的md记录文件
+<br>2017.01.04 绑定域名jerey.cn
+<br>2017.01.20 集成了百度统计以及多说评论系统
+<br>2017.02.01 增加简书图标和链接，增加部分朋友链接
+<br>2017.02.02 为所有文章添加catalog目录
 
 
-<br>绑定域名jerey.cn
-<br>重命名了之前写的md记录文件
-<br>集成了百度统计以及多说评论系统
+ ![博客主界面视图](/img/xiaminblog_view.jpg)
 
- ![](/img/xiaminblog_view.jpg)
+ ![作品界面](/img/xiamin_portfolio.jpg)
 
- ![](/img/xiamin_portfolio.jpg)
-
+ ![百度统计](/img/xiamin_tongji.jpg)
 
  ----------
  博客地址   ： [夏敏的博客/Anderson大码渣/Jerey_Jobs][1] <br>
