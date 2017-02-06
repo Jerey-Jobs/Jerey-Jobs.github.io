@@ -1,6 +1,8 @@
 ---
 title: Android浅析SurfaceView
-tags: Android
+tags: 
+    - Android
+    - View
 grammar_cjkRuby: true
 catalog: true
 layout:  post

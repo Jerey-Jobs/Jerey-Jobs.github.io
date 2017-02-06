@@ -1,6 +1,8 @@
 ---
 title: RecylclerView入门初步
-tags: Android
+tags: 
+    - Android
+    - View
 grammar_cjkRuby: true
 catalog: true
 layout:  post
