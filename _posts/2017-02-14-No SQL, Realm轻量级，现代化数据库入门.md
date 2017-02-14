@@ -1,6 +1,8 @@
 ---
 title: No SQL, Realm轻量级，现代化数据库入门
-tags: Android
+tags: 
+    - Android
+    - 数据库
 subtitle: "让你的应用迅速带上存储的翅膀"
 header-img: "img/post-bg-android.jpg"
 grammar_cjkRuby: true
