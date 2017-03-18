@@ -8,7 +8,7 @@ catalog: true
 layout:  post
 ---
 
-*本文来自[How the Java virtual machine performs thread synchronization](http://www.javaworld.com/article/2076971/java-concurrency/how-the-java-virtual-machine-performs-thread-synchronization.html)，
+本文来自[How the Java virtual machine performs thread synchronization](http://www.javaworld.com/article/2076971/java-concurrency/how-the-java-virtual-machine-performs-thread-synchronization.html)
 
 ## 前言
 所有的 Java 程序都会被翻译为包含字节码的 class 文件，字节码是 JVM 的机器语言。这篇文章将阐述 JVM 是如何处理线程同步以及相关的字节码。
