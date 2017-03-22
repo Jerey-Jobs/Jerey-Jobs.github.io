@@ -20,7 +20,7 @@ layout: default
 				<h2>夏敏</h2>
 				<p>Android Programmer<br>
 					读过两年书，尘世中一个迷途小书童
-					<br> 
+					<br>
 					<br>曾经有个初恋女友叫C语言
 					<br>也曾爱慕过Linux的芳容
 					<br>如今，Android工程师一枚
@@ -28,7 +28,7 @@ layout: default
 					</p>
 			</header>
 
-			
+
 			<div class="main">
 			    <h2>个人作品</h2>
 				<ul class="cbp_tmtimeline">
@@ -157,29 +157,16 @@ layout: default
 			                </div>
 			                <!-- 多说评论框 end -->
 						</div>
-					</li> 
+					</li>
 					{% endif %}
 				</ul>
 			</div>
 		</div>
 		{% if site.duoshuo_username %}
-		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-		<script type="text/javascript">
-		    // dynamic User by Hux
-		    var _user = '{{site.duoshuo_username}}';
-
-		    // duoshuo comment query.
-		    var duoshuoQuery = {short_name: _user };
-		    (function() {
-		        var ds = document.createElement('script');
-		        ds.type = 'text/javascript';ds.async = true;
-		        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		        ds.charset = 'UTF-8';
-		        (document.getElementsByTagName('head')[0]
-		         || document.getElementsByTagName('body')[0]).appendChild(ds);
-		    })();
-		</script>
-		<!-- 多说公共JS代码 end -->
+		<!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2127941"></script>
+	<!-- UY END -->
 		{% endif %}
 	</body>
 </html>
