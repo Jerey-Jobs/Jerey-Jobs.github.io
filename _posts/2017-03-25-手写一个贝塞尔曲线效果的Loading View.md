@@ -13,7 +13,7 @@ layout:  post
 
 先看一下效果图.
 
-![](img/post1/loadingview.gif)
+![](/img/post1/loadingview.gif)
 
 ### 编写过程
 
@@ -190,9 +190,29 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 ```
 
 
-### 结尾
+### 使用
+
+此外我还将该工程发布到了jitpack
+
+引用此库，可以这么使用
+``` gradle
+  allprojects {
+    repositories {
+      ...
+      maven { url 'https://jitpack.io' }
+    }
+  }
+```
+
+Add the dependency
+``` gradle
+  dependencies {
+          compile 'com.github.Jerey-Jobs:BesselLoadingView:1.1'
+  }
+```
 
 到此.我们的自定义View便搞定了.一开始的图我们的layout是这样的.
+
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -234,6 +254,7 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 </android.support.constraint.ConstraintLayout>
 
 ```
+
 
 具体代码见 [https://github.com/Jerey-Jobs/BesselLoadingView](https://github.com/Jerey-Jobs/BesselLoadingView)
 欢迎大家Star.
