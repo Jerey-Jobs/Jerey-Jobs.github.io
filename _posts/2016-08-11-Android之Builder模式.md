@@ -1,6 +1,8 @@
 ---
 title: 2016-08-11-Android之Builder模式
-tags: Android
+tags:
+  - Android
+  - 设计模式
 grammar_cjkRuby: true
 catalog: true
 layout:  post
@@ -55,7 +57,7 @@ public class Computer {
     private String ram;
     private String disk;
     private String power;
-    
+
     public Computer(String cpu, String motherboard, String displayCard, String ram, String disk, String power) {
         this.cpu = cpu;
         this.motherboard = motherboard;
@@ -122,7 +124,7 @@ public class Computer {
         private String ram;
         private String disk;
         private String power;
-        
+
         public Builder setCpu(String cpu) {
             this.cpu = cpu;
             return this;
@@ -152,10 +154,10 @@ public class Computer {
             this.power = power;
             return this;
         }
-        
+
         public Computer create() {
             Computer computer = new Computer();
-            
+
             if (cpu != null) {
                 computer.setCpu(cpu);
             }
@@ -174,7 +176,7 @@ public class Computer {
             if (power != null) {
                 computer.setPower(power);
             }
-            
+
             return computer;
         }
     }
@@ -237,7 +239,7 @@ public class Computer {
     private String ram;
     private String disk;
     private String power;
-    
+
     public Computer(String cpu, String motherboard, String displayCard, String ram, String disk, String power) {
         this.cpu = cpu;
         this.motherboard = motherboard;
@@ -305,7 +307,7 @@ public class Computer {
         private String ram;
         private String disk;
         private String power;
-        
+
         public Builder setCpu(String cpu) {
             this.cpu = cpu;
             return this;
@@ -335,10 +337,10 @@ public class Computer {
             this.power = power;
             return this;
         }
-        
+
         public Computer create() {
             Computer computer = new Computer();
-            
+
             if (cpu != null) {
                 computer.setCpu(cpu);
             }
@@ -357,7 +359,7 @@ public class Computer {
             if (power != null) {
                 computer.setPower(power);
             }
-            
+
             return computer;
         }
     }
@@ -386,13 +388,13 @@ Computer computer = new Computer.Builder()
 ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
  ----------
- 本文作者：Anderson/Jerey_Jobs 
+ 本文作者：Anderson/Jerey_Jobs
 
  博客地址   ： [夏敏的博客/Anderson大码渣/Jerey_Jobs][1] <br>
  简书地址   :  [Anderson大码渣][2] <br>
  CSDN地址   :  [Jerey_Jobs的专栏][3] <br>
  github地址 :  [Jerey_Jobs][4]
- 
+
 
 
   [1]: http://jerey.cn/
