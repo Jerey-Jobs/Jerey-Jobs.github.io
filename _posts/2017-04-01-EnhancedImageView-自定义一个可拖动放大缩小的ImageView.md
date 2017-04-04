@@ -3,8 +3,8 @@ title: EnhancedImageView-自己实现一个带有放大缩小效果的图片预�
 tags:
   - View
 grammar_cjkRuby: true
-header-img: "img/android-o.jpg"
-catalog: true
+header-img: "img/post-bg-e2e-ux.jpg"
+layout:  page
 ---
 
 
