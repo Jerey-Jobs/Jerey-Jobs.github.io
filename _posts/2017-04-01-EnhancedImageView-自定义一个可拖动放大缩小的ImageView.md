@@ -4,7 +4,8 @@ tags:
   - View
 grammar_cjkRuby: true
 header-img: "img/post-bg-e2e-ux.jpg"
-layout:  page
+layout:  post
+catalog: true
 ---
 
 
