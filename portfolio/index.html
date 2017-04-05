@@ -190,27 +190,6 @@ layout: default
 	<!-- UY END -->
 		{% endif %}
 
-	<script type="text/javascript">
-        //平台、设备和操作系统
-        var system = {
-            win: false,
-            mac: false,
-            xll: false,
-            ipad:false
-        };
-        //检测平台
-        var p = navigator.platform;
-        system.win = p.indexOf("Win") == 0;
-        system.mac = p.indexOf("Mac") == 0;
-        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
-        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false;
-        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面
-        if (system.win || system.mac || system.xll) {
-						<script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
-        } else {
-        }
- </script>
-
  <script type="text/javascript">
      function browserRedirect() {
        var sUserAgent = navigator.userAgent.toLowerCase();
@@ -222,16 +201,17 @@ layout: default
        var bIsAndroid = sUserAgent.match(/android/i) == "android";
        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+			 var htmljs = "<script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-2" count="99" src="\/\/cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"><\/script>";
        document.writeln("您的浏览设备为：");
        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
          document.writeln("phone");
        } else {
          document.writeln("pc");
-				 <script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+				 document.writeln(htmljs);
        }
      }
      browserRedirect();
-</script>
+  </script>
 
 	</body>
 </html>
