@@ -5,9 +5,25 @@ description: "Hi，I'm Anderson."
 header-img: "img/my_desk.jpg"
 ---
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0
-src="http://onu8hdryi.bkt.clouddn.com/%E8%83%A1%E5%A4%8F%20-%20%E9%82%A3%E4%BA%9B%E5%B9%B4.mp3"></iframe>
-<EMBED src="" loop="true" width="110" height="110" hidden="false" autostart="true"><br></EMBED>
+<!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0
+src="http://onu8hdryi.bkt.clouddn.com/%E8%83%A1%E5%A4%8F%20-%20%E9%82%A3%E4%BA%9B%E5%B9%B4.mp3"></iframe> -->
+<script type="text/javascript">
+      var sUserAgent = navigator.userAgent.toLowerCase();
+      var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+      var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+      var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+      var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+      var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+      var bIsAndroid = sUserAgent.match(/android/i) == "android";
+      var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+      var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+      var htmljs = '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="http://onu8hdryi.bkt.clouddn.com/%E8%83%A1%E5%A4%8F%20-%20%E9%82%A3%E4%BA%9B%E5%B9%B4.mp3"></iframe>';
+      if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+      } else {
+        document.write(htmljs);
+      }
+</script>
+
 <!-- Language Selector -->
 <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
     <option value="0" selected> 中文 Chinese </option>
