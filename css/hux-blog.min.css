@@ -558,7 +558,7 @@ pre code {
 .intro-header .site-heading,
 .intro-header .post-heading,
 .intro-header .page-heading {
-    padding: 55px 0 45px;
+    padding: 55px 0 35px;
     color: #fff
 }
 
@@ -571,12 +571,12 @@ pre code {
 }
 
 .intro-header .site-heading {
-    padding: 90px 0 65px
+    padding: 90px 0 45px
 }
 
 @media only screen and (min-width:768px) {
     .intro-header .site-heading {
-        padding: 100px 0
+        padding: 100px 0 60px
     }
 }
 
@@ -626,7 +626,7 @@ pre code {
     font-size: 17px;
     line-height: 1.4;
     font-weight: 400;
-    margin: 10px 0 15px;
+    margin: 10px 0 10px;
     margin-top: -5px
 }
 
@@ -664,7 +664,7 @@ pre code {
 }
 
 .post-preview>a>.post-title {
-    font-size: 21px;
+    font-size: 16px;
     line-height: 1.3;
     margin-top: 20px;
     margin-bottom: 8px
