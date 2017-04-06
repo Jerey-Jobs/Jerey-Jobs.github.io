@@ -626,7 +626,7 @@ pre code {
     font-size: 17px;
     line-height: 1.4;
     font-weight: 400;
-    margin: 10px 0 30px;
+    margin: 10px 0 15px;
     margin-top: -5px
 }
 
@@ -643,13 +643,13 @@ pre code {
 
 @media only screen and (min-width:768px) {
     .intro-header .post-heading h1 {
-        font-size: 55px
+        font-size: 50px
     }
     .intro-header .post-heading .subheading {
         font-size: 30px
     }
     .intro-header .post-heading .meta {
-        font-size: 20px
+        font-size: 16px
     }
 }
 
