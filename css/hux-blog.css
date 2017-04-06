@@ -515,22 +515,22 @@ pre code {
 .intro-header .site-heading,
 .intro-header .post-heading,
 .intro-header .page-heading {
-  padding: 85px 0 55px;
+  padding: 55px 0 45px;
   color: white;
 }
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
   .intro-header .post-heading,
   .intro-header .page-heading {
-    padding: 150px 0;
+    padding: 100px 0;
   }
 }
 .intro-header .site-heading {
-  padding: 95px 0 70px;
+  padding: 90px 0 65px;
 }
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading {
-    padding: 150px 0;
+    padding: 100px 0;
   }
 }
 .intro-header .site-heading,
@@ -563,7 +563,7 @@ pre code {
   }
 }
 .intro-header .post-heading h1 {
-  font-size: 30px;
+  font-size: 25px;
   margin-bottom: 24px;
 }
 .intro-header .post-heading .subheading,
