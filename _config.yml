@@ -72,7 +72,7 @@ ga_domain: auto
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "Android Application Developer <br> 朋友，如果你连自己的体重都控制不了，你还怎么控制自己的人生<br>梦想的路还有很长呢"
-sidebar-avatar: /img/captain_android.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/study-dog.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
