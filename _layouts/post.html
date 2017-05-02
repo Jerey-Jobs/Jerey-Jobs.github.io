@@ -108,7 +108,19 @@ layout: default
                     </li>
                     {% endif %}
                 </ul>
-
+                {% if site.netease_comment %}
+                <!-- 网易云跟帖评论框 -->
+                <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+                <script>
+                  var cloudTieConfig = {
+                    url: document.location.href,
+                    sourceId: "",
+                    productKey: "cfdc4deb2f0148389b4e50e9fcd8d2dd",
+                    target: "cloud-tie-wrapper"
+                  };
+                </script>
+                <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+                {% endif %}
 
                 {% if site.duoshuo_username %}
                 <!-- 多说评论框 start -->
