@@ -5,12 +5,17 @@
 #### 由于小书匠的语法与github的kramdown有很多不一样的地方，导致之前的文章很多排版错误，又进行了后续更新。
 #### 后续将之前的简书博客和有道云笔记部分内容也迁移了过来
 
+### 博客大事记
+
 <br>2017.01.01 重命名了之前写的md记录文件
 <br>2017.01.04 绑定域名jerey.cn
 <br>2017.01.20 集成了百度统计以及多说评论系统
 <br>2017.02.01 增加简书图标和链接，增加部分朋友链接
 <br>2017.02.02 为所有文章添加catalog目录
 <br>2017.02.05 为博客增加不蒜子访问统计显示
+<br>2017.04.05 为博客增加酷炫背景动画, 增加移动端和PC端判断, 并给PC版的about界面增加背景音乐
+<br>2017.04.09 为博客增加`Material Design`版本 [Link](http://jerey.cn/Material-Design-Blog/public/)
+<br>2017.05.02 因多说组织将于2017.06.01结束服务, 使用网易云跟帖替代多说评论系统
 
 ### 内部文章
 [TCP与UDP](https://github.com/Jerey-Jobs/Jerey-Jobs.github.io/blob/master/_posts/2014-12-01-%E5%A4%A7%E5%AD%A6%E9%82%A3%E7%82%B9%E4%BA%8B-TCP%E4%B8%8EUDP%E5%AD%A6%E7%94%9F%E6%97%B6%E4%BB%A3%E8%AE%B0%E5%BD%95.md)<br>
