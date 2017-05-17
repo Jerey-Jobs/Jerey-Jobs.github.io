@@ -5,6 +5,7 @@ tags:
   - View
 grammar_cjkRuby: true
 header-img: "img/post-bg-android.jpg"
+preview-img: "img/post1/loadingview.gif"
 catalog: true
 layout:  post
 ---

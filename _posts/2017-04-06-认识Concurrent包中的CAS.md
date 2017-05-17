@@ -4,6 +4,7 @@ tags:
   - Java
 grammar_cjkRuby: true
 header-img: "img/bg-java.png"
+preview-img: "img/post1/atom_cpu.png"
 layout:  post
 catalog: true
 ---

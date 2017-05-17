@@ -4,6 +4,7 @@ tags:
   - View
 grammar_cjkRuby: true
 header-img: "img/post-bg-e2e-ux.jpg"
+preview-img: "img/post1/enhance_imageview.gif"
 layout:  post
 catalog: true
 ---

@@ -5,6 +5,7 @@ tags:
   - Java
 grammar_cjkRuby: true
 header-img: "img/bg-java.png"
+preview-img: "img/bg-java.png"
 catalog: true
 layout:  post
 ---

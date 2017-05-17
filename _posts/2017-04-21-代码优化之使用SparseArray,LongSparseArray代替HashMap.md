@@ -6,6 +6,7 @@ tags:
   - 代码优化
 grammar_cjkRuby: true
 header-img: "img/post-bg-unix-linux.jpg"
+preview-img: "img/post1/sparseArrayWarning.png"
 catalog: true
 layout:  post
 categories: 代码优化
