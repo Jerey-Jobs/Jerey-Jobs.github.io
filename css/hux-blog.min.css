@@ -714,6 +714,9 @@ pre code {
 @media only screen and (min-width:768px) {
     .post-preview {
       position: relative;
+    }
+
+    .post-preview>a {
       padding-left: 30%;
     }
 
