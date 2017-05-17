@@ -654,6 +654,7 @@ pre code {
 }
 
 .post-preview>a {
+    display: block;
     color: #404040
     position: relative;
     padding-left: 40%;
@@ -666,11 +667,13 @@ pre code {
 }
 
 .post-preview .post-header-img {
+  height: 80%
   margin-top: 20px;
   margin-bottom: 20px
   border-radius: 8px;
   background-size: cover;
   background-position: center;
+  width: 38%;
 }
 
 .post-preview>a>.post-title {
@@ -708,7 +711,13 @@ pre code {
 }
 
 @media only screen and (min-width:768px) {
+    .post-preview {
+      position: relative;
+      padding-left: 40%;
+    }
+    
     .post-preview .post-header-img {
+      height: 80%;
       margin-top: 20px;
       margin-bottom: 20px;
       position: absolute;
@@ -717,6 +726,7 @@ pre code {
       bottom: 0;
       width: 38%;
     }
+
     .post-preview>a>.post-title {
         font-size: 23px;
         line-height: 1.3;
