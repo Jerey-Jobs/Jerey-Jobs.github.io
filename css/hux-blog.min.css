@@ -657,7 +657,7 @@ pre code {
     display: block;
     color: #404040
     position: relative;
-    padding-left: 40%;
+    padding-left: 30%;
 }
 
 .post-preview>a:hover,
@@ -667,13 +667,13 @@ pre code {
 }
 
 .post-preview .post-header-img {
-  height: 80%
-  margin-top: 20px;
-  margin-bottom: 20px
+  height: 80%;
   border-radius: 8px;
-  background-size: cover;
-  background-position: center;
-  width: 38%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 28%;
 }
 
 .post-preview>a>.post-title {
@@ -713,18 +713,16 @@ pre code {
 @media only screen and (min-width:768px) {
     .post-preview {
       position: relative;
-      padding-left: 40%;
     }
-    
+
     .post-preview .post-header-img {
       height: 80%;
-      margin-top: 20px;
-      margin-bottom: 20px;
+      border-radius: 8px;
       position: absolute;
       left: 0;
       top: 0;
       bottom: 0;
-      width: 38%;
+      width: 28%;
     }
 
     .post-preview>a>.post-title {
