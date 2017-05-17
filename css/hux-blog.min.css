@@ -657,7 +657,6 @@ pre code {
     display: block;
     color: #404040;
     position: relative;
-    padding-left: 30%;
 }
 
 .post-preview>a:hover,
@@ -666,7 +665,7 @@ pre code {
     color: #0085a1
 }
 
-.post-preview .post-header-img {
+/*.post-preview .post-header-img {
   height: 80%;
   border-radius: 5px;
   position: absolute;
@@ -676,7 +675,7 @@ pre code {
   top: 0;
   bottom: 0;
   width: 28%;
-}
+}*/
 
 .post-preview>a>.post-title {
     font-size: 18px;
@@ -715,6 +714,7 @@ pre code {
 @media only screen and (min-width:768px) {
     .post-preview {
       position: relative;
+      padding-left: 30%;
     }
 
     .post-preview .post-header-img {
