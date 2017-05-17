@@ -655,7 +655,7 @@ pre code {
 
 .post-preview>a {
     display: block;
-    color: #404040
+    color: #404040;
     position: relative;
     padding-left: 30%;
 }
@@ -668,8 +668,10 @@ pre code {
 
 .post-preview .post-header-img {
   height: 80%;
-  border-radius: 8px;
+  border-radius: 5px;
   position: absolute;
+  background-position: center;
+  background-size: cover;
   left: 0;
   top: 0;
   bottom: 0;
@@ -717,8 +719,10 @@ pre code {
 
     .post-preview .post-header-img {
       height: 80%;
-      border-radius: 8px;
+      border-radius: 5px;
       position: absolute;
+      background-position: center;
+      background-size: cover;
       left: 0;
       top: 0;
       bottom: 0;
