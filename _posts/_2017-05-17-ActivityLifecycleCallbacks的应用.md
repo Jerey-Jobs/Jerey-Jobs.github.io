@@ -1,15 +1,16 @@
 ---
-title: Android状态模式应用
+title: Android一个应用多个图标的几种实现方式
 tags:
-  - 设计模式
+  - Android
+  - 小知识
 grammar_cjkRuby: true
-header-img: "/img/post-bg-unix-linux.jpg"
+header-img: "img/post-bg-unix-linux.jpg"
+preview-img: "/img/post-bg-unix-linux.jpg"
 catalog: true
 layout:  post
-categories: 设计模式
-date: 2017-05-18
+categories: 代码优化
+date: 2017-05-03
 ---
-
 
 
 ----------
