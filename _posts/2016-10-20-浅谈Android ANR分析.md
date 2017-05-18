@@ -4,7 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
-preview-img: "img/preview/anr.png"
+preview-img: "/img/preview/anr.png"
 ---
 
  -  ** 什么是ANR？**

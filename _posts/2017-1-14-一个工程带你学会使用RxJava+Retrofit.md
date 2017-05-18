@@ -4,7 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
-preview-img: "img/post1/rxjava1.jpg"
+preview-img: "/img/post1/rxjava1.jpg"
 ---
 
 写了一个工程，大概分六个demo.java带你学习如何使用,通熟易懂，很明显，是我这个菜鸟写的。

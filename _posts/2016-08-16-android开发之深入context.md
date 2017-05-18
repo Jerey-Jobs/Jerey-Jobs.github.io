@@ -4,7 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
-preview-img: "img/post1/context.png"
+preview-img: "/img/post1/context.png"
 ---
 
 今天研究了一下Context类，对于context发现即熟悉又陌生。一个我们天天打交道的东西到底是什么呢，这篇文章将带大家了解context。

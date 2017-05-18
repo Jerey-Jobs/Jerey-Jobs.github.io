@@ -2,7 +2,7 @@
 title: ClassLoader那点事 [转]
 subtitle:   "甚好文章，讲解很全，不得不转"
 header-img: "img/post-bg-android.jpg"
-preview-img: "img/preview/classloader.png"
+preview-img: "/img/preview/classloader.png"
 tags:
     - Android
     - Java

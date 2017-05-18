@@ -6,7 +6,7 @@ tags:
 grammar_cjkRuby: true
 catalog: true
 layout:  post
-preview-img: "img/always/design_patterns.png"
+preview-img: "/img/always/design_patterns.png"
 ---
 
 ![设计模式](/img/always/design_patterns.png)

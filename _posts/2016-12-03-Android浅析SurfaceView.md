@@ -4,7 +4,7 @@ tags:
     - Android
     - View
 grammar_cjkRuby: true
-preview-img: "img/preview/surfaceview.png"
+preview-img: "/img/preview/surfaceview.png"
 catalog: true
 layout:  post
 ---

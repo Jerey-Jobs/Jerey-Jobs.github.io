@@ -5,7 +5,7 @@ tags:
     - 数据库
 subtitle: "让你的应用迅速带上存储的翅膀"
 header-img: "img/post-bg-android.jpg"
-preview-img: "img/preview/realm.png"
+preview-img: "/img/preview/realm.png"
 grammar_cjkRuby: true
 catalog: true
 layout:  post

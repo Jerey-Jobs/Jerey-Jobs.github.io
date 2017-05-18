@@ -4,7 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
-preview-img: "img/post1/handler_leak.png"
+preview-img: "/img/post1/handler_leak.png"
 ---
 
 我们先来看一张Android Studio中的warning截图

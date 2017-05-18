@@ -4,7 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
-preview-img: "img/preview/activity.png"
+preview-img: "/img/preview/activity.png"
 ---
 
 很多人提到Activity就知道其7大生命周期，以及各个方法的使用，但是Activity到底是怎么工作的呢？

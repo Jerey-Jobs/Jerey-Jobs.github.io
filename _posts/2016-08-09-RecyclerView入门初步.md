@@ -6,7 +6,7 @@ tags:
 grammar_cjkRuby: true
 catalog: true
 layout:  post
-preview-img: "img/preview/recylclerview.png"
+preview-img: "/img/preview/recylclerview.png"
 ---
 
 

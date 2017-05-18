@@ -3,7 +3,7 @@ title: Android状态模式应用
 tags:
   - 设计模式
 grammar_cjkRuby: true
-header-img: "img/post-bg-unix-linux.jpg"
+header-img: "/img/post-bg-unix-linux.jpg"
 catalog: true
 layout:  post
 categories: 设计模式

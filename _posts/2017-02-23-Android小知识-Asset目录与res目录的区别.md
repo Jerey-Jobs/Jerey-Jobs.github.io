@@ -1,7 +1,7 @@
 ---
 title: Android小知识-Asset目录与res目录的区别
 header-img: "img/post-bg-android.jpg"
-preview-img: "img/post-bg-android.jpg"
+preview-img: "/img/post-bg-android.jpg"
 tags:
     - Android
     - 小知识

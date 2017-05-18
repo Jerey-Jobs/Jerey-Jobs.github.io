@@ -2,7 +2,7 @@
 title: 简单说说ART和Dalvik区别
 tags: Android
 header-img: "img/post-bg-android.jpg"
-preview-img: "img/preview/artjvm.png"
+preview-img: "/img/preview/artjvm.png"
 grammar_cjkRuby: true
 catalog: true
 layout:  post

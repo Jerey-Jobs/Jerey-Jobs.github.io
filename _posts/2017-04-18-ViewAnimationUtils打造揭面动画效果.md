@@ -4,7 +4,7 @@ tags:
   - Android
 grammar_cjkRuby: true
 header-img: "img/post-bg-android.jpg"
-preview-img: "img/post1/animationhelper2.gif"
+preview-img: "/img/post1/animationhelper2.gif"
 catalog: true
 layout:  post
 categories: Android

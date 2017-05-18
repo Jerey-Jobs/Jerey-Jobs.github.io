@@ -3,7 +3,7 @@ title: DiskLruCache简介
 tags: Android
 grammar_cjkRuby: true
 header-img: "img/post-bg-android.jpg"
-preview-img: "img/preview/disklrucache.png"
+preview-img: "/img/preview/disklrucache.png"
 catalog: true
 layout:  post
 ---

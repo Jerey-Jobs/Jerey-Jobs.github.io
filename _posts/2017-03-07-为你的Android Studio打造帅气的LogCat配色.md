@@ -2,7 +2,7 @@
 title: 为你的Android Studio打造帅气的LogCat配色
 tags: 小知识
 grammar_cjkRuby: true
-preview-img: "img/preview/logcat.png"
+preview-img: "/img/preview/logcat.png"
 catalog: true
 layout:  post
 ---

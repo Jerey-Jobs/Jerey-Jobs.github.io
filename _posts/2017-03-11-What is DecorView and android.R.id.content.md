@@ -4,7 +4,7 @@ tags:
     - View
     - Android
 header-img: "img/post-bg-android.jpg"
-preview-img: "img/post-bg-android.jpg"
+preview-img: "/img/post-bg-android.jpg"
 grammar_cjkRuby: true
 catalog: true
 layout:  post
