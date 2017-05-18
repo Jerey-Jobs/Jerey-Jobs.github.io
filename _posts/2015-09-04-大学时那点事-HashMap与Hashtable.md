@@ -4,7 +4,7 @@ tags:
     - Java
     - 大学那点事
 grammar_cjkRuby: true
-preview-img: "img/preview/hashmap.png"
+preview-img: "/img/preview/hashmap.png"
 catalog: true
 layout:  post
 ---
