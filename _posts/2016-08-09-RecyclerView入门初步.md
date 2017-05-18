@@ -1,13 +1,14 @@
 ---
 title: RecylclerView入门初步
-tags: 
+tags:
     - Android
     - View
 grammar_cjkRuby: true
 catalog: true
 layout:  post
+preview-img: "img/preview/recylclerview.png"
 ---
- 
+
 
 
 RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是继承ListView的，RecyclerView直接继承于ViewGroup父类。RecyclerView的灵活性与可替代性比listview更好，我们可以很方便的使用它完成ListView比较难完成的效果。
@@ -17,7 +18,7 @@ RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是
 
  **- 添加依赖**
 
-  
+
 
 ``` gradle
       compile 'com.android.support:recyclerview-v7:21.0.+'
@@ -25,7 +26,7 @@ RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是
 
  **- 在xml中配置**
 
- 
+
 
 ``` java
  <android.support.v7.widget.RecyclerView
@@ -36,13 +37,13 @@ RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是
 ```
 
  **- Acitvity中使用**
- 
+
 
 ``` java
     RecyclerView mRecyclerView;
     RecyclerViewAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
-    
+
     mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
     mLayoutManager = new LinearLayoutManager(this);
 
@@ -67,8 +68,8 @@ RecyclerView可以看作是ListView的进化版本，当然RecyclerView并不是
  **- 适配器编写**
 
  RecycleView是对ListView以及GridView的升级，在使用的时候同源更新需要使用Adapter适配器。但是RecycleView使用的适配器并不是之前的BaseAdapter了。RecycleView使用的适配器需要继承RecyclerView.Adapter\
- 
- 
+
+
 我们将适配器的编写流程分为：
 
 1.继承 RecyclerView.Adapter
@@ -187,11 +188,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 ```
 
  **- 初步运行**
- 
+
 发现可以运行，类似于简单的listview（当然，item的xml配置代码被我省略了）
 
  - 添加监听事件
- 
+
  我选择在长按item时删除该item，删除动画在由该行设置
 
 ``` java
@@ -228,6 +229,3 @@ notifyItemRangeChanged(position, mdata.size());
 **总结**
 
      本文只是RecyclerView的一些基本使用，有很多强大的功能还未能接触，本文也比较初步，仅作入门引导。
-
- 
-

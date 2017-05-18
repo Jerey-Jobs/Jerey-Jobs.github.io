@@ -2,7 +2,8 @@
 title: ClassLoader那点事 [转]
 subtitle:   "甚好文章，讲解很全，不得不转"
 header-img: "img/post-bg-android.jpg"
-tags: 
+preview-img: "img/preview/classloader.png"
+tags:
     - Android
     - Java
 grammar_cjkRuby: true
@@ -63,8 +64,8 @@ Android 应用打包成 apk 文件时，class 文件会被打包成一个或者�
 ODEX 相关的细节可以阅读以下文章扩展：
 
 - [ART 和 Dalvik](http://www.mywiki.cn/hovercool/index.php/ART%E5%92%8CDalvik)
-- [ODEX格式及生成过程](http://www.jianshu.com/p/242abfb7eb7f) 
-- [What are ODEX files in Android](http://stackoverflow.com/questions/9593527/what-are-odex-files-in-android) 
+- [ODEX格式及生成过程](http://www.jianshu.com/p/242abfb7eb7f)
+- [What are ODEX files in Android](http://stackoverflow.com/questions/9593527/what-are-odex-files-in-android)
 
 > 注：本人的 5.0 机器 ODEX 优化后的文件是在 `/data/dalvilk-cache` 文件夹下的，6.0 机器该文件夹下只有 framework 和部分内置的 App 的优化后的 dex 文件，查找相关资料后没有找到明确的说法，目前猜测和 ROM 有关系，后续再深究下这个问题。
 
@@ -209,7 +210,7 @@ public DexClassLoader(String dexPath, String optimizedDirectory,
   File dexOutputDir = context.getCodeCacheDir();
   ```
 
-  > 注：后续发现，getCodeCacheDir() 方法只能在 API 21 以上可以使用。 
+  > 注：后续发现，getCodeCacheDir() 方法只能在 API 21 以上可以使用。
 
 - `String libraryPath` : 存储 C/C++ 库文件的路径集
 
@@ -340,7 +341,7 @@ public Class findClass(String name, List<Throwable> suppressed) {
         suppressed.addAll(Arrays.asList(dexElementsSuppressedExceptions));
     }
     return null;
-} 
+}
 ```
 
 这里有关于热修复实现的一个点，就是将补丁 dex 文件放到 dexElements 数组前面，这样在加载 class 时，优先找到补丁包中的 dex 文件，加载到 class 之后就不再寻找，从而原来的 apk 文件中同名的类就不会再使用，从而达到修复的目的，虽然说起来较为简单，但是实现起来还有很多细节需要注意，本文先热身，后期再分析具体实现。
@@ -392,15 +393,15 @@ protected Class<?> loadClass(String className, boolean resolve) throws ClassNotF
 
     ```java
        package com.jaeger;
-    
+
        public interface ISayHello {
            String say();
        }
     ```
-    
+
     ```java
        package com.jaeger;
-    
+
        public class HelloAndroid implements ISayHello {
            @Override
            public String say() {
@@ -452,7 +453,7 @@ protected Class<?> loadClass(String className, boolean resolve) throws ClassNotF
                    // 获取到包含 class.dex 的 jar 包文件
                    final File jarFile =
                        new File(Environment.getExternalStorageDirectory().getPath() + File.separator + "sayhello_dex.jar");
-                   
+
                    // 如果没有读权限,确定你在 AndroidManifest 中是否声明了读写权限
                    Log.d(TAG, jarFile.canRead() + "");
 

@@ -4,6 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
+preview-img: "img/post1/context.png"
 ---
 
 今天研究了一下Context类，对于context发现即熟悉又陌生。一个我们天天打交道的东西到底是什么呢，这篇文章将带大家了解context。
@@ -32,18 +33,19 @@ public abstract class Context
 
 那么我们明确第一点，context是一个抽象类，而我们平时用的context，均是其实现，而更伟大的是， 我们的application，我们的activity，service，均在context的继承关系树的。
 让我们看一张类图，相信看完这个类图大家就知道context在我们的应用中是什么样子的地位：<br>
-![context继承关系图][1]
+
+![context继承关系图](/img/post1/context.png)
 
 
 同时我们知道了，一个应用程序App共有的Context数目公式为：
- 
+
                      总Context实例个数 = Service个数 + Activity个数 + 1（Application对应的Context实例）
 可见，我们的每个Activity，Service，Application都有自己的context，那么context是什么时候传入的呢?
 
 **Context的传入**
 
    1、创建Application对象的时机
- 
+
        每个应用程序在第一次启动时，都会首先创建Application对象。如果对应用程序启动一个Activity(startActivity)流程比较
 清楚的话，创建Application的时机在创建handleBindApplication()方法中，该函数位于 ActivityThread.java类中 ，如下：
 
@@ -55,7 +57,7 @@ private final void handleBindApplication(AppBindData data){
     Application app = data.info.makeApplication(data.restrictedBackupMode, null);  
     ...  
 }  
-  
+
 public Application makeApplication(boolean forceDefaultAppClass, Instrumentation instrumentation) {  
     ...  
     try {  
@@ -72,7 +74,7 @@ public Application makeApplication(boolean forceDefaultAppClass, Instrumentation
 ```
 
   2、创建Activity对象的时机
- 
+
        通过startActivity()或startActivityForResult()请求启动一个Activity时，如果系统检测需要新建一个Activity对象时，就会
   回调handleLaunchActivity()方法，该方法继而调用performLaunchActivity()方法，去创建一个Activity实例，并且回调
  onCreate()，onStart()方法等， 函数都位于 ActivityThread.java类 ，如下：
@@ -99,15 +101,15 @@ private final Activity performLaunchActivity(ActivityRecord r, Intent customInte
     }  
     ...      
 }  
- 
+
 ```
 
 
- 
+
 
 3、创建Service对象的时机
 
- 
+
        通过startService或者bindService时，如果系统检测到需要新创建一个Service实例，就会回调handleCreateService()方法，
  完成相关数据操作。handleCreateService()函数位于 ActivityThread.java类，如下：
 
@@ -134,6 +136,3 @@ private final void handleCreateService(CreateServiceData data){
 ```
 
 需要强调一点的是，通过对ContextImp的分析可知，其方法的大多数操作都是直接调用其属性mPackageInfo(该属性类型为PackageInfo)<br>的相关方法而来。这说明ContextImp是一种轻量级类，而PackageInfo才是真正重量级的类。而一个App里的所有ContextIml实例，都对应同一个packageInfo对象
-
-
-  [1]: ./images/context.png "context.png"

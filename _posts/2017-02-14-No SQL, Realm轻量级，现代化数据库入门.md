@@ -1,10 +1,11 @@
 ---
 title: No SQL, Realm轻量级，现代化数据库入门
-tags: 
+tags:
     - Android
     - 数据库
 subtitle: "让你的应用迅速带上存储的翅膀"
 header-img: "img/post-bg-android.jpg"
+preview-img: "img/preview/realm.png"
 grammar_cjkRuby: true
 catalog: true
 layout:  post
@@ -14,13 +15,13 @@ layout:  post
 ### 简介
 
  Realm是一个可以替代SQLite以及ORMlibraries的轻量级数据库。相比SQLite，Realm更快并且具有很多现代数据库的特性，比如支持JSON，流式api，数据变更通知，以及加密支持，这些都为安卓开发者带来了方便。
- 
+
 准确来说，它是专门为移动应用所设计的数据持久化解决方案之一。
 
 Realm 可以轻松地移植到您的项目当中，并且绝大部分常用的功能（比如说插入、查询等等）都可以用一行简单的代码轻松完成！
 
 Realm 并不是对 Core Data 的简单封装，相反地， Realm 并不是基于 Core Data ，也不是基于 SQLite 所构建的。它拥有自己的数据库存储引擎，可以高效且快速地完成数据库的构建操作。
- 
+
 ### 优点
 
 - 跨平台 ：现在绝大多数的应用开发并不仅仅只在 iOS 平台上进行开发，还要兼顾到 Android 平台的开发。为两个平台设计不同的数据库是愚蠢的，而使用 Realm 数据库， iOS 和 Android 无需考虑内部数据的架构，调用 Realm 提供的 API 就可以完成数据的交换，实现 “ 一个数据库，两个平台无缝衔接 ” 。
@@ -181,7 +182,7 @@ isEmpty() & isNotEmpty()
 
 ### 常见问题
 
--  A RealmObject with no @PrimaryKey cannot be updated: class com.jerey.realmdemo.Person 
+-  A RealmObject with no @PrimaryKey cannot be updated: class com.jerey.realmdemo.Person
 一个没有主键的类是不使用copyToRealmOrUpdate的
 
 -  Android Realm: Primary key constraint broken. Value already exists: 0
@@ -189,23 +190,23 @@ isEmpty() & isNotEmpty()
 
 -  the xxx RealmMigration must be provided
 出现这个问题的时候是因为，没有初始化时没有提供migration
- 
+
 - 没有在beginTransaction();与commitTransaction(); 就进行了事物修改等
 
 
- 
+
  ----------
 
 ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
  ----------
- 本文作者：Anderson/Jerey_Jobs 
+ 本文作者：Anderson/Jerey_Jobs
 
  博客地址   ： [夏敏的博客/Anderson大码渣/Jerey_Jobs][1] <br>
  简书地址   :  [Anderson大码渣][2] <br>
  CSDN地址   :  [Jerey_Jobs的专栏][3] <br>
  github地址 :  [Jerey_Jobs][4]
- 
+
 
 
   [1]: http://jerey.cn/

@@ -4,6 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
+preview-img: "img/preview/anr.png"
 ---
 
  -  ** 什么是ANR？**
@@ -51,7 +52,7 @@ Mainthread handler: handleMessage(), post(runnable)
 
  - **ANR分析**
  我们知道，应用程序是由ActivityManagerService和WindowManagerService系统服务监视的，当ANR发生时，ActivityManagerService中的appNoResPonding方法，会将错误信息先写入logcat，同时，将ANR的 stack trace信息写入到trace文件中，trace文件的路径为data/anr/trace.txt
- 
+
 
 1、WindowManagerService中有一个InputDispathcherThread,该线程是个while(true)循环，始终在读取输入事件队列，分类并处理这些事件；
 
@@ -115,12 +116,12 @@ private class KeyQ extends KeyInputQueue implements KeyInputQueue.FilterCallback
 > Variable com.android.server.WindowManagerService.mFocusedApp  
 > Variable com.android.server.WindowManagerService.mCurrentFocus
 
-  
+
   KeyWaiter.mFinished，当一个输入事件被处理后，但该事件没有完成时 mFinished=false，事件完成后 mFinished=true；所以ANR 产生时mFinished =false；
 ANR检测机制
 
 对与按键响应不及时（keyDispatchingTimedOut）的ANR，当触发一个造成ANR的键盘事件后，如果不再有任何输入操作，无论多长时间ANR对话框是不会弹出的，只有在下一次输入事件产生后5秒才会弹出ANR。简单说就是，输入事件ANR的检测需要下一次输入事件来触发其检测机制，并触发ANR。
- 
+
 
  - **如何调查并解决ANR**
 
@@ -129,7 +130,7 @@ ANR检测机制
 3: 看代码
 4：仔细查看ANR的成因（iowait?block?memoryleak?）
  **分析logcat输出**
- 
+
  log输出会包括{
  	  进程名
       application id
@@ -139,7 +140,7 @@ ANR检测机制
                             占用率统计
       				 }
  }
- 
+
 从LOG可以看出ANR的类型，CPU的使用情况，如果CPU使用量接近100%，说明当前设备很忙，有可能是CPU饥饿导致了ANR
 
 如果CPU使用量很少，说明主线程被BLOCK了
@@ -148,8 +149,8 @@ ANR检测机制
 
 
  **分析trace.txt**
- 
- 
+
+
 
 ``` stylus
 pid 21404 at 2011-04-0113:12:14 -----
@@ -196,4 +197,3 @@ at dalvik.system.NativeStart.main(Native Method)
 
 
 通过trace文件的分析，我们可以容易分析各种死锁问题，IO问题
-

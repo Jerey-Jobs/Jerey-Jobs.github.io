@@ -4,6 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
+preview-img: "img/post1/handler_leak.png"
 ---
 
 我们先来看一张Android Studio中的warning截图
@@ -34,7 +35,7 @@ public class HandlerTestActivity extends Activity {
 将隐性匿名类写成一个单独的类（top-level-class），这样Handler和Context之间就没有联系了。
 
 - ### 如何写？
-大家都知道，写成静态类后，由于其类似于单独成为了一个类，便不能直接调用我们Activity中的一些控件了，难不成要把所有的控件都写成static的么，当然不是 
+大家都知道，写成静态类后，由于其类似于单独成为了一个类，便不能直接调用我们Activity中的一些控件了，难不成要把所有的控件都写成static的么，当然不是
 
 我们通过使Handler持有Activity的一个弱引用来解决这个问题，直接持有Activity的话，我们便与之前的匿名内部类直接持有外部类的引用没区别了，而持有了弱引用，在Activity有用的情况下，其会被AMS持有强引用，GC不会回收，而当其finish了，便没有强引用对象持有了，此时GC时便会回收该Activity，我们的Handler由于是持有的弱引用，也不会导致其回收不成功。
 
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
  简书地址   :  [Anderson大码渣][1]
  CSDN地址   :  [Jerey_Jobs的专栏][2]
  github地址 :  [Jerey_Jobs][3]
- 
+
 
   [1]: http://www.jianshu.com/users/016a5ba708a0/latest_articles
   [2]: http://blog.csdn.net/jerey_jobs

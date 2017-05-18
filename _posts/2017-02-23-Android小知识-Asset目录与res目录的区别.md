@@ -1,7 +1,8 @@
 ---
 title: Android小知识-Asset目录与res目录的区别
 header-img: "img/post-bg-android.jpg"
-tags: 
+preview-img: "img/post-bg-android.jpg"
+tags:
     - Android
     - 小知识
 grammar_cjkRuby: true
@@ -18,7 +19,7 @@ layout:  post
 　　两者目录下的文件在打包后会原封不动的保存在apk包中，不会被编译成二进制。
 
 ### res/raw和assets的不同点：
- 
+
 　　res/raw中的文件会被映射到R.java文件中，访问的时候直接使用资源ID即R.id.filename；assets文件夹下的文件不会被映射到R.java中，访问的时候需要AssetManager类。　
 
 　　res/raw不可以有目录结构，而assets则可以有目录结构，也就是assets目录下可以再建立文件夹　
@@ -32,7 +33,7 @@ layout:  post
 ```
 
 　　读取assets下的文件资源，通过以下方式获取输入流来进行写操作
-	
+
 
 ``` java
     /**  
@@ -68,13 +69,13 @@ layout:  post
 ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
  ----------
- 本文作者：Anderson/Jerey_Jobs 
+ 本文作者：Anderson/Jerey_Jobs
 
  博客地址   ： [夏敏的博客/Anderson大码渣/Jerey_Jobs][1] <br>
  简书地址   :  [Anderson大码渣][2] <br>
  CSDN地址   :  [Jerey_Jobs的专栏][3] <br>
  github地址 :  [Jerey_Jobs][4]
- 
+
 
 
   [1]: http://jerey.cn/

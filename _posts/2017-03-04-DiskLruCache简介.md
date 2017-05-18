@@ -3,6 +3,7 @@ title: DiskLruCache简介
 tags: Android
 grammar_cjkRuby: true
 header-img: "img/post-bg-android.jpg"
+preview-img: "img/preview/disklrucache.png"
 catalog: true
 layout:  post
 ---
@@ -11,7 +12,7 @@ layout:  post
 
 抱着学习的态度去看了看代码,加上网上的介绍,学习了其原理.
 
-首先,DiskLruCache原理很简单,就是将你的东西缓存到磁盘上,你可能说,我们也能啊.任何东西都可以转换成字节流的形式再转换文件形式存放在磁盘上,毕竟,所有东西都是二进制. 
+首先,DiskLruCache原理很简单,就是将你的东西缓存到磁盘上,你可能说,我们也能啊.任何东西都可以转换成字节流的形式再转换文件形式存放在磁盘上,毕竟,所有东西都是二进制.
 
 所以说,大家都能干的事情,但是干好可是很难的。而JakeWharton短短500行代码帮你干好了这件事情是很神奇的.
 
@@ -70,18 +71,18 @@ DiskLruCache mDiskLruCache = DiskLruCache.open(cacheFile, appVersion, 1, 10*1024
 
 - #### 效果
 
-> xiamin@xiamin:~/AndroidStudioProjects/KeepGank$ adb shell 
+> xiamin@xiamin:~/AndroidStudioProjects/KeepGank$ adb shell
 > shell@A37:/ cd /sdcard/Android/data/com.jerey.keepgank/cache/xiamin
 > shell@A37:/sdcard/Android/data/com.jerey.keepgank/cache/xiamin $ ls
-> 32190eac33f22c640d3344af0bc3cf20.0 journal 
+> 32190eac33f22c640d3344af0bc3cf20.0 journal
 > shell@A37:/sdcard/Android/data/com.jerey.keepgank/cache/xiamin cat 32190eac33f22c640d3344af0bc3cf20.0                                    
 > test1
 > shell@A37:/sdcard/Android/data/com.jerey.keepgank/cache/xiamin
 >
 > shell@A37:/sdcard/Android/data/com.jerey.keepgank/cache/xiamin cat journal    
 > libcore.io.DiskLruCache 1 1 1
-> 
-> DIRTY 32190eac33f22c640d3344af0bc3cf20 
+>
+> DIRTY 32190eac33f22c640d3344af0bc3cf20
 > CLEAN 32190eac33f22c640d3344af0bc3cf20 0
 > shell@A37:/sdcard/Android/data/com.jerey.keepgank/cache/xiamin $
 
@@ -246,13 +247,13 @@ DiskLruCache其实封装了一个Editor和一个Snapshot帮我们写和读文件
 ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
  ----------
- 本文作者：Anderson/Jerey_Jobs 
+ 本文作者：Anderson/Jerey_Jobs
 
  博客地址   ： [夏敏的博客/Anderson大码渣/Jerey_Jobs][1] <br>
  简书地址   :  [Anderson大码渣][2] <br>
  CSDN地址   :  [Jerey_Jobs的专栏][3] <br>
  github地址 :  [Jerey_Jobs][4]
- 
+
 
 
   [1]: http://jerey.cn/

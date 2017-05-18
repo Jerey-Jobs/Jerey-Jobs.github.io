@@ -4,6 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
+preview-img: "img/preview/activity.png"
 ---
 
 很多人提到Activity就知道其7大生命周期，以及各个方法的使用，但是Activity到底是怎么工作的呢？
@@ -57,7 +58,7 @@ final ApplicationThread mAppThread = new ApplicationThread();
 - ActivityRecord
 ActivityManagerService端负责记录每个注册过来的Activity的信息
 
----------- 
+----------
 
 ### Activity与其他类的区别
 
@@ -100,47 +101,47 @@ public final class ActivityThread {
                 ...
         }
     }
-        
-        
+
+
     private void handleLaunchActivity(ActivityClientRecord r, Intent customIntent, String reason) {
     ...
         Activity a = performLaunchActivity(r, customIntent);
     ...
     }
-    
-    
+
+
     private Activity performLaunchActivity(ActivityClientRecord r, Intent customIntent) {
         // System.out.println("##### [" + System.currentTimeMillis() + "] ActivityThread.performLaunchActivity(" + r + ")");
-        
-        /*创建application，整个应用程序就这个地方创建app 
+
+        /*创建application，整个应用程序就这个地方创建app
         * 里面会调用LoadedApk的  public Application makeApplication(boolean forceDefaultAppClass,Instrumentation instrumentation)
         ---->instrumentation.callApplicationOnCreate(app);
         ---->mActivityThread.mAllApplications.add(app);
         回调application的oncreate方法*/
-    
+
         Application app = r.packageInfo.makeApplication(false, mInstrumentation);
-        
+
         /*使用classloader创建class*/
         java.lang.ClassLoader cl = r.packageInfo.getClassLoader();
         activity = mInstrumentation.newActivity(
                 cl, component.getClassName(), r.intent);
-        
+
         /*使得activity与windows对象进行关联 同时对Activity初始化相关的内容
           比如：ContextImpl，Theme，Configuration，title*/
         activity.attach(appContext, this, getInstrumentation(), r.token,
                     r.ident, app, r.intent, r.activityInfo, title, r.parent,
                     r.embeddedID, r.lastNonConfigurationInstances, config,
                     r.referrer, r.voiceInteractor, window);
-        
+
         /*让mInstrumentation回掉自己的oncreate*/
         if (r.isPersistable()) {
             mInstrumentation.callActivityOnCreate(activity, r.state, r.persistentState);
         } else {
             mInstrumentation.callActivityOnCreate(activity, r.state);
         }
-  
+
     }
-    
+
 ```
 
 从上面我们看出Instrumentation是负责回掉activity生命周期的工具类，而ActivityThread是控制着这些执行的类。<br>

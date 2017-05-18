@@ -1,9 +1,10 @@
 ---
 title: 大学那点事-HashMap与Hashtable
-tags: 
+tags:
     - Java
     - 大学那点事
 grammar_cjkRuby: true
+preview-img: "img/preview/hashmap.png"
 catalog: true
 layout:  post
 ---
@@ -173,13 +174,13 @@ void transfer(Entry[] newTable){
 ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
  ----------
- 本文作者：Anderson/Jerey_Jobs 
+ 本文作者：Anderson/Jerey_Jobs
 
  博客地址   ： [夏敏的博客/Anderson大码渣/Jerey_Jobs][1] <br>
  简书地址   :  [Anderson大码渣][2] <br>
  CSDN地址   :  [Jerey_Jobs的专栏][3] <br>
  github地址 :  [Jerey_Jobs][4]
- 
+
 
 
   [1]: http://jerey.cn/

@@ -4,6 +4,7 @@ tags: 零散记录
 grammar_cjkRuby: true
 catalog: true
 layout:  post
+preview-img: "img/preview/ubuntuss.png"
 ---
 
 sudo apt-get install python-gevent python-pip<br>

@@ -1,8 +1,9 @@
 ---
-title: 闲散整理，带你走进Android短信源码 
+title: 闲散整理，带你走进Android短信源码
 subtitle:   "事实上，市场上的大多短信应用都是基于Google原生改的"
 grammar_cjkRuby: true
 header-img: "img/post-bg-os-metro.jpg"
+preview-img: "img/mms/mmsbasemodel.png"
 catalog: true
 layout:  post
 tags:
@@ -45,7 +46,7 @@ tags:
                   PushReceiver 推送，Class0
                   SmsSystemEventReceiver  系统启动
                   PrivilegedSmsReceiver 彩信接收
-                  
+
 
 ## 基础知识
 
@@ -92,11 +93,11 @@ Recipient接受人，这里是指信息的接收者，要么是一个陌生的�
 - 编辑界面的类图
 
 ![编辑界面类图](/img/mms/write_view_leitu.png)
-   
-### 短信发送、接收 
+
+### 短信发送、接收
 
 - 短信发送流程图
-- 
+-
 ![短信发送流程图](/img/mms/sms_send_liucheng.png)
 
 - 短信发送类图
@@ -107,7 +108,7 @@ Recipient接受人，这里是指信息的接收者，要么是一个陌生的�
 
 ![短信接收流程图](/img/mms/sms_receive_l.png)
 
-### 彩信 
+### 彩信
 
 MMS为Multimedia Messaging Service的缩写，中文译为多媒体短信服务，通过网络来传输数据
 
@@ -147,13 +148,13 @@ Google内置包里为我们提供了一系列操作PDU的类（com.google.androi
  #### Mms数据库，在短信应用程序中占有很重要的地位
 
 > 1.负责数据的存储 	短信，彩信，对话列表都存储在数据库中<br>
-> 
+>
 > 2.负责大量的通信 	先待发短信存储到数据库中，发送服务将待短信从数据库取出<br>
-> 
+>
 > 3.通过ContentProvider，间接的肩负起通知界面数据刷新工作  	getContext().getContentResolver().notifyChange() 	通知观察者去刷新数据<br>
 
 
-> 
+>
 > threads表：在ConversationList.Java中显示的当前短信 <br>
 > sms表：短信内容 <br>
 > pdu表： 彩信内容<br>
@@ -170,13 +171,13 @@ Google内置包里为我们提供了一系列操作PDU的类（com.google.androi
 ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
  ----------
- 本文作者：Anderson/Jerey_Jobs 
+ 本文作者：Anderson/Jerey_Jobs
 
  博客地址   ： [夏敏的博客/Anderson大码渣/Jerey_Jobs][1] <br>
  简书地址   :  [Anderson大码渣][2] <br>
  CSDN地址   :  [Jerey_Jobs的专栏][3] <br>
  github地址 :  [Jerey_Jobs][4]
- 
+
 
 
   [1]: http://jerey.cn/

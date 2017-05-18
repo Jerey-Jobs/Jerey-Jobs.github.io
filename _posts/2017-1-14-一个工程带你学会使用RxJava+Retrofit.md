@@ -4,6 +4,7 @@ tags: Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
+preview-img: "img/post1/rxjava1.jpg"
 ---
 
 写了一个工程，大概分六个demo.java带你学习如何使用,通熟易懂，很明显，是我这个菜鸟写的。
@@ -41,13 +42,13 @@ RxJava 的观察者模式如下图：
 通过阅读以下代码链接，会一步一步的知道RxJava是如何使用的。
 个人建议把我工程拉下来看，直接运行看log比较有感觉。
 [工程链接：https://github.com/Jerey-Jobs/RxJavaDemos](https://github.com/Jerey-Jobs/RxJavaDemos)
- 
+
  * 第一章：数据的发射与接收<br>
  [第一章代码：数据的发射与接收](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo1.java)
  通过创建observable与observer <br>
  再通过 observable.subscribe(observer); 进行数据发布,实现简单的订阅关系。
  具体见代码。
- 
+
 
 ``` java
 /**
@@ -108,7 +109,7 @@ public class Demo1 {
 ```
 
 
- 	
+
  * 第二章：通过filter 控制筛选 通过map转换格式
 
  [第二章代码：通过filter 控制筛选 通过map转换格式](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo2.java)
@@ -175,16 +176,16 @@ public class Demo2 {
  [第三章代码：Scheduler 线程控制](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo3.java)
  *
 	 * Schedulers.immediate(): 直接在当前线程运行，相当于不指定线程。这是默认的 Scheduler。
-	 
+
 	 * Schedulers.newThread(): 总是启用新线程，并在新线程执行操作。
-	
+
 	 * Schedulers.io(): I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler
-	 
+
 	 * 行为模式和 newThread() 差不多，区别在于 io() 的内部实现是是用一个无数量上限的线程池，可以重用空闲的线程，因此多数情况下 io() 比 newThread() 更有效率。不要把计算工作放在 io() 中，可以避免创建不必要的线程。
-	 
+
 	 * Schedulers.computation(): 计算所使用的 Scheduler。这个计算指的是 CPU 密集型计算，即不会被 I/O 等操作限制性能的操作，例如图形的计算。这个 Scheduler 使用的固定的线程池，大小为 CPU 核数。不要把 I/O 操作放在 computation() 中，否则 I/O 操作的等待时间会浪费 CPU。
-	 
-	 * 另外， Android 还有一个专用的 AndroidSchedulers.mainThread()，它指定的操作将在 Android 主线程运行。 
+
+	 * 另外， Android 还有一个专用的 AndroidSchedulers.mainThread()，它指定的操作将在 Android 主线程运行。
 
 ``` java
 
@@ -268,7 +269,7 @@ public class Demo3 {
 ```
 
 
- 	
+
  * 第四章：学会使用lift转变类型
 
  [第四章代码：学会使用lift转变类型](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo4.java)
@@ -330,7 +331,7 @@ public class Demo4 {
 
 ```
 
-	
+
 * 第五章：学会使用Observable.Transformer 改变自身属性
 
 [第五章代码：学会使用Observable.Transformer 改变自身属性](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/Demo5.java)
@@ -382,7 +383,7 @@ public class Demo5 {
 ```
 
 
-	
+
 * 第六章：学会简单使用Retrofit
 
 [第六章代码：学会使用Retrofit](https://github.com/Jerey-Jobs/RxJavaDemos/blob/master/app/src/main/java/com/jerey/rxjavademo/RetrofitDemo.java)
@@ -468,13 +469,13 @@ public class RetrofitDemo {
 ### 谢谢大家阅读，如有帮助，来个喜欢或者关注吧！
 
  ----------
- 本文作者：Anderson/Jerey_Jobs 
+ 本文作者：Anderson/Jerey_Jobs
 
  博客地址   ： [夏敏的博客/Anderson大码渣/Jerey_Jobs][1] <br>
  简书地址   :  [Anderson大码渣][2] <br>
  CSDN地址   :  [Jerey_Jobs的专栏][3] <br>
  github地址 :  [Jerey_Jobs][4]
- 
+
 
 
   [1]: http://jerey.cn/
