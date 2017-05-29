@@ -1,7 +1,7 @@
 ---
 title: JVM学习之 线程同步背后的原理
 tags:
-    - Java
+    - JVM
 header-img: "img/post-bg-unix-linux.jpg"
 preview-img: "/img/post-bg-unix-linux.jpg"
 grammar_cjkRuby: true
