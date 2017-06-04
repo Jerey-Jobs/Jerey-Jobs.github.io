@@ -1,6 +1,6 @@
 ---
 title: 来自B站的开源的MagicaSakura源码解析
-subtitle: "目前看来,这只是一个改变颜色的框架,而不是一个主题框架"
+subtitle: "目前看来,这只是一个多颜色的框架,而不是一个多主题框架"
 tags:
   - Android
 grammar_cjkRuby: true
