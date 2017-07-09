@@ -92,15 +92,6 @@ service-worker: true
 #Friends
 friends: [
     {
-        title: "Vic",
-        href: "https://github.com/JeAmoTu/"
-    },{
-        title: "PandaQ",
-        href: "http://www.jianshu.com/u/aa53f5d59037/"
-    },{
-        title: "Java-Coffee",
-        href: "https://github.com/Java-Coffee/"
-    },{
         title: "战斗天地大毛子",
         herf: "http://www.jianshu.com/u/4a48fa798e34/"
     },{
@@ -109,5 +100,14 @@ friends: [
     },{
         herf: "http://codingsj.com/",
         title: 施届
+    },{
+        title: "Vic",
+        href: "https://github.com/JeAmoTu/"
+    },{
+        title: "PandaQ",
+        href: "http://www.jianshu.com/u/aa53f5d59037/"
+    },{
+        title: "Java-Coffee",
+        href: "https://github.com/Java-Coffee/"
     }
 ]
