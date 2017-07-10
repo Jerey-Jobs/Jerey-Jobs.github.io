@@ -150,7 +150,8 @@ src="http://onu8hdryi.bkt.clouddn.com/%E8%83%A1%E5%A4%8F%20-%20%E9%82%A3%E4%BA%9
 </div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["weixin","tsina","sqq","qzone","youdao","twi"],"viewText":"分享到：","viewSize":"24"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["weixin","tsina","sqq","qzone","youdao","twi"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
-<!--  网易云帖 -->
+{% if site.netease_comment %}
+<!-- 网易云跟帖评论框 -->
 <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
@@ -161,3 +162,25 @@ src="http://onu8hdryi.bkt.clouddn.com/%E8%83%A1%E5%A4%8F%20-%20%E9%82%A3%E4%BA%9
   };
 </script>
 <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+{% endif %}
+
+{% if site.livere_comment %}
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQzOS82MDA3">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+{% endif %}
