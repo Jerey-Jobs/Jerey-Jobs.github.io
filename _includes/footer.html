@@ -264,3 +264,94 @@
     });
 </script>
 {% endif %}
+
+<style type="text/css">
+  /* 小火箭css */
+  #gotop1 {
+      width: 80px;
+      position: fixed;
+      bottom: 90px;
+      cursor: pointer;
+      z-index: 99998;
+      right: 50%;
+      margin-right: -620px;
+  }
+  /* 小火箭悬停特效 */
+  #gotop1:hover {
+      animation: rubberBand 1s;
+  }
+
+  @keyframes rubberBand {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+      transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+      transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+      transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+      transform: scale3d(.95, 1.05, 1);
+    }
+
+    75% {
+      transform: scale3d(1.05, .95, 1);
+    }
+
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  /* end 小火箭 */
+
+  /* 以下css不用理会和复制 */
+  body{margin: 0; padding: 0; text-align:center;}
+
+  #gotop5{
+    padding: 12px 0;
+      font-size: 24px;
+      background: #45d3ff;
+      display: block;
+      color: #fff;
+  }
+
+  .box2{
+    background: #ffa341;
+      height: 70px;
+      line-height: 70px;
+  }
+
+  .box2>a{margin-left: 15px;}
+</style>
+
+<div id="shangxia2">
+  <span id="gotop1">
+    <img src="img/rocket.svg" alt="返回顶部">
+    <!-- <img src="img/rocked.png" alt="返回顶部小火箭"> -->
+  </span>
+</div>
+
+<script type="text/javascript">
+  /* 选择你喜欢的速度类型，复制下面的某段代码即可。不明处请咨询：qpjk.cc */
+  $(function() {
+
+  // 以1秒慢快慢的速度滚动顶部
+  $("#gotop3").click(function() {
+  TweenMax.to(window, 1, {scrollTo:0, ease:Expo.easeInOut});
+   });
+
+  // 以1.5秒快慢快的速度滚动顶部
+  $("#gotop1").click(function() {
+  TweenMax.to(window, 1.5, {scrollTo:0, ease:SlowMo.ease.config(0.7, 0.7, false)});
+   });
+
+  });
+</script>
