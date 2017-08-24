@@ -82,4 +82,5 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   color: #75715e;
 }
 
-.highlight .n { color: #9C9C96; }
+.highlight .n { color: #F1F1F1; }
+.highlight .o { color: #F1F1F1; font-weight: bold; }
