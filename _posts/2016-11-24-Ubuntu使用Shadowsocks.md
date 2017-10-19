@@ -39,3 +39,15 @@ sudo vim /etc/proxychains.conf(需要root权限，用sudo)，然后将最下面�
 使用方法：在想用代理的命令前加上sudo proxychains 即
 
 sudo proxychains git pull origin master
+
+
+### ss客户端
+```
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
+```
+
+### 请空Ubuntu DNS方法
+>sudo /etc/init.d/dns-clean start
+
