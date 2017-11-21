@@ -72,7 +72,36 @@ WebSocket是HTML5开始提供的一种浏览器与服务器间进行全双工通
 服务端: 好的, id11消息已经通知成功.
 ```
 
-..等待继续
+### WebSocket的端口
+既然是基于socket的,肯定走哪个端口.在Java的websocket源码中, `WebSocketClient`类中有以下代码, 我们可以知道, ws走的是80端口, wss走的是443.
+
+ps: ws 表示纯文本通信（ 如ws://example.com/socket），wss 表示使用加密信道通信（TCP+TLS）
+
+WebSocket 的主要目的，是在浏览器中的应用与服务器之间提供优化的、双向通信机制。可是，WebSocket 的连接协议也可以用于浏览器之外的场景，可以通过非HTTP协商机制交换数据。考虑到这一点，HyBi Working Group 就选择采用了自定义的URI模式：
+
+    ws协议：普通请求，占用与http相同的80端口；<br>
+    wss协议：基于SSL的安全传输，占用与tls相同的443端口。<br>
+
+
+``` java
+    private int getPort() {
+        int port = this.uri.getPort();
+        if(port == -1) {
+            String scheme = this.uri.getScheme();
+            if(scheme.equals("wss")) {
+                return 443;
+            } else if(scheme.equals("ws")) {
+                return 80;
+            } else {
+                throw new RuntimeException("unknown scheme: " + scheme);
+            }
+        } else {
+            return port;
+        }
+    }
+```
+
+
 
 
 
