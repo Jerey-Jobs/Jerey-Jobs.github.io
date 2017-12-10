@@ -1,6 +1,6 @@
 ---
 title: WebSocket简介
-subtitle: 简单介绍一下websocket
+subtitle: "简单介绍一下websocket"
 tags:
   - Android
   - 网络
@@ -11,7 +11,7 @@ catalog: true
 layout:  post
 categories: Android
 date: 2017-12-10
-
+---
 
 好多小伙伴对websocket都不怎么了解，甚至是闻所未闻，本篇文章将简单的介绍一下websocket。当然，websock的并不能解决我们面临的所有问题，一个稳定的在线判断，长链接框架，写起来也是有很多问题要继续处理的。
 
