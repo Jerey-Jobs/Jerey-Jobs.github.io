@@ -6,7 +6,7 @@ tags:
   - 网络
 grammar_cjkRuby: true
 header-img: "img/post-bg-os-metro.jpg"
-preview-img: "/img/post1/websocket.jpg"
+preview-img: "/img/preview/websocket.jpg"
 catalog: true
 layout:  post
 categories: Android
