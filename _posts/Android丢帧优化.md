@@ -62,20 +62,49 @@ date: 2020-03-03
 ### 优化我们的App
 
 引起应用卡顿的常见原因：
-  - 过度绘制
- 1. 布局层次过多
-     
 
- 2. 自定义View不合理
+##### 过度绘制
 
-- UI线程的耗时操作 
+过度绘制是引起我们无法在16ms内完成数据buffer准备的原因之一. 因为布局层数过多,可能导致我们的界面被重复绘制了五六次, 或者更多. 
+
+- 开启GPU过度绘制调试工具
+1.点击进入“设置”；
+2.点击进入“开发者选项”
+3.选中“调试GPU过度绘制”
+4.选中“显示过度绘制区域”
+
+![](/img/frameloss/overdraw.png)
+
+1.原色 – 没有被过度绘制 – 这部分的像素点只在屏幕上绘制了一次。
+2.蓝色 – 1次过度绘制– 这部分的像素点只在屏幕上绘制了两次。
+3.绿色 – 2次过度绘制 – 这部分的像素点只在屏幕上绘制了三次。
+4.粉色 – 3次过度绘制 – 这部分的像素点只在屏幕上绘制了四次。
+5.红色 – 4次过度绘制 – 这部分的像素点只在屏幕上绘制了五次。
+
+我们可以根据界面的显示,优化我们的布局层次, 目标就是不要出现粉色和红色的! 
+
+- 合理的选择布局, 比如不要多层LinearLayout嵌套, 使用ViewStub等
+- 去掉不必要的背景 onDraw第一步就会去drawBackuground
+
+##### UI线程的耗时操作 
+HWUI呈现模式分析
 
 
-- 频繁GC
+##### 频繁GC
 
 
 
 ### 排查卡顿
+Trace大法,即
+
+1. TraceView
+2. SystemTrace
+
+    命令：
+    python ~/software/android-sdk/android-sdk_r24.4.1-linux/android-sdk-linux/platform-tools/systrace/systrace.py -t 4 -o xiamin2.html  camera hal freq sched gfx input view wm am sm audio video res dalvik ss idle irq sync workq memreclaim binder_driver binder_lock ion pagecache
+
+
+
 
 ### 监控卡顿
 
