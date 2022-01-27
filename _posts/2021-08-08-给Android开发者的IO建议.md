@@ -7,7 +7,7 @@ grammar_cjkRuby: true
 catalog: true
 layout:  post
 header-img: "img/miui-fast.png"
-preview-img: "/img/time.png"
+preview-img: "/img/io/androidwrite.png"
 categories: Android
 date: 2021-08-08
 ---
@@ -52,7 +52,8 @@ Android 基于 `Linux` 实现。`一切皆文件`是Linux的一大特征，其�
 在经过系统的VFS映射后，我们的write数据会到达具体的文件系统层。但即使这样，我们也不会直接写到磁盘中。因为有page的存在，我们正常使用的都是`缓冲式IO（标准IO）`
 
 如何查看我们目录对应的具体文件系统挂载?<br>
-`adb shell mount`
+
+使用`mount`命令， `adb shell mount` 之后查看自己想知道的目录的对应挂载文件系统即可。
 
 
 #### **Page Cache**
@@ -185,17 +186,34 @@ MMKV - https://zhuanlan.zhihu.com/p/47420264
 
 ··· 待写
 
-- 加载布局文件的IO
+- 加载布局文件的IO （Inflate耗时）
 
-··· 待写
 
-- 加载本地图片的IO
 
-··· 待写
+- 加载本地图片的IO耗时
 
-## 为了解决IO的耗时，大家都做了哪些？
+常规情况下，
+
+AyncImageLoader
+Glide
+
+缓存
+
+## 选择正确的数据存储目录，利用好高效的IO
+
+相信看了上面不同路径对应的挂载不同的原理后，我们对存储目录的选择有了更谨慎的判断，写入遵循几个原则就不会出大错：
+- 应用尽量不访问外置SDcard，存储到应用私有目录下（避免fuse）
+
+- 目录层级不要过深，十几级的目录层级在部分文件系统上会出现性能严重下降的情况
+
+- 单个文件夹数量不宜过多，如：在某个文件夹下存放了10w个缓存文件，不同的文件系统表现会差很多。文件系统的索引会效率地下。
+（这点IOS系统做的很棒，拍摄的照片都存在`DCIM`里的`Apple**`目录下，每个目录文件都在 百的数量级，反观`Android`,都存在DCIM/Camera中，那么512G的手机拍了200个G的照片情况，这样的存储方式很明显不是一个较优解）
+
+## 为了解决IO的耗时，大家还做了哪些？
+
 - 类加载耗时
 zipAlign
+ReDex
 
 - 支付宝：Android Apk 文件的重新布局，来改善 IO 性能的过程
 https://developer.aliyun.com/article/673875
