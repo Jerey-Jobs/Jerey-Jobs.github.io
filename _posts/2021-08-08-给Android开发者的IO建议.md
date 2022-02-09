@@ -256,7 +256,8 @@ adb shell ls -al /sdcard/
 只需要知道，在选择正确的IO方案前，我们需要有足够的NIO，BIO知识储备，操作系统知识储备。
 
 ## 减少Android主线程IO操作
-- 持久化 key-value
+
+#### 持久化 key-value
 
 在开发中，我们经常需要本地存储下一些持久化的记录，同时这些记录可能需要不断的更新到本地。 甚至有些情况，我们需要多进程访问这一个值。
 
@@ -270,14 +271,15 @@ adb shell ls -al /sdcard/
 MMKV - https://zhuanlan.zhihu.com/p/47420264
 
 
-- 加载布局文件的IO （Inflate耗时）
+#### 加载布局文件的IO （Inflate耗时）
 
 为了解决/优化这个问题带来的体验。Android推出了RecyclerView 等组件，来解决列表华滑动时因重复inflate带来的主线程IO引起的卡顿问题，但有些场景需要动态的添加新view，此时inflate的耗时不可避免。
 
 可以使用`AsyncLayoutInflater + cache` 的方案优化这个问题。
 
 
-- 加载本地图片的IO耗时
+####  加载本地图片的IO耗时
+
 本地图片加载也可以使用以下几种方案：
 AyncImageLoader <br>
 Glide <br>
@@ -315,7 +317,7 @@ https://developer.aliyun.com/article/673875
 
 小米集团招聘内推：
 
-
+![小米Android内推](/img/io/xiaomi-hr.jpeg)
 
 
 #### 部分来源：<br>
