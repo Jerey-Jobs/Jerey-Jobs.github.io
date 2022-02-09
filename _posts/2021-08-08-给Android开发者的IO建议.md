@@ -1,19 +1,19 @@
 ---
 title: 给 Android 开发者的IO建议
-subtitle: "新时代Android存储知识"
+subtitle: "Android存储建议"
 tags:
   - Android
 grammar_cjkRuby: true
 catalog: true
 layout:  post
-header-img: "img/miui-fast.png"
+header-img: "img/post-bg-unix-linux.jpg"
 preview-img: "/img/io/androidwrite.png"
 categories: Android
 date: 2021-08-08
 ---
 
 ## 性能优化容易忽视的点：IO
-在Android主线程进行IO易导致耗时过长，从而带来应用卡顿, 这是Android开发者都很熟悉知识，Android官方也对此没有强制限制, 全凭开发者“自觉”。而在平时的ANR以及卡顿分析中，发现很多耗时都因为主线程的IO，只有了解IO背后的知识很好的进行对应问题的优化工作。
+在Android主线程进行IO易导致耗时过长，从而带来应用卡顿, 这是Android开发者都很熟悉知识，Android官方也对此没有强制限制, 全凭开发者“自觉”。而在平时的ANR以及卡顿分析中，发现很多耗时都因为主线程的IO，而只有拥有足够的IO知识储备才能很好的进行对应问题的优化工作。
 
 从其他角度来看，即使非Android开发者，也需要注意IO带来的影响。因为IO带来的耗时常是不受重视的，其也往往容易成为拖累整个程序运行性能的瓶颈，因此我们在设计程序架构的时候，需要更多考虑IO带来的影响。（Android 在主线程Inflate布局这种设计，本就是不是一个优秀的架构设计，为此后面Google也一直在进行尝试取消掉xml布局这个事情，如推出了`Jetpack Compose`声明式UI工具包等）
 
@@ -107,20 +107,84 @@ EMMC与UFS相比的显著差距是，同一时刻只能进行读取或者写入�
 <font color=red>一个小小的IO写入，并不一定像你在测试机上看到的或者测试到的那么流畅。有些用户用着你写的程序可能非常容易出现ANR。</font>
 
 ## IO方案选择
+此博客的主要篇幅为IO背景知识，因NIO的知识体系过于庞大，其分为服务端的应用与普通IO/系统调用/内存映射等相关知识，此处只做粗略介绍。
 
 ### BIO (Blocking I/O)
 常规的libc API，常规Java IO用法，都是BIO，既阻塞式IO。
 （注：此处存在一处争议，如《Think in Java》中提到提到Java1.4之后  `FileInputStream`默认使用NIO来实现，但是Android中替换了该实现，改回了`IoBridge`, 此处我们暂将`FileInputStream`归类为BIO）
 
+阻塞式IO的特点是：当进行IO操作时，会因为等待相关资源而使当前线程进阻塞状态，需要等到IO资源准备完毕，即数据写入完毕/读取完毕，线程则进入唤醒状态。
 
-··· 待写
-
+设想一下，如果有50个线程进行并发读取，其带来的阻塞，唤醒开销会非常大。而在服务器的socket开发中，这种模式远远无法满足需求，因此BIO有其局限性。
 
 
 ### NIO（New I/O 或 Non-blocking I/O）
-NIO个人更倾向于称之为：Non-blocking I/O，非阻塞式IO。相较于BIO，其不阻塞
+NIO个人更倾向于称之为：Non-blocking I/O，非阻塞式IO。相较于BIO，其采用高性能的非阻塞方式避免出现同步IO带来的低效率问题。这使得NIO在服务端开发中大展身手。
 
-··· 待写
+其主要类在：`java.nio`包，引入了以下几种概念：
+> Channel <br>
+> Selector <br>
+> Buffer
+
+如：Buffer下的allocateDirect(int capacity) 方法。其底层实现为unsafe与runtime进行native的内存操作，能提高IO操作的速度，当另一个方面，分配直接缓冲区的系统开销很大，因此只有在缓冲区较大且长期存在，或者经常重用的情况下，才使用这种缓冲区。
+
+源码见： http://androidxref.com/9.0.0_r3/xref/libcore/ojluni/src/main/java/java/nio/DirectByteBuffer.java
+
+```
+59        // Reference to original DirectByteBuffer that held this MemoryRef. The field is set
+60        // only for the MemoryRef created through JNI NewDirectByteBuffer(void*, long) function.
+61        // This allows users of JNI NewDirectByteBuffer to create a PhantomReference on the
+62        // DirectByteBuffer instance that will only be put in the associated ReferenceQueue when
+63        // the underlying memory is not referenced by any DirectByteBuffer instance. The
+64        // MemoryRef can outlive the original DirectByteBuffer instance if, for example, slice()
+65        // or asReadOnlyBuffer() are called and all strong references to the original DirectByteBuffer
+66        // are discarded.
+67        final Object originalBufferObject;
+68
+69        MemoryRef(int capacity) {
+70            VMRuntime runtime = VMRuntime.getRuntime();
+71            buffer = (byte[]) runtime.newNonMovableArray(byte.class, capacity + 7);
+72            allocatedAddress = runtime.addressOf(buffer);
+73            // Offset is set to handle the alignment: http://b/16449607
+74            offset = (int) (((allocatedAddress + 7) & ~(long) 7) - allocatedAddress);
+75            isAccessible = true;
+76            isFreed = false;
+77            originalBufferObject = null;
+78        }
+
+236    /**
+237     * Allocates a new direct byte buffer.
+238     *
+239     * <p> The new buffer's position will be zero, its limit will be its
+240     * capacity, its mark will be undefined, and each of its elements will be
+241     * initialized to zero.  Whether or not it has a
+242     * {@link #hasArray backing array} is unspecified.
+243     *
+244     * @param  capacity
+245     *         The new buffer's capacity, in bytes
+246     *
+247     * @return  The new byte buffer
+248     *
+249     * @throws  IllegalArgumentException
+250     *          If the <tt>capacity</tt> is a negative integer
+251     */
+252    public static ByteBuffer allocateDirect(int capacity) {
+253        if (capacity < 0) {
+254            throw new IllegalArgumentException("capacity < 0: " + capacity);
+255        }
+256
+257        DirectByteBuffer.MemoryRef memoryRef = new DirectByteBuffer.MemoryRef(capacity);
+258        return new DirectByteBuffer(capacity, memoryRef);
+259    }
+260
+```
+
+又比如使用`MappedByteBuffer`进行内存映射提高文件处理速度：
+https://www.cnblogs.com/qing-gee/p/11352668.html
+
+这样的例子还有很多，如使用NIO减少系统调用copy次数等等，我们需要了解NIO的各类的使用，才能写出更加高效IO的代码。
+
+具体NIO的使用方法，在阅读nio源码的同时，可以参考这本书：`《NIO与Socket编程技术指南》- 高洪岩`
 
 ## 了解Android文件系统
 Android的文件系统,由于各目录的需求不一样，如应用的私有数据需要绝对安全不可给除应用自身的任何应用访问，又如部分目录需要作为公共目录供各个应用读写。因此在实现上，也使用了不同的文件系统方案进行不同的权限管理。
@@ -199,15 +263,22 @@ Glide
 
 缓存
 
-## 选择正确的数据存储目录，利用好高效的IO
+## 选择正确的数据存储目录，避免低效IO
 
 相信看了上面不同路径对应的挂载不同的原理后，我们对存储目录的选择有了更谨慎的判断，写入遵循几个原则就不会出大错：
+<br>
 - 应用尽量不访问外置SDcard，存储到应用私有目录下（避免fuse）
-
+<br>
 - 目录层级不要过深，十几级的目录层级在部分文件系统上会出现性能严重下降的情况
-
-- 单个文件夹数量不宜过多，如：在某个文件夹下存放了10w个缓存文件，不同的文件系统表现会差很多。文件系统的索引会效率地下。
+<br>
+- 单个文件夹数量不宜过多，如：在某个文件夹下存放了10w个缓存文件，不同的文件系统表现会差很多。文件系统的索引效率下降。
 （这点IOS系统做的很棒，拍摄的照片都存在`DCIM`里的`Apple**`目录下，每个目录文件都在 百的数量级，反观`Android`,都存在DCIM/Camera中，那么512G的手机拍了200个G的照片情况，这样的存储方式很明显不是一个较优解）
+
+## 选择正确的IO方案，达到高效IO
+
+本文不给出具体选择方案。比如移动一个文件的IO方案，copy一个文件的方案，大量数据文件夹的遍历方案，文件读取方案等等，都希望我们的程序员有自己的判断，而不是依赖了此篇文章。（异或受此篇文章影响选错了方案），因此本文只提供了多种可能性，不帮读者进行选择。
+
+只需要选择正确的IO方案前，我们需要有足够的NIO，BIO知识储备，操作系统知识储备。
 
 ## 为了解决IO的耗时，大家还做了哪些？
 
@@ -219,15 +290,28 @@ ReDex
 https://developer.aliyun.com/article/673875
 
 
+# 总结寄语
+在我们日常写程序的时候，需要多了解底层原理。如果了解底层的同学应该知道：时钟周期。我们编写的效率不高的程序何尝不是浪费了若干个时钟周期呢？
+
+虽然只是一些小小的优化，有可能只是“去掉一次copy”，“少输出了一行log”，“少了一次系统调用”，”优化了某个buffer大小，提升了百分之2的性能”
+但积少成多，有可能最后使得整个程序的体验比之前提升了一个档次。
+
+很多时候开发者因为种种原因可能会忽视一个调用的优化，也就导致程序运行的比本该运行的慢了一点。但千里之堤毁于蚁穴，若程序中处处都存在这些细小的问题，整个程序的综合体验又如何能达到极致？
+
+上术并不是表达我对当下的不满，有时候，有可能因为需求的紧急，不得不写出更方便的但效率相对较低/不稳定的代码。但应仍有追求极致的信念，使得整个生态变得更佳。
+
 ---
--- 夏敏，写于2021年末，工作于小米南京分公司 <br>
+-- 夏敏，写于2021年末，工作于小米集团南京分公司 <br>
+   个人邮箱：jerey_jobs@qq.com  <br>
+   内推邮箱：xiamin@xiaomi.com <br>
 -- 感谢我的爱人李白云女士对我一直以来的支持。
 
 小米集团招聘内推：
 
 
 
-部分知识点来源：
-《Linux内核源代码导读》-陈香兰
-《Think in Java》   - Bruce Eckel
-《Java高并发核心编程》- 尼恩
+
+#### 部分来源：<br>
+《Linux内核源代码导读》-陈香兰<br>
+《Think in Java》   - Bruce Eckel<br>
+《Java高并发核心编程》- 尼恩<br>
