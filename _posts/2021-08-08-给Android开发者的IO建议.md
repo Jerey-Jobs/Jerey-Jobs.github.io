@@ -128,7 +128,7 @@ NIO个人更倾向于称之为：Non-blocking I/O，非阻塞式IO。相较于BI
 
 如：Buffer下的allocateDirect(int capacity) 方法。其底层实现为unsafe与runtime进行native的内存操作，能提高IO操作的速度，当另一个方面，分配直接缓冲区的系统开销很大，因此只有在缓冲区较大且长期存在，或者经常重用的情况下，才使用这种缓冲区。
 
-源码见： http://androidxref.com/9.0.0_r3/xref/libcore/ojluni/src/main/java/java/nio/DirectByteBuffer.java
+源码见： [http://androidxref.com/9.0.0_r3/xref/libcore/ojluni/src/main/java/java/nio/DirectByteBuffer.java](http://androidxref.com/9.0.0_r3/xref/libcore/ojluni/src/main/java/java/nio/DirectByteBuffer.java)
 
 ```
 59        // Reference to original DirectByteBuffer that held this MemoryRef. The field is set
@@ -179,8 +179,8 @@ NIO个人更倾向于称之为：Non-blocking I/O，非阻塞式IO。相较于BI
 260
 ```
 
-又比如使用`MappedByteBuffer`进行内存映射提高文件处理速度：
-https://www.cnblogs.com/qing-gee/p/11352668.html
+又比如使用`MappedByteBuffer`进行内存映射提高文件处理速度：<br>
+[https://www.cnblogs.com/qing-gee/p/11352668.html](https://www.cnblogs.com/qing-gee/p/11352668.html)
 
 这样的例子还有很多，如使用NIO减少系统调用copy次数等等，我们需要了解NIO的各类的使用，才能写出更加高效IO的代码。
 
@@ -223,7 +223,7 @@ sdcard分区下, 也需要一个管理应用访问权限的系统,在Android R�
 > /data/media on /storage/emulated/0/Android/data type sdcardfs (rw,nosuid,nodev,noexec,noatime,fsuid=1023,fsgid=1023,gid=1015,multiuser,mask=6,derive_gid,default_normal,unshared_obb)
 
 我们可以得到结论：
-/storage/emulated/0/Android/data  也就是平时大家用的 'getExternalFilesDir' 在Android R上其文件系统为：f2fs （这个目录在Android Q上是 sdcardfs）
+`/storage/emulated/0/Android/data`  也就是平时大家用的 'getExternalFilesDir' 在Android R上其文件系统为：f2fs （这个目录在Android Q上是 sdcardfs）
 
 如果我们对f2fs与sdcardfs 读写测试，会得到以下结论：f2fs在文件创建效率方面相比于sdcardfs会快的多。因此<font color=red>在Android R上，此区域的IO性能其实是得到了增强的。</font>
 
@@ -268,7 +268,7 @@ adb shell ls -al /sdcard/
 解决这个问题的替代方案，可以使用本地数据库 or ContentProvider 进行多进程KV管理。
 
 这里推荐使用基于内存映射+文件锁方案的MMKV，因为已经在微信上稳定运行好几年，有其稳定性保证：
-MMKV - https://zhuanlan.zhihu.com/p/47420264
+MMKV - [https://zhuanlan.zhihu.com/p/47420264](https://zhuanlan.zhihu.com/p/47420264)
 
 
 #### 加载布局文件的IO （Inflate耗时）
@@ -295,7 +295,8 @@ zipalign优化的最根本目的是帮助操作系统更高效率的根据请求
 
 ### 优化PageCache的命中率，提高app的启动速度
 - 支付宝：通过安装包重排布优化 Android 端启动性能
-https://developer.aliyun.com/article/673875
+
+[通过安装包重排布优化 Android 端启动性能  https://developer.aliyun.com/article/673875](https://developer.aliyun.com/article/673875)
 
 ### ReDex重布局，
 也是优化 Class 字节码布局。Facebook 通过线上及线下测试，启动速度提升 20% 以上，Dex 大小减小 25%，对于内存较小的机型启动速度的优化效果尤其明显。
